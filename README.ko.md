@@ -12,9 +12,3 @@
 - **Netlify:** <https://bgolearn.netlify.app/>
 
 두 주소는 동일한 문서를 제공합니다. 일부 국가 또는 네트워크 환경에서 `netlify.app`에 접근할 수 없는 사용자도 BGOlearn 알고리즘 매뉴얼을 볼 수 있도록 GitHub Pages를 대체 접속 경로로 유지합니다.
-
-## 배포
-
-게시되는 정적 사이트는 [`html/`](html/) 디렉터리에 있습니다. `main` 브랜치에 푸시할 때마다 GitHub Actions가 이 디렉터리를 GitHub Pages에 자동으로 배포합니다.
-
-최초 설정 시 저장소의 **Settings → Pages → Build and deployment → Source**에서 **GitHub Actions**를 선택하세요.

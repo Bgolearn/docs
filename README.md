@@ -12,9 +12,3 @@ The documentation is available from the following maintained endpoints:
 - **Netlify:** <https://bgolearn.netlify.app/>
 
 Both endpoints serve the same documentation. GitHub Pages is maintained as an alternative access route for users in countries or network environments where `netlify.app` may be unavailable.
-
-## Deployment
-
-The published static site is located in the [`html/`](html/) directory. Every push to the `main` branch automatically deploys this directory to GitHub Pages through GitHub Actions.
-
-For the initial setup, configure **Settings → Pages → Build and deployment → Source** as **GitHub Actions** in the repository.

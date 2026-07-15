@@ -12,9 +12,3 @@
 - **Netlify：** <https://bgolearn.netlify.app/>
 
 两个地址提供相同的文档内容。GitHub Pages 作为备用访问入口持续维护，方便部分国家或网络环境中无法访问 `netlify.app` 的用户阅读 BGOlearn 算法手册。
-
-## 发布方式
-
-网站静态文件位于 [`html/`](html/) 目录。每次推送到 `main` 分支时，GitHub Actions 会自动将该目录发布至 GitHub Pages。
-
-首次启用时，请在仓库 **Settings → Pages → Build and deployment → Source** 中选择 **GitHub Actions**。

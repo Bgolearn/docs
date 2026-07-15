@@ -12,9 +12,3 @@
 - **Netlify：** <https://bgolearn.netlify.app/>
 
 両方のサイトは同一のドキュメントを提供します。`netlify.app` へアクセスできない国やネットワーク環境の利用者も BGOlearn アルゴリズムマニュアルを閲覧できるよう、GitHub Pages を代替のアクセス先として維持しています。
-
-## デプロイ
-
-公開される静的サイトは [`html/`](html/) ディレクトリにあります。`main` ブランチへの各プッシュで、GitHub Actions がこのディレクトリを GitHub Pages に自動デプロイします。
-
-初回設定時は、リポジトリの **Settings → Pages → Build and deployment → Source** で **GitHub Actions** を選択してください。
