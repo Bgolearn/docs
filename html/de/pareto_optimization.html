@@ -1,0 +1,1148 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Pareto Optimization and Trade-off Analysis &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'de/pareto_optimization';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/de/pareto_optimization.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fde/pareto_optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/de/pareto_optimization.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Pareto Optimization and Trade-off Analysis</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-pareto-fronts">Understanding Pareto Fronts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front-analysis">Pareto Front Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-the-pareto-front">Identifying the Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-training-data-with-new-experiments">Combining Training Data with New Experiments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-pareto-fronts">Visualizing Pareto Fronts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pareto-front">2D Pareto Front</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3D Pareto Front</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-analysis">Trade-off Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypervolume-analysis">Hypervolume Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making-strategies">Decision Making Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-based-selection">Weight-Based Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-selection">Interactive Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-criteria-decision-analysis-mcda">Multi-Criteria Decision Analysis (MCDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-pareto-analysis">Advanced Pareto Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front-approximation-quality">Pareto Front Approximation Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">Practical Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alloy-design-case-study">Alloy Design Case Study</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="pareto-optimization-and-trade-off-analysis">
+<h1>Pareto Optimization and Trade-off Analysis<a class="headerlink" href="#pareto-optimization-and-trade-off-analysis" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Diese Seite ist die deutsche Version des Bgolearn-Handbuchs.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page covers Pareto front analysis, trade-off understanding, and decision-making strategies for multi-objective materials design.</p>
+</div>
+<section id="understanding-pareto-fronts">
+<h2>Understanding Pareto Fronts<a class="headerlink" href="#understanding-pareto-fronts" title="Link to this heading">#</a></h2>
+<p>The Pareto front represents the set of optimal trade-offs between competing objectives. In materials design, this helps us understand the fundamental limits and relationships between material properties.</p>
+<div class="tip admonition">
+<p class="admonition-title">Materials Example</p>
+<p>For a structural alloy, the Pareto front might show:</p>
+<ul class="simple">
+<li><p><strong>High strength, low ductility</strong> (brittle but strong)</p></li>
+<li><p><strong>Medium strength, medium ductility</strong> (balanced properties)</p></li>
+<li><p><strong>Low strength, high ductility</strong> (tough but weak)</p></li>
+</ul>
+<p>Each point represents an optimal trade-off - you can’t improve one property without sacrificing another.</p>
+</div>
+</section>
+<section id="pareto-front-analysis">
+<h2>Pareto Front Analysis<a class="headerlink" href="#pareto-front-analysis" title="Link to this heading">#</a></h2>
+<section id="identifying-the-pareto-front">
+<h3>Identifying the Pareto Front<a class="headerlink" href="#identifying-the-pareto-front" title="Link to this heading">#</a></h3>
+<p>After running MultiBgolearn optimization, analyze the results to identify Pareto optimal solutions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># First, create sample data files if they don&#39;t exist</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating sample data files...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Create sample alloy dataset</span>
+<span class="n">alloy_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">,</span> <span class="mf">3.1</span><span class="p">,</span> <span class="mf">2.7</span><span class="p">,</span> <span class="mf">3.4</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">275</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">285</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">275</span><span class="p">,</span> <span class="mi">260</span><span class="p">,</span> <span class="mi">295</span><span class="p">,</span> <span class="mi">270</span><span class="p">,</span> <span class="mi">258</span><span class="p">,</span> <span class="mi">282</span><span class="p">],</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+    <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">8.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.7</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.8</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.4</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.1</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">alloy_data</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Create virtual space for optimization</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_candidates</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">virtual_space</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="n">virtual_space</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Created alloy_dataset.csv with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">alloy_data</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Created virtual_space.csv with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_space</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidates&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="c1"># Load your original training dataset</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Create a complete dataset by combining training data with recommended points</span>
+<span class="c1"># Note: You would need to experimentally measure the objectives for VS_recommended</span>
+<span class="c1"># For demonstration, we&#39;ll use the training data for Pareto analysis</span>
+<span class="n">all_data</span> <span class="o">=</span> <span class="n">training_data</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">find_pareto_front</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Find Pareto optimal points from objective values.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    objectives: array-like, shape (n_samples, n_objectives)</span>
+<span class="sd">                Objective values (assuming maximization)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    pareto_indices: array of indices of Pareto optimal points</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_points</span> <span class="o">=</span> <span class="n">objectives</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">pareto_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+        <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_points</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="c1"># Check if point j dominates point i</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">objectives</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">objectives</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+        <span class="k">if</span> <span class="n">is_pareto</span><span class="p">:</span>
+            <span class="n">pareto_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pareto_indices</span><span class="p">)</span>
+
+<span class="c1"># Extract objectives (assuming last 3 columns)</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="n">all_data</span><span class="p">[[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">pareto_indices</span> <span class="o">=</span> <span class="n">find_pareto_front</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+<span class="n">pareto_front</span> <span class="o">=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> Pareto optimal solutions&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="combining-training-data-with-new-experiments">
+<h3>Combining Training Data with New Experiments<a class="headerlink" href="#combining-training-data-with-new-experiments" title="Link to this heading">#</a></h3>
+<p>After running optimization and conducting new experiments, combine the results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># After conducting experiments on recommended points</span>
+<span class="c1"># Create new experimental data (example)</span>
+<span class="n">new_experiments</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>  <span class="c1"># Recommended composition</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">295</span><span class="p">],</span>  <span class="c1"># Measured values from experiments</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">13</span><span class="p">],</span>
+    <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">8.5</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Combine training data with new experimental results</span>
+<span class="n">complete_dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">training_data</span><span class="p">,</span> <span class="n">new_experiments</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Now perform Pareto analysis on the complete dataset</span>
+<span class="n">complete_objectives</span> <span class="o">=</span> <span class="n">complete_dataset</span><span class="p">[[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">complete_pareto_indices</span> <span class="o">=</span> <span class="n">find_pareto_front</span><span class="p">(</span><span class="n">complete_objectives</span><span class="p">)</span>
+<span class="n">complete_pareto_front</span> <span class="o">=</span> <span class="n">complete_objectives</span><span class="p">[</span><span class="n">complete_pareto_indices</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Updated Pareto front with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">complete_pareto_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> optimal solutions&quot;</span><span class="p">)</span>
+
+<span class="c1"># Save the complete dataset for future use</span>
+<span class="n">complete_dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;updated_dataset.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-pareto-fronts">
+<h3>Visualizing Pareto Fronts<a class="headerlink" href="#visualizing-pareto-fronts" title="Link to this heading">#</a></h3>
+<section id="d-pareto-front">
+<h4>2D Pareto Front<a class="headerlink" href="#d-pareto-front" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot 2D Pareto front</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+<span class="c1"># Plot all points</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">objectives</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">objectives</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+           <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All solutions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Highlight Pareto front</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+           <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> 
+           <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto front&#39;</span><span class="p">)</span>
+
+<span class="c1"># Connect Pareto points</span>
+<span class="n">pareto_sorted</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pareto_sorted</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pareto_sorted</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> 
+         <span class="s1">&#39;r--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Strength vs. Ductility Pareto Front&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h4>3D Pareto Front<a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot all points</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">objectives</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">objectives</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">objectives</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+          <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;lightblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All solutions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Highlight Pareto front</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+          <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> 
+          <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto front&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Negative Cost ($/kg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;3D Pareto Front: Strength vs. Ductility vs. Cost&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="trade-off-analysis">
+<h2>Trade-off Analysis<a class="headerlink" href="#trade-off-analysis" title="Link to this heading">#</a></h2>
+<section id="correlation-analysis">
+<h3>Correlation Analysis<a class="headerlink" href="#correlation-analysis" title="Link to this heading">#</a></h3>
+<p>Understand relationships between objectives:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Calculate correlation matrix</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> 
+                                 <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+
+<span class="c1"># Plot correlation heatmap</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+           <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.3f&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Objective Correlations in Pareto Front&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Interpret correlations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trade-off Analysis:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Strength vs. Ductility correlation: </span><span class="si">{</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Ductility&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Strength vs. Cost correlation: </span><span class="si">{</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Neg_Cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ductility vs. Cost correlation: </span><span class="si">{</span><span class="n">correlation_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Neg_Cost&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="hypervolume-analysis">
+<h3>Hypervolume Analysis<a class="headerlink" href="#hypervolume-analysis" title="Link to this heading">#</a></h3>
+<p>Track Pareto front quality using hypervolume:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calculate_hypervolume_2d</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">reference_point</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate hypervolume for 2D Pareto front.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    pareto_front: array-like, shape (n_points, 2)</span>
+<span class="sd">    reference_point: array-like, shape (2,)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    hypervolume: float</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Sort points by first objective</span>
+    <span class="n">sorted_front</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])]</span>
+    
+    <span class="n">hypervolume</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">prev_x</span> <span class="o">=</span> <span class="n">reference_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">sorted_front</span><span class="p">:</span>
+        <span class="n">width</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev_x</span>
+        <span class="n">height</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">reference_point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">hypervolume</span> <span class="o">+=</span> <span class="n">width</span> <span class="o">*</span> <span class="n">height</span>
+        <span class="n">prev_x</span> <span class="o">=</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">hypervolume</span>
+
+<span class="c1"># Calculate hypervolume</span>
+<span class="n">reference_point</span> <span class="o">=</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>  <span class="c1"># Slightly worse than worst known values</span>
+<span class="n">hv</span> <span class="o">=</span> <span class="n">calculate_hypervolume_2d</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">reference_point</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pareto front hypervolume: </span><span class="si">{</span><span class="n">hv</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="decision-making-strategies">
+<h2>Decision Making Strategies<a class="headerlink" href="#decision-making-strategies" title="Link to this heading">#</a></h2>
+<section id="weight-based-selection">
+<h3>Weight-Based Selection<a class="headerlink" href="#weight-based-selection" title="Link to this heading">#</a></h3>
+<p>Select solutions based on preference weights:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">weighted_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Select Pareto solution based on weighted sum.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    pareto_front: array-like, shape (n_points, n_objectives)</span>
+<span class="sd">    weights: array-like, shape (n_objectives,)</span>
+<span class="sd">             Weights for each objective (should sum to 1)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    best_idx: int, index of best solution</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Normalize objectives to [0, 1] scale</span>
+    <span class="n">normalized_front</span> <span class="o">=</span> <span class="p">(</span><span class="n">pareto_front</span> <span class="o">-</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">pareto_front</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate weighted scores</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">normalized_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+<span class="c1"># Example: Prioritize strength (50%), ductility (30%), cost (20%)</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>
+<span class="n">best_idx</span> <span class="o">=</span> <span class="n">weighted_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">selected_solution</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Selected solution with weights </span><span class="si">{</span><span class="n">weights</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Strength: </span><span class="si">{</span><span class="n">selected_solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ductility: </span><span class="si">{</span><span class="n">selected_solution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cost: </span><span class="si">{</span><span class="o">-</span><span class="n">selected_solution</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> $/kg&quot;</span><span class="p">)</span>  <span class="c1"># Convert back from negative</span>
+</pre></div>
+</div>
+</section>
+<section id="interactive-selection">
+<h3>Interactive Selection<a class="headerlink" href="#interactive-selection" title="Link to this heading">#</a></h3>
+<p>Allow users to interactively explore trade-offs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">interactive_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">objective_names</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Interactive Pareto front exploration.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pareto Front Solutions:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">solution</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Solution </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="p">(</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_value</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">objective_names</span><span class="p">,</span> <span class="n">solution</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">obj_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">obj_value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+    
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">choice</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Select solution (1-</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)</span><span class="si">}</span><span class="s2">) or 0 to exit: &quot;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">choice</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">choice</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">):</span>
+                <span class="n">selected</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">choice</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Selected solution </span><span class="si">{</span><span class="n">choice</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">objective_names</span><span class="p">,</span> <span class="n">selected</span><span class="p">):</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">obj_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">obj_value</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">choice</span><span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invalid choice. Please try again.&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Please enter a valid number.&quot;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="kc">None</span>
+
+<span class="c1"># Example usage</span>
+<span class="n">objective_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Strength (MPa)&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility (%)&#39;</span><span class="p">,</span> <span class="s1">&#39;Negative Cost ($/kg)&#39;</span><span class="p">]</span>
+<span class="c1"># selected_idx = interactive_selection(pareto_front, objective_names)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-criteria-decision-analysis-mcda">
+<h3>Multi-Criteria Decision Analysis (MCDA)<a class="headerlink" href="#multi-criteria-decision-analysis-mcda" title="Link to this heading">#</a></h3>
+<p>Use TOPSIS method for systematic decision making:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">topsis_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">beneficial_criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    TOPSIS (Technique for Order Preference by Similarity to Ideal Solution)</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters:</span>
+<span class="sd">    pareto_front: array-like, shape (n_points, n_objectives)</span>
+<span class="sd">    weights: array-like, shape (n_objectives,)</span>
+<span class="sd">    beneficial_criteria: list of bool, True if objective should be maximized</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    ranking: array of indices sorted by TOPSIS score (best first)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">beneficial_criteria</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">beneficial_criteria</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">]</span> <span class="o">*</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Normalize decision matrix</span>
+    <span class="n">normalized</span> <span class="o">=</span> <span class="n">pareto_front</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">pareto_front</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+    
+    <span class="c1"># Apply weights</span>
+    <span class="n">weighted</span> <span class="o">=</span> <span class="n">normalized</span> <span class="o">*</span> <span class="n">weights</span>
+    
+    <span class="c1"># Determine ideal and negative-ideal solutions</span>
+    <span class="n">ideal_solution</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">weighted</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">negative_ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">weighted</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">weighted</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">beneficial_criteria</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+            <span class="n">ideal_solution</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">weighted</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">negative_ideal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">weighted</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ideal_solution</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">weighted</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+            <span class="n">negative_ideal</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">weighted</span><span class="p">[:,</span> <span class="n">j</span><span class="p">])</span>
+    
+    <span class="c1"># Calculate distances</span>
+    <span class="n">dist_ideal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">weighted</span> <span class="o">-</span> <span class="n">ideal_solution</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">dist_negative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">weighted</span> <span class="o">-</span> <span class="n">negative_ideal</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    
+    <span class="c1"># Calculate TOPSIS scores</span>
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">dist_negative</span> <span class="o">/</span> <span class="p">(</span><span class="n">dist_ideal</span> <span class="o">+</span> <span class="n">dist_negative</span><span class="p">)</span>
+    
+    <span class="c1"># Return ranking (best to worst)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">scores</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Example: TOPSIS ranking</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
+<span class="n">beneficial</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>  <span class="c1"># All objectives to be maximized</span>
+<span class="n">ranking</span> <span class="o">=</span> <span class="n">topsis_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">beneficial</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TOPSIS Ranking (best to worst):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">ranking</span><span class="p">[:</span><span class="mi">5</span><span class="p">]):</span>  <span class="c1"># Show top 5</span>
+    <span class="n">solution</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">. Strength: </span><span class="si">{</span><span class="n">solution</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Ductility: </span><span class="si">{</span><span class="n">solution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Cost: </span><span class="si">{</span><span class="o">-</span><span class="n">solution</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-pareto-analysis">
+<h2>Advanced Pareto Analysis<a class="headerlink" href="#advanced-pareto-analysis" title="Link to this heading">#</a></h2>
+<section id="pareto-front-approximation-quality">
+<h3>Pareto Front Approximation Quality<a class="headerlink" href="#pareto-front-approximation-quality" title="Link to this heading">#</a></h3>
+<p>Assess how well your optimization approximates the true Pareto front:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">pareto_front_metrics</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">reference_front</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate Pareto front quality metrics.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="c1"># Number of solutions</span>
+    <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;n_solutions&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)</span>
+    
+    <span class="c1"># Spread (diversity)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)):</span>
+            <span class="n">min_dist</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="n">dist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">min_dist</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">min_dist</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+            <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">min_dist</span><span class="p">)</span>
+        <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;min_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;avg_distance&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;spread&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+    
+    <span class="c1"># Hypervolume (if 2D or 3D)</span>
+    <span class="k">if</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="n">ref_point</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="p">(</span><span class="n">pareto_front</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;hypervolume&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_hypervolume_2d</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">ref_point</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">metrics</span>
+
+<span class="c1"># Calculate metrics</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">pareto_front_metrics</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pareto Front Quality Metrics:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="sensitivity-analysis">
+<h3>Sensitivity Analysis<a class="headerlink" href="#sensitivity-analysis" title="Link to this heading">#</a></h3>
+<p>Analyze how sensitive the Pareto front is to changes in objectives:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sensitivity_analysis</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">perturbation</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analyze sensitivity of Pareto front to objective perturbations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">original_hv</span> <span class="o">=</span> <span class="n">calculate_hypervolume_2d</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+    
+    <span class="n">sensitivities</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">obj_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pareto_front</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+        <span class="c1"># Perturb objective</span>
+        <span class="n">perturbed_front</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">perturbed_front</span><span class="p">[:,</span> <span class="n">obj_idx</span><span class="p">]</span> <span class="o">*=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">perturbation</span><span class="p">)</span>
+        
+        <span class="c1"># Recalculate Pareto front</span>
+        <span class="n">new_pareto_indices</span> <span class="o">=</span> <span class="n">find_pareto_front</span><span class="p">(</span><span class="n">perturbed_front</span><span class="p">)</span>
+        <span class="n">new_pareto_front</span> <span class="o">=</span> <span class="n">perturbed_front</span><span class="p">[</span><span class="n">new_pareto_indices</span><span class="p">]</span>
+        
+        <span class="c1"># Calculate new hypervolume</span>
+        <span class="k">if</span> <span class="n">new_pareto_front</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">new_hv</span> <span class="o">=</span> <span class="n">calculate_hypervolume_2d</span><span class="p">(</span><span class="n">new_pareto_front</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">5</span><span class="p">])</span>
+            <span class="n">sensitivity</span> <span class="o">=</span> <span class="p">(</span><span class="n">new_hv</span> <span class="o">-</span> <span class="n">original_hv</span><span class="p">)</span> <span class="o">/</span> <span class="n">original_hv</span>
+            <span class="n">sensitivities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sensitivity</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">sensitivities</span>
+
+<span class="c1"># Perform sensitivity analysis</span>
+<span class="n">sensitivities</span> <span class="o">=</span> <span class="n">sensitivity_analysis</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">)</span>
+<span class="n">objective_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;Cost&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sensitivity Analysis (5% perturbation):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">sensitivity</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">objective_names</span><span class="p">,</span> <span class="n">sensitivities</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">sensitivity</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (hypervolume change)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-applications">
+<h2>Practical Applications<a class="headerlink" href="#practical-applications" title="Link to this heading">#</a></h2>
+<section id="alloy-design-case-study">
+<h3>Alloy Design Case Study<a class="headerlink" href="#alloy-design-case-study" title="Link to this heading">#</a></h3>
+<p>Complete workflow for alloy optimization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="c1"># 2. Pareto front analysis</span>
+<span class="c1"># Load training data and extract objectives</span>
+<span class="n">training_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">)</span>
+<span class="n">all_objectives</span> <span class="o">=</span> <span class="n">training_data</span><span class="p">[[</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;Neg_Cost&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">pareto_indices</span> <span class="o">=</span> <span class="n">find_pareto_front</span><span class="p">(</span><span class="n">all_objectives</span><span class="p">)</span>
+<span class="n">pareto_front</span> <span class="o">=</span> <span class="n">all_objectives</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">]</span>
+
+<span class="c1"># 3. Trade-off analysis</span>
+<span class="n">correlation_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">pareto_front</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Objective Correlations:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">correlation_matrix</span><span class="p">)</span>
+
+<span class="c1"># 4. Decision making</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>  <span class="c1"># Strength, ductility, cost</span>
+<span class="n">best_idx</span> <span class="o">=</span> <span class="n">weighted_selection</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
+<span class="n">selected_alloy</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Recommended Alloy Composition:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Strength: </span><span class="si">{</span><span class="n">selected_alloy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Ductility: </span><span class="si">{</span><span class="n">selected_alloy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Cost: </span><span class="si">{</span><span class="o">-</span><span class="n">selected_alloy</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> $/kg&quot;</span><span class="p">)</span>
+
+<span class="c1"># 5. Experimental validation</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Next experiment: Virtual space index </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected improvements: </span><span class="si">{</span><span class="n">improvements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>Now that you understand Pareto optimization:</p>
+<ol class="arabic simple">
+<li><p><strong>Practice with examples</strong>: <a class="reference internal" href="examples/multi_objective.html"><span class="doc">Multi-Objective Optimization Examples</span></a></p></li>
+<li><p><strong>Try real materials cases</strong>: <span class="xref std std-doc">examples/materials_design</span></p></li>
+<li><p><strong>Learn advanced techniques</strong>: <span class="xref std std-doc">examples/advanced_usage</span></p></li>
+<li><p><strong>Explore visualization tools</strong>: <span class="xref std std-doc">visualization</span></p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more on multi-objective optimization:</p>
+<ul class="simple">
+<li><p>Deb, K. “Multi-Objective Optimization using Evolutionary Algorithms”</p></li>
+<li><p>Miettinen, K. “Nonlinear Multiobjective Optimization”</p></li>
+<li><p>Zitzler, E. “Multiobjective Evolutionary Algorithms: A Comparative Case Study”</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./de"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#understanding-pareto-fronts">Understanding Pareto Fronts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front-analysis">Pareto Front Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#identifying-the-pareto-front">Identifying the Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#combining-training-data-with-new-experiments">Combining Training Data with New Experiments</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-pareto-fronts">Visualizing Pareto Fronts</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pareto-front">2D Pareto Front</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3D Pareto Front</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trade-off-analysis">Trade-off Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#correlation-analysis">Correlation Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hypervolume-analysis">Hypervolume Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making-strategies">Decision Making Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-based-selection">Weight-Based Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interactive-selection">Interactive Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-criteria-decision-analysis-mcda">Multi-Criteria Decision Analysis (MCDA)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-pareto-analysis">Advanced Pareto Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front-approximation-quality">Pareto Front Approximation Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-analysis">Sensitivity Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-applications">Practical Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alloy-design-case-study">Alloy Design Case Study</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

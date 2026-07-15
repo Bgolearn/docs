@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bgolearn &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ja/index';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/ja/index.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fja/index.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ja/index.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bgolearn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-navigation">Detailed Navigation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-paths">Learning Paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-support">Community &amp; Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bgolearn">
+<h1>Bgolearn<a class="headerlink" href="#bgolearn" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本ページは Bgolearn マニュアルの日本語版です。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Welcome to the documentation of <strong>Bgolearn</strong> : <em>a unified Bayesian optimization framework for accelerating materials discovery</em>. This document is written and produced by <strong>Dr. <a class="reference external" href="https://bin-cao.github.io/">Bin Cao</a></strong> to help new learners master the basics of Bayesian Optimization and use <strong>Bgolearn</strong> to solve real-world optimization problems.</p>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">What is Bgolearn?</p>
+<p>Bgolearn is a Python package developed by <strong>Dr. <a class="reference external" href="https://bin-cao.github.io/">Bin Cao</a> at Hong Kong University of Science and Technology (Guangzhou)</strong> that implements state-of-the-art Bayesian optimization algorithms for both single-objective and multi-objective optimization. It’s particularly powerful for materials discovery, where experiments are costly and time-consuming.</p>
+<p><strong>Key Features:</strong></p>
+<ul class="simple">
+<li><p>Single-objective optimization with multiple acquisition functions</p></li>
+<li><p>Multi-objective optimization via MultiBgolearn</p></li>
+<li><p>Materials-focused design and applications</p></li>
+<li><p>Flexible surrogate model selection</p></li>
+<li><p>Bootstrap uncertainty quantification</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">What makes Bgolearn special?</p>
+<ul class="simple">
+<li><p><strong>Materials-focused</strong>: Built specifically for materials science workflows</p></li>
+<li><p><strong>Parallel experiments</strong>: Batch optimization for efficient resource utilization</p></li>
+<li><p><strong>Rich visualizations</strong>: Interactive plots and optimization dashboards</p></li>
+<li><p><strong>Robust &amp; reliable</strong>: Comprehensive error handling and data validation</p></li>
+<li><p><strong>Easy to use</strong>: Simple API with sensible defaults</p></li>
+</ul>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">About</p>
+<p>The <em>Bgolearn</em> project is supported by the <strong>Shanghai Artificial Intelligence Open Source Award Project Support Plan (上海市人工智能开源奖励项目支持计划, 2025)</strong>, with a funding of 500,000 RMB. Special thanks to <strong>Prof. Jie Xiong</strong> and <strong>Prof. Tong-Yi Zhang</strong> from <strong>Shanghai University</strong> for their support in this project.</p>
+<p>An updated survey of <em>Bgolearn</em> has been published on <strong><a class="reference external" href="https://doi.org/10.48550/arXiv.2601.06820">npj Computational Materials, 2026</a></strong>. We express our deep gratitude for the guidance and contributions of <strong>Prof. Tong-Yi Zhang</strong> (Shanghai University, HKUST(GZ)), <strong>Prof. Jun Wang</strong> (University College London), <strong>Prof. Turab Lookman</strong> (Xi’an Jiaotong University), <strong>Prof. Dezhen Xue</strong> (Xi’an Jiaotong University), <strong>Prof. Jie Xiong</strong> (Shanghai University), and <strong>Prof. Jian Hui</strong> (Suzhou Laboratory).</p>
+<h3 class="rubric" id="key-features">Key Features</h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Materials Science Focus</div>
+<p class="sd-card-text">Specialized workflows for composition optimization, processing parameter tuning, and multi-objective materials design.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Multiple Acquisition Functions</div>
+<p class="sd-card-text">EI, UCB, PI, PES, KG, etc. for different optimization strategies and experimental constraints.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Batch Optimization</div>
+<p class="sd-card-text">Select multiple experiments for parallel execution, dramatically reducing optimization time and cost.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Advanced Visualization</div>
+<p class="sd-card-text">Interactive plots, optimization dashboards, and materials-specific visualizations for better insights.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h3 class="rubric" id="quick-start-example">Quick Start Example</h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="linenos"> 2</span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="linenos"> 3</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># Load your materials data</span>
+<span class="linenos"> 6</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;Composition&#39;</span><span class="p">])</span>
+<span class="linenos"> 7</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>  <span class="c1"># Target property (e.g., strength)</span>
+<span class="hll"><span class="linenos"> 8</span><span class="n">X_candidates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure&#39;</span><span class="p">,</span> <span class="s1">&#39;Composition&#39;</span><span class="p">])</span>
+</span><span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="c1"># Initialize and fit Bgolearn</span>
+<span class="linenos">11</span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="linenos">12</span><span class="n">model</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+<span class="linenos">13</span>    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>  <span class="c1"># Pass DataFrame directly</span>
+<span class="linenos">14</span>    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>  <span class="c1"># Pass Series directly</span>
+<span class="hll"><span class="linenos">15</span>    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>  <span class="c1"># Pass DataFrame directly</span>
+</span><span class="linenos">16</span>    <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span>
+<span class="linenos">17</span><span class="p">)</span>
+<span class="hll"><span class="linenos">18</span>
+</span><span class="linenos">19</span><span class="c1"># Get recommendation using Expected Improvement</span>
+<span class="linenos">20</span><span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="c1"># The recommended point(s)</span>
+<span class="linenos">23</span><span class="n">next_experiment</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># First (best) recommendation</span>
+<span class="linenos">24</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Next recommended experiment: </span><span class="si">{</span><span class="n">next_experiment</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="c1"># Get prediction for all virtual samples</span>
+<span class="linenos">27</span><span class="n">predicted_values</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+<span class="linenos">28</span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of predictions: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">predicted_values</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="c1"># Basic visualization using matplotlib</span>
+<span class="linenos">31</span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="linenos">32</span>
+<span class="linenos">33</span><span class="c1"># Plot EI values</span>
+<span class="linenos">34</span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="linenos">35</span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span>
+<span class="linenos">36</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expected Improvement Values&#39;</span><span class="p">)</span>
+<span class="linenos">37</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Candidate Index&#39;</span><span class="p">)</span>
+<span class="linenos">38</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;EI Value&#39;</span><span class="p">)</span>
+<span class="linenos">39</span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+Basic Installation</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>bgolearn
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+Development Installation</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Bin-Cao/Bgolearn.git
+<span class="nb">cd</span><span class="w"> </span>Bgolearn
+pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
+With Optional Dependencies</label><div class="sd-tab-content docutils">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete installation with all features</span>
+pip<span class="w"> </span>install<span class="w"> </span>bgolearn<span class="o">[</span>all<span class="o">]</span>
+
+<span class="c1"># Or install specific components</span>
+pip<span class="w"> </span>install<span class="w"> </span>bgolearn<span class="w"> </span>plotly<span class="w"> </span>seaborn<span class="w">  </span><span class="c1"># For advanced visualization</span>
+pip<span class="w"> </span>install<span class="w"> </span>bgolearn<span class="w"> </span>pymatgen<span class="w"> </span>matminer<span class="w">  </span><span class="c1"># For materials science</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Verify Installation</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bgolearn imported successfully!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Test basic functionality</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bgolearn optimizer initialized successfully!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="documentation-structure">
+<h2>Documentation Structure<a class="headerlink" href="#documentation-structure" title="Link to this heading">#</a></h2>
+<p>This documentation is organized into several main sections:</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-1 sd-row-cols-xs-1 sd-row-cols-sm-1 sd-row-cols-md-2 sd-row-cols-lg-4 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Getting Started</div>
+<p class="sd-card-text">Installation, basic concepts, and your first optimization</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Perfect for newcomers to Bayesian optimization</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="getting_started.html"><span class="doc">Getting Started with Bgolearn</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+BgoFace GUI</div>
+<p class="sd-card-text">Graphical user interface for visual optimization workflows</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">No coding required - perfect for materials scientists</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="bgoface.html"><span class="doc">BgoFace: Graphical User Interface for Bgolearn</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Core Documentation</div>
+<p class="sd-card-text">API reference, acquisition functions, and optimization strategies</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Comprehensive guides for all features</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="api_reference.html"><span class="doc">API Reference</span></a></div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm sd-card-hover docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Applications</div>
+<p class="sd-card-text">Materials discovery workflows and specialized applications</p>
+</div>
+<div class="sd-card-footer docutils">
+<p class="sd-card-text">Real-world examples and best practices</p>
+</div>
+<a class="sd-stretched-link sd-hide-link-text reference internal" href="materials_discovery.html"><span class="doc">Materials Discovery with Bgolearn</span></a></div>
+</div>
+</div>
+</div>
+<section id="detailed-navigation">
+<h3>Detailed Navigation<a class="headerlink" href="#detailed-navigation" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="learning-paths">
+<h2>Learning Paths<a class="headerlink" href="#learning-paths" title="Link to this heading">#</a></h2>
+<p>Choose your learning path based on your background and goals:</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
+🔰 Beginner Path</label><div class="sd-tab-content docutils">
+<p><strong>New to Bayesian Optimization?</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="getting_started.html"><span class="doc">Getting Started with Bgolearn</span></a> - Installation and basic concepts</p></li>
+<li><p><a class="reference internal" href="first_optimization.html"><span class="doc">Your First Optimization</span></a> - Your first optimization tutorial</p></li>
+<li><p><a class="reference internal" href="acquisition_functions.html"><span class="doc">Acquisition Functions Guide</span></a> - Understanding acquisition functions</p></li>
+<li><p><a class="reference internal" href="examples/single_objective.html"><span class="doc">Single-Objective Optimization Examples</span></a> - Single-objective examples</p></li>
+</ol>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
+🔬 Materials Scientist Path</label><div class="sd-tab-content docutils">
+<p><strong>Focused on materials discovery?</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="materials_discovery.html"><span class="doc">Materials Discovery with Bgolearn</span></a> - Materials discovery overview</p></li>
+<li><p><a class="reference internal" href="examples/single_objective.html"><span class="doc">Single-Objective Optimization Examples</span></a> - Alloy composition optimization</p></li>
+<li><p><a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a> - Multi-objective optimization</p></li>
+<li><p><a class="reference internal" href="examples/multi_objective.html"><span class="doc">Multi-Objective Optimization Examples</span></a> - Multi-property design examples</p></li>
+</ol>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
+⚡ Advanced User Path</label><div class="sd-tab-content docutils">
+<p><strong>Ready for advanced features?</strong></p>
+<ol class="arabic simple">
+<li><p><a class="reference internal" href="optimization_strategies.html"><span class="doc">Optimization Strategies</span></a> - Advanced optimization strategies</p></li>
+<li><p><a class="reference internal" href="surrogate_models.html"><span class="doc">Surrogate Models in Bgolearn</span></a> - Different surrogate models</p></li>
+<li><p><a class="reference internal" href="bgoface.html"><span class="doc">BgoFace: Graphical User Interface for Bgolearn</span></a> - GUI interface for visual workflows</p></li>
+<li><p><a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a> - Multi-objective optimization</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="community-support">
+<h2>Community &amp; Support<a class="headerlink" href="#community-support" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Get Help &amp; Connect</p>
+<ul class="simple">
+<li><p><strong>GitHub Discussions</strong>: Ask questions and share experiences</p></li>
+<li><p><strong>Issues</strong>: Report bugs and request features</p></li>
+<li><p><strong>Email</strong>: <a class="reference external" href="mailto:binjacobcao&#37;&#52;&#48;gmail&#46;com">binjacobcao<span>&#64;</span>gmail<span>&#46;</span>com</a></p></li>
+<li><p><strong>Documentation</strong>: You’re reading it!</p></li>
+</ul>
+</div>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+🔗 Links</div>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/Bin-Cao/Bgolearn">GitHub Repository</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://pypi.org/project/bgolearn/">PyPI Package</a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://bgolearn.readthedocs.io/">Documentation</a></p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-body docutils">
+<div class="sd-card-title sd-font-weight-bold docutils">
+Contributing</div>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="#contributing"><span class="xref myst">Contributing Guide</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference external" href="https://github.com/Bin-Cao/Bgolearn/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="#contributing.md#development-setup"><span class="xref myst">Development Setup</span></a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="citation">
+<h2>Citation<a class="headerlink" href="#citation" title="Link to this heading">#</a></h2>
+<p>If you use Bgolearn in your research, please cite our work:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">cao2026bgolearn</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="w">        </span><span class="p">=</span><span class="w"> </span><span class="s">{Bgolearn: a Unified Bayesian Optimization Framework for Accelerating Materials Discovery}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{Cao, Bin and Xiong, Jie and Ma, Jiaxuan and Tian, Yuan and Hu, Yirui and He, Mengwei and Zhang, Longhan and Wang, Jiayu and Hui, Jian and Liu, Li and Xue, Dezhen and Lookman, Turab and Zhang, Tong-Yi}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="w">      </span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv preprint arXiv:2601.06820}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{2026}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">eprint</span><span class="w">       </span><span class="p">=</span><span class="w"> </span><span class="s">{2601.06820}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">archivePrefix</span><span class="p">=</span><span class="w"> </span><span class="s">{arXiv}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">primaryClass</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">{cond-mat.mtrl-sci}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">doi</span><span class="w">          </span><span class="p">=</span><span class="w"> </span><span class="s">{https://doi.org/10.48550/arXiv.2601.06820}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">note</span><span class="w">         </span><span class="p">=</span><span class="w"> </span><span class="s">{38 pages, 5 figures}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<div class="note admonition">
+<p class="admonition-title">MIT License</p>
+<p>Bgolearn is released under the MIT License, making it free for both academic and commercial use.
+See the <a class="reference external" href="https://github.com/Bin-Cao/Bgolearn/blob/main/LICENSE">full license</a> for details.</p>
+</div>
+<hr class="docutils" />
+<p><strong>Ready to accelerate your research?</strong> <a class="reference internal" href="getting_started.html"><span class="doc">Start here</span></a> or explore our <span class="xref std std-doc">examples</span> to see Bgolearn in action!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ja"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#documentation-structure">Documentation Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-navigation">Detailed Navigation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-paths">Learning Paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#community-support">Community &amp; Support</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation">Citation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

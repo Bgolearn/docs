@@ -1,0 +1,1371 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MultiBgolearn 中的 MOBO 算法 &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh/mobo_algorithms';</script>
+    <script src="../_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/zh/mobo_algorithms.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fzh/mobo_algorithms.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh/mobo_algorithms.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MultiBgolearn 中的 MOBO 算法</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ehvi">预期超容量改进 (EHVI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">数学细节</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multibgolearn">在 MultiBgolearn 中实现</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">示例：使用 EHVI 进行合金设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-qnehvi">q-噪声预期超容量改进 (qNEHVI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">数学细节</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qnehvi">示例：使用 qNEHVI 进行合金设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pi">改进概率 (PI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">执行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">计算详情</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">示例：加工参数优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ucb">置信上限 (UCB)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">多目标 UCB 变体</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">1. 组件级 UCB</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.基于超容量的UCB</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">3. 标化UCB</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">执行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">参数选择</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">示例：多属性陶瓷设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">算法比较</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">性能特点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">选择指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">在以下情况下选择 EHVI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">在以下情况下选择 qNEHVI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">在以下情况下选择 PI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id34">在以下情况下选择 UCB：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">高级主题</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">约束处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id37">批量优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id38">动态目标</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id39">实施技巧</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id40">数据预处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id41">选型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id42">引导程序设置</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id43">故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id44">常见问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id45">性能优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id46">下一步</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multibgolearn-mobo">
+<h1>MultiBgolearn 中的 MOBO 算法<a class="headerlink" href="#multibgolearn-mobo" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页是 Bgolearn 手册的中文版本。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页提供了 MultiBgolearn 中实现的多目标贝叶斯优化算法的详细说明。</p>
+</div>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>MultiBgolearn 实现了三个主要的多目标采集功能，每个功能都有不同的优势和用例：</p>
+<ol class="arabic simple">
+<li><p><strong>预期超容量改进 (EHVI)</strong> - 基于卷的优化</p></li>
+<li><p><strong>q-Noisy 预期超体积改进 (qNEHVI)</strong> - 基于体积的优化</p></li>
+<li><p><strong>改进概率 (PI)</strong> - 基于概率的改进</p></li>
+<li><p><strong>置信上限 (UCB)</strong> - 不确定性感知探索</p></li>
+</ol>
+</section>
+<section id="ehvi">
+<h2>预期超容量改进 (EHVI)<a class="headerlink" href="#ehvi" title="Link to this heading">#</a></h2>
+<section id="id2">
+<h3>理论<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>EHVI 被认为是多目标贝叶斯优化的黄金标准。它最大化了超体积的预期改进，超体积是帕累托前沿主导的目标空间的体积。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>EHVI(x) = E[HV(F ∪ {f(x)}) - HV(F)]
+</pre></div>
+</div>
+<p>在哪里：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F</span></code>：当前帕累托前沿近似</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HV(·)</span></code>：超成交量指标</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f(x)</span></code>：x点的预测目标向量</p></li>
+</ul>
+</section>
+<section id="id3">
+<h3>数学细节<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p>对于高斯过程代理模型，可以针对 2D 问题分析计算 EHVI，并针对更高维度进行近似：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>EHVI(x) = ∫ max(0, HV_improvement) · p(f(x)) df(x)
+</pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">p(f(x))</span></code> 是 GP 预测的多元高斯分布。</p>
+</section>
+<section id="multibgolearn">
+<h3>在 MultiBgolearn 中实现<a class="headerlink" href="#multibgolearn" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># Use EHVI for multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="o">=</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span>
+    <span class="n">VS_path</span><span class="o">=</span><span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span> 
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>                    <span class="c1"># Expected Hypervolume Improvement</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>   <span class="c1"># Best for EHVI</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>优点<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">EHVI 优势</p>
+<ul class="simple">
+<li><p><strong>理论上合理</strong>：最大化明确定义的质量指标</p></li>
+<li><p><strong>帕累托服从</strong>：尊重帕累托支配关系</p></li>
+<li><p><strong>平衡探索</strong>：探索和开发之间的良好权衡</p></li>
+<li><p><strong>可扩展</strong>：适用于 2-4 个目标</p></li>
+</ul>
+</div>
+</section>
+<section id="id5">
+<h3>局限性<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">EHVI 局限性</p>
+<ul class="simple">
+<li><p><strong>计算成本</strong>：对于超过 4 个目标而言成本昂贵</p></li>
+<li><p><strong>依赖参考点</strong>：需要仔细选择参考点</p></li>
+<li><p><strong>需要近似</strong>：精确计算仅适用于 2D</p></li>
+</ul>
+</div>
+</section>
+<section id="id6">
+<h3>最佳用例<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>2-4 个目标</strong>：最佳性能范围</p></li>
+<li><p><strong>平衡探索</strong>：当您想要全面的帕累托前沿时</p></li>
+<li><p><strong>质量焦点</strong>：当超容量成为重要指标时</p></li>
+<li><p><strong>材料设计</strong>：合金优化、加工参数</p></li>
+</ul>
+</section>
+<section id="id7">
+<h3>示例：使用 EHVI 进行合金设计<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># Prepare alloy dataset</span>
+<span class="c1"># Features: Cu, Mg, Si content (%)</span>
+<span class="c1"># Objectives: Strength (MPa), Ductility (%), Cost ($/kg)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> 
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">],</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+    <span class="s1">&#39;Cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">95</span><span class="p">,</span> <span class="o">-</span><span class="mi">130</span><span class="p">,</span> <span class="o">-</span><span class="mi">110</span><span class="p">]</span>  <span class="c1"># Negative for maximization</span>
+<span class="p">})</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;alloy_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Virtual space</span>
+<span class="n">virtual_space</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">virtual_space</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_alloys.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># EHVI optimization</span>
+<span class="n">recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;alloy_data.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_alloys.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended alloy: Cu=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected improvements: Strength=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Ductility=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Cost=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="q-qnehvi">
+<h2>q-噪声预期超容量改进 (qNEHVI)<a class="headerlink" href="#q-qnehvi" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3>理论<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>qNEHVI 扩展了 EHVI 来处理噪声观测和批量采集，使其成为具有测量不确定性和并行实验的现实世界多目标优化的最先进方法。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>qNEHVI(X_q) = E_y[E_f[HV(P(y ∪ f_q)) - HV(P(y))]]
+</pre></div>
+</div>
+<p>在哪里：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X_q</span> <span class="pre">=</span> <span class="pre">{x_1,</span> <span class="pre">...,</span> <span class="pre">x_q}</span></code>：q个候选点的批次</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>：现有数据的噪声观测值</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f_q</span></code>：候选批次的预测目标</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">P(·)</span></code>：帕累托前沿算子</p></li>
+<li><p>内心期望：关于 GP 后验预测</p></li>
+<li><p>外部期望：过度观察噪声</p></li>
+</ul>
+</section>
+<section id="id9">
+<h3>数学细节<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>qNEHVI 在采集函数中明确模拟观测噪声：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>y_i(x) = f_i(x) + ε_i, ε_i ~ N(0, σ²_obs,i)
+</pre></div>
+</div>
+<p>采集函数通过嵌套蒙特卡罗采样来近似：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>qNEHVI(X_q) ≈ (1/S₁S₂) Σ Σ max(0, HV(P(y^(s₁) ∪ f_q^(s₂))) - HV(P(y^(s₁))))
+</pre></div>
+</div>
+</section>
+<section id="qnehvi">
+<h3>示例：使用 qNEHVI 进行合金设计<a class="headerlink" href="#qnehvi" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># Prepare alloy dataset</span>
+<span class="c1"># Features: Cu, Mg, Si content (%)</span>
+<span class="c1"># Objectives: Strength (MPa), Ductility (%), Cost ($/kg)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> 
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">],</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">14</span><span class="p">],</span>
+    <span class="s1">&#39;Cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">95</span><span class="p">,</span> <span class="o">-</span><span class="mi">130</span><span class="p">,</span> <span class="o">-</span><span class="mi">110</span><span class="p">]</span>  <span class="c1"># Negative for maximization</span>
+<span class="p">})</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;alloy_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Virtual space</span>
+<span class="n">virtual_space</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">virtual_space</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_alloys.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># EHVI optimization</span>
+<span class="n">recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;alloy_data.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_alloys.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;qNEHVI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended alloy: Cu=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;qNEHVI improvements: Strength=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Ductility=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, Cost=</span><span class="si">{</span><span class="n">improvements</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pi">
+<h2>改进概率 (PI)<a class="headerlink" href="#pi" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3>理论<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>多目标 PI 计算候选点将改进当前 Pareto 前沿中至少一个目标的概率。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dominates</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">F</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>对于高斯过程预测：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PI(x) = P(∃ y ∈ F : f(x) ≻ y)
+</pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">≻</span></code> 表示帕累托优势。</p>
+</section>
+<section id="id11">
+<h3>执行<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use PI for improvement-focused optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="o">=</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span>
+    <span class="n">VS_path</span><span class="o">=</span><span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;PI&#39;</span><span class="p">,</span>                      <span class="c1"># Probability of Improvement</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>      <span class="c1"># Good for discrete problems</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h3>计算详情<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<p>对于每个候选点 x，PI 计算如下：</p>
+<ol class="arabic simple">
+<li><p><strong>从 GP 后验生成样本</strong>：<code class="docutils literal notranslate"><span class="pre">f_samples</span> <span class="pre">~</span> <span class="pre">GP(x)</span></code></p></li>
+<li><p><strong>检查每个样本相对于帕累托前沿的优势</strong></p></li>
+<li><p><strong>计算概率</strong>作为主导样本的分数</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pseudo-code for PI calculation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_PI</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pareto_front</span><span class="p">,</span> <span class="n">gp_model</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># Sample from GP posterior</span>
+    <span class="n">f_samples</span> <span class="o">=</span> <span class="n">gp_model</span><span class="o">.</span><span class="n">sample_posterior</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+    
+    <span class="c1"># Check dominance for each sample</span>
+    <span class="n">dominates_count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="n">f_samples</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">dominates</span><span class="p">(</span><span class="n">sample</span><span class="p">,</span> <span class="n">pf_point</span><span class="p">)</span> <span class="k">for</span> <span class="n">pf_point</span> <span class="ow">in</span> <span class="n">pareto_front</span><span class="p">):</span>
+            <span class="n">dominates_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    
+    <span class="k">return</span> <span class="n">dominates_count</span> <span class="o">/</span> <span class="n">n_samples</span>
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>优点<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">PI 优势</p>
+<ul class="simple">
+<li><p><strong>直观</strong>：易于理解和解释</p></li>
+<li><p><strong>保守</strong>：关注可能的改进</p></li>
+<li><p><strong>计算速度快</strong>：计算效率相对较高</p></li>
+<li><p><strong>稳健</strong>：适用于嘈杂的目标</p></li>
+</ul>
+</div>
+</section>
+<section id="id14">
+<h3>局限性<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">PI 局限性</p>
+<ul class="simple">
+<li><p><strong>利用偏差</strong>：可能探索得不够</p></li>
+<li><p><strong>局部最优</strong>：可能会陷入局部区域</p></li>
+<li><p><strong>忽略幅度</strong>：不考虑改进大小</p></li>
+</ul>
+</div>
+</section>
+<section id="id15">
+<h3>最佳用例<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>保守优化</strong>：当您想要可靠的改进时</p></li>
+<li><p><strong>嘈杂的目标</strong>：当测量具有高度不确定性时</p></li>
+<li><p><strong>预算有限</strong>：当您的评估机会很少时</p></li>
+<li><p><strong>开发重点</strong>：当您想要改进已知的良好区域时</p></li>
+</ul>
+</section>
+<section id="id16">
+<h3>示例：加工参数优化<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat treatment optimization</span>
+<span class="c1"># Features: Temperature (°C), Time (hours), Cooling rate (°C/min)</span>
+<span class="c1"># Objectives: Hardness (HV), Toughness (J), Energy cost (kWh)</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">450</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">550</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">520</span><span class="p">],</span>
+    <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="s1">&#39;Cooling_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">12</span><span class="p">],</span>
+    <span class="s1">&#39;Hardness&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">235</span><span class="p">],</span>
+    <span class="s1">&#39;Toughness&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+    <span class="s1">&#39;Energy_cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="o">-</span><span class="mi">95</span><span class="p">]</span>  <span class="c1"># Negative for maximization</span>
+<span class="p">})</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;heat_treatment_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Virtual processing conditions</span>
+<span class="n">virtual_conditions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">475</span><span class="p">,</span> <span class="mi">525</span><span class="p">,</span> <span class="mi">490</span><span class="p">,</span> <span class="mi">510</span><span class="p">],</span>
+    <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">],</span>
+    <span class="s1">&#39;Cooling_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">virtual_conditions</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_conditions.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># PI optimization</span>
+<span class="n">recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;heat_treatment_data.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_conditions.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;PI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GradientBoosting&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">8</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended conditions: T=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, t=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h, CR=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C/min&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="ucb">
+<h2>置信上限 (UCB)<a class="headerlink" href="#ucb" title="Link to this heading">#</a></h2>
+<section id="id17">
+<h3>理论<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>多目标 UCB 通过使用每个目标的置信界限来平衡利用（平均预测）和探索（不确定性）。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UCB</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">β·σ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>在哪里：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">μ(x)</span></code>：平均预测向量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">σ(x)</span></code>：标准差向量</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">β</span></code>：探索参数</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>多目标 UCB 变体<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<section id="id19">
+<h4>1. 组件级 UCB<a class="headerlink" href="#id19" title="Link to this heading">#</a></h4>
+<p>分别将 UCB 应用于每个目标：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UCB_i</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">μ_i</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">β·σ_i</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="n">m</span>
+</pre></div>
+</div>
+</section>
+<section id="id20">
+<h4>2.基于超容量的UCB<a class="headerlink" href="#id20" title="Link to this heading">#</a></h4>
+<p>使用 UCB 值计算超体积：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UCB_HV</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">HV</span><span class="p">([</span><span class="n">UCB_1</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">UCB_2</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="n">UCB_m</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+</pre></div>
+</div>
+</section>
+<section id="id21">
+<h4>3. 标化UCB<a class="headerlink" href="#id21" title="Link to this heading">#</a></h4>
+<p>将目标与权重结合起来：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>UCB_scalar(x) = Σ w_i · UCB_i(x)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id22">
+<h3>执行<a class="headerlink" href="#id22" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use UCB for exploration-focused optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="o">=</span><span class="s1">&#39;data.csv&#39;</span><span class="p">,</span>
+    <span class="n">VS_path</span><span class="o">=</span><span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;UCB&#39;</span><span class="p">,</span>                     <span class="c1"># Upper Confidence Bound</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;SVR&#39;</span><span class="p">,</span>               <span class="c1"># Good for high-dimensional problems</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id23">
+<h3>参数选择<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<p>探索参数 β 控制探索与利用的权衡：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># β selection guidelines</span>
+<span class="n">beta_values</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Conservative (exploitation)&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span>
+    <span class="s2">&quot;Balanced&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
+    <span class="s2">&quot;Aggressive (exploration)&quot;</span><span class="p">:</span> <span class="mf">2.0</span><span class="p">,</span>
+    <span class="s2">&quot;Very aggressive&quot;</span><span class="p">:</span> <span class="mf">3.0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id24">
+<h3>优点<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">UCB 优势</p>
+<ul class="simple">
+<li><p><strong>不确定性意识</strong>：明确考虑预测不确定性</p></li>
+<li><p><strong>可调</strong>：β参数允许探索控制</p></li>
+<li><p><strong>稳健</strong>：适用于噪声数据</p></li>
+<li><p><strong>可扩展</strong>：对于许多目标都有效</p></li>
+</ul>
+</div>
+</section>
+<section id="id25">
+<h3>局限性<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">UCB 局限性</p>
+<ul class="simple">
+<li><p><strong>参数调整</strong>：需要选择β</p></li>
+<li><p><strong>过度探索</strong>：可能在高 β 的情况下探索过多</p></li>
+<li><p><strong>取决于模型</strong>：性能取决于不确定性估计</p></li>
+</ul>
+</div>
+</section>
+<section id="id26">
+<h3>最佳用例<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>嘈杂的目标</strong>：当测量具有显着的不确定性时</p></li>
+<li><p><strong>探索需求</strong>：当你想要探索未知区域时</p></li>
+<li><p><strong>高维度</strong>：当您有很多目标时 (&gt;4)</p></li>
+<li><p><strong>不确定性量化</strong>：当预测置信度很重要时</p></li>
+</ul>
+</section>
+<section id="id27">
+<h3>示例：多属性陶瓷设计<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Ceramic material optimization</span>
+<span class="c1"># Features: Al2O3, SiO2, MgO content (%)</span>
+<span class="c1"># Objectives: Strength (MPa), Thermal conductivity (W/mK), Thermal shock resistance</span>
+
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Al2O3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">85</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">88</span><span class="p">],</span>
+    <span class="s1">&#39;SiO2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">],</span>
+    <span class="s1">&#39;MgO&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">350</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">320</span><span class="p">],</span>
+    <span class="s1">&#39;Thermal_conductivity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span>
+    <span class="s1">&#39;Thermal_shock&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;ceramic_data.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Virtual compositions</span>
+<span class="n">virtual_ceramics</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Al2O3&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">87</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">83</span><span class="p">,</span> <span class="mi">89</span><span class="p">],</span>
+    <span class="s1">&#39;SiO2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="s1">&#39;MgO&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">virtual_ceramics</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_ceramics.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># UCB optimization with high exploration</span>
+<span class="n">recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;ceramic_data.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_ceramics.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;UCB&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">12</span>  <span class="c1"># Higher bootstrap for better uncertainty</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended ceramic: Al2O3=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, SiO2=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, MgO=</span><span class="si">{</span><span class="n">recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id28">
+<h2>算法比较<a class="headerlink" href="#id28" title="Link to this heading">#</a></h2>
+<section id="id29">
+<h3>性能特点<a class="headerlink" href="#id29" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table" id="mobo-comparison">
+<caption><span class="caption-text">Algorithm Comparison</span><a class="headerlink" href="#mobo-comparison" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>算法</p></th>
+<th class="head"><p>最适合</p></th>
+<th class="head"><p>目标</p></th>
+<th class="head"><p>勘探</p></th>
+<th class="head"><p>计算</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>EHVI</strong></p></td>
+<td><p>均衡优化</p></td>
+<td><p>2-4</p></td>
+<td><p>缓和</p></td>
+<td><p>高的</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>qNEHVI</strong></p></td>
+<td><p>均衡优化</p></td>
+<td><p>2-4</p></td>
+<td><p>缓和</p></td>
+<td><p>高变化</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PI</strong></p></td>
+<td><p>保守改进</p></td>
+<td><p>2-6</p></td>
+<td><p>低的</p></td>
+<td><p>中等的</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>UCB</strong></p></td>
+<td><p>不确定/噪音数据</p></td>
+<td><p>2-8+</p></td>
+<td><p>高的</p></td>
+<td><p>低的</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id30">
+<h3>选择指南<a class="headerlink" href="#id30" title="Link to this heading">#</a></h3>
+<section id="id31">
+<h4>在以下情况下选择 EHVI：<a class="headerlink" href="#id31" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>您有 2-4 个目标</p></li>
+<li><p>您想要全面的帕累托前沿</p></li>
+<li><p>计算资源可用</p></li>
+<li><p>超容量是重要指标</p></li>
+</ul>
+</section>
+<section id="id32">
+<h4>在以下情况下选择 qNEHVI：<a class="headerlink" href="#id32" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>您有 2-4 个目标</p></li>
+<li><p>测量结果具有显着的观察噪声或不确定性</p></li>
+<li><p>多个实验可以并行进行</p></li>
+</ul>
+</section>
+<section id="id33">
+<h4>在以下情况下选择 PI：<a class="headerlink" href="#id33" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>您想要可靠的改进</p></li>
+<li><p>目标有噪音</p></li>
+<li><p>评估预算有限</p></li>
+<li><p>首选保守方法</p></li>
+</ul>
+</section>
+<section id="id34">
+<h4>在以下情况下选择 UCB：<a class="headerlink" href="#id34" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p>您有 &gt;4 个目标</p></li>
+<li><p>测量不确定度高</p></li>
+<li><p>需要探索未知区域</p></li>
+<li><p>想要可调探索</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id35">
+<h2>高级主题<a class="headerlink" href="#id35" title="Link to this heading">#</a></h2>
+<section id="id36">
+<h3>约束处理<a class="headerlink" href="#id36" title="Link to this heading">#</a></h3>
+<p>所有算法都可以通过惩罚方法处理约束：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add constraints to optimization</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">constraint_penalty</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">penalty</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Composition constraint: sum ≤ 100%</span>
+    <span class="k">if</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">-</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="c1"># Temperature constraint: 400 ≤ T ≤ 600</span>
+    <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">400</span> <span class="ow">or</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">600</span><span class="p">:</span>
+        <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">penalty</span>
+</pre></div>
+</div>
+</section>
+<section id="id37">
+<h3>批量优化<a class="headerlink" href="#id37" title="Link to this heading">#</a></h3>
+<p>对于并行实验，修改采集函数：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch EHVI (simplified concept)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">batch_EHVI</span><span class="p">(</span><span class="n">X_batch</span><span class="p">,</span> <span class="n">pareto_front</span><span class="p">,</span> <span class="n">gp_models</span><span class="p">):</span>
+    <span class="c1"># Compute joint improvement for entire batch</span>
+    <span class="c1"># More complex than single-point EHVI</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="id38">
+<h3>动态目标<a class="headerlink" href="#id38" title="Link to this heading">#</a></h3>
+<p>处理随时间变化的目标：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update objectives based on new requirements</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update_objectives</span><span class="p">(</span><span class="n">iteration</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">,</span> <span class="s1">&#39;cost&#39;</span><span class="p">]</span>  <span class="c1"># Add cost later</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id39">
+<h2>实施技巧<a class="headerlink" href="#id39" title="Link to this heading">#</a></h2>
+<section id="id40">
+<h3>数据预处理<a class="headerlink" href="#id40" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Normalize objectives to similar scales</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">objectives_normalized</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id41">
+<h3>选型<a class="headerlink" href="#id41" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model recommendations by algorithm</span>
+<span class="n">model_recommendations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;EHVI&#39;</span><span class="p">:</span> <span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>      <span class="c1"># Best uncertainty estimates</span>
+    <span class="s1">&#39;qNEHVI&#39;</span><span class="p">:</span> <span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>      <span class="c1"># Best uncertainty estimates</span>
+    <span class="s1">&#39;PI&#39;</span><span class="p">:</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>           <span class="c1"># Robust to noise</span>
+    <span class="s1">&#39;UCB&#39;</span><span class="p">:</span> <span class="s1">&#39;GaussianProcess&#39;</span>        <span class="c1"># Good uncertainty quantification</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id42">
+<h3>引导程序设置<a class="headerlink" href="#id42" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Bootstrap recommendations by algorithm</span>
+<span class="n">bootstrap_settings</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;EHVI&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>   <span class="c1"># Moderate bootstrap for balance</span>
+    <span class="s1">&#39;qNEHVI&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>   <span class="c1"># Moderate bootstrap for balance</span>
+    <span class="s1">&#39;PI&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>     <span class="c1"># Higher for noise robustness  </span>
+    <span class="s1">&#39;UCB&#39;</span><span class="p">:</span> <span class="mi">10</span>    <span class="c1"># Highest for uncertainty estimation</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id43">
+<h2>故障排除<a class="headerlink" href="#id43" title="Link to this heading">#</a></h2>
+<section id="id44">
+<h3>常见问题<a class="headerlink" href="#id44" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>收敛性差</strong></p>
+<ul class="simple">
+<li><p>增加引导迭代次数</p></li>
+<li><p>尝试不同的代理模型</p></li>
+<li><p>检查目标缩放</p></li>
+</ul>
+</li>
+<li><p><strong>性能缓慢</strong></p>
+<ul class="simple">
+<li><p>减小虚拟空间大小</p></li>
+<li><p>使用更简单的模型（RandomForest 与 GaussianProcess）</p></li>
+<li><p>减少引导迭代</p></li>
+</ul>
+</li>
+<li><p><strong>意外的推荐</strong></p>
+<ul class="simple">
+<li><p>验证目标定义（最大与最小）</p></li>
+<li><p>检查数据预处理</p></li>
+<li><p>验证约束处理</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id45">
+<h3>性能优化<a class="headerlink" href="#id45" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Speed up optimization</span>
+<span class="n">optimization_tips</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Reduce virtual space&quot;</span><span class="p">:</span> <span class="s2">&quot;Keep &lt;5000 candidates&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Simplify models&quot;</span><span class="p">:</span> <span class="s2">&quot;Use RandomForest for speed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Parallel bootstrap&quot;</span><span class="p">:</span> <span class="s2">&quot;Use multiprocessing&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Cache computations&quot;</span><span class="p">:</span> <span class="s2">&quot;Store expensive calculations&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id46">
+<h2>下一步<a class="headerlink" href="#id46" title="Link to this heading">#</a></h2>
+<p>现在您已经了解了 MOBO 算法：</p>
+<ol class="arabic simple">
+<li><p><strong>举例练习</strong>：<a class="reference internal" href="examples/multi_objective.html"><span class="doc">多目标优化示例</span></a></p></li>
+<li><p><strong>学习帕累托分析</strong>：<a class="reference internal" href="pareto_optimization.html"><span class="doc">帕累托优化和权衡分析</span></a></p></li>
+<li><p><strong>尝试实际应用</strong>：<span class="xref std std-doc">examples/materials_design</span></p></li>
+<li><p><strong>探索高级功能</strong>：<span class="xref std std-doc">examples/advanced_usage</span></p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>有关算法详细信息：</p>
+<ul class="simple">
+<li><p>Emmerich, M.“单目标和多目标进化优化”</p></li>
+<li><p>琼斯，D.R. “昂贵的黑盒功能的高效全局优化”</p></li>
+<li><p>Knowles, J.“ParEGO：一种具有在线景观近似的混合算法”</p></li>
+<li><p>Samuel, D.“多个噪声目标的并行贝叶斯优化与预期的超体积改进”</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./zh"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ehvi">预期超容量改进 (EHVI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">数学细节</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multibgolearn">在 MultiBgolearn 中实现</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">示例：使用 EHVI 进行合金设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#q-qnehvi">q-噪声预期超容量改进 (qNEHVI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">数学细节</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#qnehvi">示例：使用 qNEHVI 进行合金设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pi">改进概率 (PI)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">执行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">计算详情</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">示例：加工参数优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ucb">置信上限 (UCB)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">理论</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">多目标 UCB 变体</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">1. 组件级 UCB</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">2.基于超容量的UCB</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">3. 标化UCB</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">执行</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">参数选择</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">优点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">局限性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">最佳用例</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">示例：多属性陶瓷设计</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">算法比较</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">性能特点</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">选择指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">在以下情况下选择 EHVI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">在以下情况下选择 qNEHVI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">在以下情况下选择 PI：</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id34">在以下情况下选择 UCB：</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">高级主题</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">约束处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id37">批量优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id38">动态目标</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id39">实施技巧</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id40">数据预处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id41">选型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id42">引导程序设置</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id43">故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id44">常见问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id45">性能优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id46">下一步</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1063 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bgolearn Nature Manuscript Package &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'paper/README_PAPER';</script>
+    <script src="../_static/language-switcher.js?v=095d934b"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/paper/README_PAPER.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fpaper/README_PAPER.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/paper/README_PAPER.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bgolearn Nature Manuscript Package</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-overview">📁 Files Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-manuscript">Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-information">Supplementary Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-and-tables-guide">Figures and Tables Guide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation-instructions">🔧 Compilation Instructions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-main-manuscript">Compile Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-supplementary-information">Compile Supplementary Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-overleaf-recommended">Using Overleaf (Recommended)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-figures">📊 Creating Figures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-figures-for-main-manuscript">Required Figures for Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-for-generating-figures">Python Script for Generating Figures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-highlights-to-emphasize">📝 Key Highlights to Emphasize</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-contributions">Main Contributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-metrics">Performance Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-features">Unique Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation-information">📚 Citation Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-citation">Primary Citation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software-citation-to-be-updated-after-publication">Software Citation (to be updated after publication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-checklist">🎯 Submission Checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-submission">Before Submission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-checklist">Figure Checklist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checklist">Data Checklist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-materials">Supplementary Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-information">📧 Contact Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-history">🔄 Revision History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-0-current">Version 1.0 (Current)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-revisions">Future Revisions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-successful-submission">💡 Tips for Successful Submission</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-style">Writing Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strengthening-the-manuscript">Strengthening the Manuscript</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">📖 Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nature-submission-guidelines">Nature Submission Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-templates">LaTeX Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-preparation">Figure Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-analysis">Statistical Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">🚀 Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">📄 License</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bgolearn-nature-manuscript-package">
+<h1>Bgolearn Nature Manuscript Package<a class="headerlink" href="#bgolearn-nature-manuscript-package" title="Link to this heading">#</a></h1>
+<p>This directory contains the complete manuscript package for submitting Bgolearn to Nature journal.</p>
+<section id="files-overview">
+<h2>📁 Files Overview<a class="headerlink" href="#files-overview" title="Link to this heading">#</a></h2>
+<section id="main-manuscript">
+<h3>Main Manuscript<a class="headerlink" href="#main-manuscript" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">nature_bgolearn_manuscript.tex</span></code></strong> - Main article (LaTeX format)</p>
+<ul>
+<li><p>~5,000 words (within Nature’s limit)</p></li>
+<li><p>Includes: Abstract, Introduction, Results, Discussion, Methods</p></li>
+<li><p>Follows Nature’s formatting guidelines</p></li>
+<li><p>Ready for compilation</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="supplementary-information">
+<h3>Supplementary Information<a class="headerlink" href="#supplementary-information" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">nature_bgolearn_supplementary.tex</span></code></strong> - Comprehensive supplementary material</p>
+<ul>
+<li><p>Detailed algorithm descriptions</p></li>
+<li><p>Extended mathematical derivations</p></li>
+<li><p>Additional benchmark results</p></li>
+<li><p>Complete code examples</p></li>
+<li><p>Extended experimental data</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="figures-and-tables-guide">
+<h3>Figures and Tables Guide<a class="headerlink" href="#figures-and-tables-guide" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">figures_and_tables_guide.md</span></code></strong> - Detailed specifications for all figures and tables</p>
+<ul>
+<li><p>Figure descriptions and panel layouts</p></li>
+<li><p>Table content and formatting</p></li>
+<li><p>Data visualization guidelines</p></li>
+<li><p>File naming conventions</p></li>
+<li><p>Preparation checklists</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<section id="compilation-instructions">
+<h2>🔧 Compilation Instructions<a class="headerlink" href="#compilation-instructions" title="Link to this heading">#</a></h2>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install LaTeX distribution (if not already installed)</span>
+<span class="c1"># For macOS:</span>
+brew<span class="w"> </span>install<span class="w"> </span>--cask<span class="w"> </span>mactex
+
+<span class="c1"># For Ubuntu/Debian:</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>texlive-full
+
+<span class="c1"># For Windows:</span>
+<span class="c1"># Download and install MiKTeX from https://miktex.org/</span>
+</pre></div>
+</div>
+</section>
+<section id="compile-main-manuscript">
+<h3>Compile Main Manuscript<a class="headerlink" href="#compile-main-manuscript" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>paper/
+pdflatex<span class="w"> </span>nature_bgolearn_manuscript.tex
+bibtex<span class="w"> </span>nature_bgolearn_manuscript
+pdflatex<span class="w"> </span>nature_bgolearn_manuscript.tex
+pdflatex<span class="w"> </span>nature_bgolearn_manuscript.tex
+</pre></div>
+</div>
+</section>
+<section id="compile-supplementary-information">
+<h3>Compile Supplementary Information<a class="headerlink" href="#compile-supplementary-information" title="Link to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>paper/
+pdflatex<span class="w"> </span>nature_bgolearn_supplementary.tex
+pdflatex<span class="w"> </span>nature_bgolearn_supplementary.tex
+</pre></div>
+</div>
+</section>
+<section id="using-overleaf-recommended">
+<h3>Using Overleaf (Recommended)<a class="headerlink" href="#using-overleaf-recommended" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Go to <a class="reference external" href="https://www.overleaf.com/">Overleaf</a></p></li>
+<li><p>Create new project → Upload Project</p></li>
+<li><p>Upload <code class="docutils literal notranslate"><span class="pre">nature_bgolearn_manuscript.tex</span></code></p></li>
+<li><p>Compile automatically</p></li>
+</ol>
+</section>
+</section>
+<section id="creating-figures">
+<h2>📊 Creating Figures<a class="headerlink" href="#creating-figures" title="Link to this heading">#</a></h2>
+<section id="required-figures-for-main-manuscript">
+<h3>Required Figures for Main Manuscript<a class="headerlink" href="#required-figures-for-main-manuscript" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Figure 1: Framework Architecture</strong></p>
+<ul class="simple">
+<li><p>Create using: <a class="reference external" href="http://draw.io">draw.io</a>, PowerPoint, or Inkscape</p></li>
+<li><p>Export as PDF (vector format)</p></li>
+<li><p>See <code class="docutils literal notranslate"><span class="pre">figures_and_tables_guide.md</span></code> for detailed specifications</p></li>
+</ul>
+</li>
+<li><p><strong>Figure 2: Benchmark Performance</strong></p>
+<ul class="simple">
+<li><p>Generate using Python/Matplotlib</p></li>
+<li><p>See example code in <code class="docutils literal notranslate"><span class="pre">supplementary.tex</span></code></p></li>
+<li><p>Export as PDF</p></li>
+</ul>
+</li>
+<li><p><strong>Figure 3: Multi-Objective Results</strong></p>
+<ul class="simple">
+<li><p>Generate using Python/Matplotlib</p></li>
+<li><p>3D plots using Plotly or Mayavi</p></li>
+<li><p>Export as PDF</p></li>
+</ul>
+</li>
+<li><p><strong>Figure 4: Materials Applications</strong></p>
+<ul class="simple">
+<li><p>Combine experimental data visualizations</p></li>
+<li><p>Use ternary plots for composition diagrams</p></li>
+<li><p>Export as PDF</p></li>
+</ul>
+</li>
+<li><p><strong>Figure 5: BgoFace Interface</strong></p>
+<ul class="simple">
+<li><p>Screenshot of BgoFace GUI</p></li>
+<li><p>Annotate using image editor</p></li>
+<li><p>Export as high-resolution PNG (300 DPI)</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="python-script-for-generating-figures">
+<h3>Python Script for Generating Figures<a class="headerlink" href="#python-script-for-generating-figures" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Generate Figure 2 (Benchmark Performance)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Run benchmark experiments</span>
+<span class="c1"># ... (see supplementary.tex for complete code)</span>
+
+<span class="c1"># Create figure</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># Panel A: Branin function</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">regret_bgolearn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Bgolearn (EI+GP)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">iterations</span><span class="p">,</span> <span class="n">regret_random</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random Search&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Iteration&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Simple Regret&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;A. Branin Function&#39;</span><span class="p">)</span>
+
+<span class="c1"># ... (similar for other panels)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;fig2_benchmark_performance.pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="key-highlights-to-emphasize">
+<h2>📝 Key Highlights to Emphasize<a class="headerlink" href="#key-highlights-to-emphasize" title="Link to this heading">#</a></h2>
+<section id="main-contributions">
+<h3>Main Contributions<a class="headerlink" href="#main-contributions" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Unified Framework</strong>: Single API for both single and multi-objective BO</p></li>
+<li><p><strong>MOBO with EHVI</strong>: First accessible implementation for materials science</p></li>
+<li><p><strong>Bootstrap Uncertainty</strong>: Novel approach for tree-based models in BO</p></li>
+<li><p><strong>Graphical Interface</strong>: BgoFace eliminates programming barriers</p></li>
+<li><p><strong>Real-World Validation</strong>: Proven success in materials discovery</p></li>
+</ol>
+</section>
+<section id="performance-metrics">
+<h3>Performance Metrics<a class="headerlink" href="#performance-metrics" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>40-60% reduction</strong> in experiments vs traditional methods</p></li>
+<li><p><strong>Hypervolume improvement</strong>: 0.85 vs 0.72 (PI) and 0.68 (UCB)</p></li>
+<li><p><strong>Time savings</strong>: 82-83% reduction in experimental campaigns</p></li>
+<li><p><strong>Scalability</strong>: Handles 2-15 dimensional problems efficiently</p></li>
+</ul>
+</section>
+<section id="unique-features">
+<h3>Unique Features<a class="headerlink" href="#unique-features" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Materials-specific workflows</p></li>
+<li><p>Multiple surrogate models (GP, RF, GB, SVR, MLP)</p></li>
+<li><p>Comprehensive acquisition functions (EI, PI, UCB, PES, KG, EHVI)</p></li>
+<li><p>Bootstrap uncertainty quantification</p></li>
+<li><p>Cross-validation for model selection</p></li>
+<li><p>Automatic data normalization</p></li>
+<li><p>Constraint handling</p></li>
+<li><p>Batch optimization support</p></li>
+</ul>
+</section>
+</section>
+<section id="citation-information">
+<h2>📚 Citation Information<a class="headerlink" href="#citation-information" title="Link to this heading">#</a></h2>
+<section id="primary-citation">
+<h3>Primary Citation<a class="headerlink" href="#primary-citation" title="Link to this heading">#</a></h3>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">cao2024active</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Active learning accelerates the discovery of high strength and high ductility lead-free solder alloys}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Cao, Bin and Su, Tianhao and Yu, Shuting and Li, Tianyuan and Zhang, Taolue and Zhang, Jincang and Dong, Ziqiang and Zhang, Tong-Yi}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Materials \&amp; Design}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{241}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="p">=</span><span class="s">{112921}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="p">=</span><span class="s">{Elsevier}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="software-citation-to-be-updated-after-publication">
+<h3>Software Citation (to be updated after publication)<a class="headerlink" href="#software-citation-to-be-updated-after-publication" title="Link to this heading">#</a></h3>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@software</span><span class="p">{</span><span class="nl">bgolearn2024</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Bgolearn: A Unified Framework for Bayesian Optimization in Materials Discovery}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Cao, Bin}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2024}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">url</span><span class="p">=</span><span class="s">{https://github.com/Bin-Cao/Bgolearn}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">version</span><span class="p">=</span><span class="s">{2.4.0}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="submission-checklist">
+<h2>🎯 Submission Checklist<a class="headerlink" href="#submission-checklist" title="Link to this heading">#</a></h2>
+<section id="before-submission">
+<h3>Before Submission<a class="headerlink" href="#before-submission" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Main manuscript compiled successfully</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Supplementary information compiled successfully</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All figures created and formatted correctly</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All tables formatted according to Nature guidelines</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Word count within limits (~5,000 words for main text)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All references formatted correctly</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Author contributions section complete</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Competing interests statement included</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Data availability statement included</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Code availability statement included</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Acknowledgments section complete</p></li>
+</ul>
+</section>
+<section id="figure-checklist">
+<h3>Figure Checklist<a class="headerlink" href="#figure-checklist" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figure 1: Architecture diagram (PDF, vector)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figure 2: Benchmark performance (PDF, vector)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figure 3: MOBO results (PDF, vector)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figure 4: Materials applications (PDF, vector)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Figure 5: BgoFace interface (PNG, 300 DPI)</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All supplementary figures prepared</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All figures have descriptive captions</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All figures referenced in text</p></li>
+</ul>
+</section>
+<section id="data-checklist">
+<h3>Data Checklist<a class="headerlink" href="#data-checklist" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All benchmark datasets available</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> All experimental data available</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Code to reproduce results available</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Data uploaded to Zenodo or similar repository</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> DOI obtained for data repository</p></li>
+</ul>
+</section>
+<section id="supplementary-materials">
+<h3>Supplementary Materials<a class="headerlink" href="#supplementary-materials" title="Link to this heading">#</a></h3>
+<ul class="contains-task-list simple">
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Extended methods section</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Additional benchmark results</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Complete code examples</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> User tutorials</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> API documentation reference</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Installation instructions</p></li>
+<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> Troubleshooting guide</p></li>
+</ul>
+</section>
+</section>
+<section id="contact-information">
+<h2>📧 Contact Information<a class="headerlink" href="#contact-information" title="Link to this heading">#</a></h2>
+<p><strong>Corresponding Author:</strong></p>
+<ul class="simple">
+<li><p>Name: Bin Cao</p></li>
+<li><p>Email: <a class="reference external" href="mailto:binjacobcao&#37;&#52;&#48;gmail&#46;com">binjacobcao<span>&#64;</span>gmail<span>&#46;</span>com</a></p></li>
+<li><p>Affiliation: Advanced Materials Thrust, HKUST(GZ)</p></li>
+</ul>
+<p><strong>GitHub Repository:</strong></p>
+<ul class="simple">
+<li><p><a class="github reference external" href="https://github.com/Bin-Cao/Bgolearn">Bin-Cao/Bgolearn</a></p></li>
+</ul>
+<p><strong>Documentation:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://bgolearn.readthedocs.io">https://bgolearn.readthedocs.io</a></p></li>
+</ul>
+<p><strong>PyPI Package:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/bgolearn/">https://pypi.org/project/bgolearn/</a></p></li>
+</ul>
+</section>
+<section id="revision-history">
+<h2>🔄 Revision History<a class="headerlink" href="#revision-history" title="Link to this heading">#</a></h2>
+<section id="version-1-0-current">
+<h3>Version 1.0 (Current)<a class="headerlink" href="#version-1-0-current" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Initial manuscript draft</p></li>
+<li><p>Complete supplementary information</p></li>
+<li><p>Figure and table specifications</p></li>
+</ul>
+</section>
+<section id="future-revisions">
+<h3>Future Revisions<a class="headerlink" href="#future-revisions" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Incorporate reviewer feedback</p></li>
+<li><p>Update figures based on comments</p></li>
+<li><p>Add additional benchmarks if requested</p></li>
+<li><p>Expand discussion section if needed</p></li>
+</ul>
+</section>
+</section>
+<section id="tips-for-successful-submission">
+<h2>💡 Tips for Successful Submission<a class="headerlink" href="#tips-for-successful-submission" title="Link to this heading">#</a></h2>
+<section id="writing-style">
+<h3>Writing Style<a class="headerlink" href="#writing-style" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Be concise</strong>: Nature has strict word limits</p></li>
+<li><p><strong>Emphasize impact</strong>: Focus on significance for materials science</p></li>
+<li><p><strong>Clear figures</strong>: Figures should tell the story independently</p></li>
+<li><p><strong>Accessible language</strong>: Avoid excessive jargon</p></li>
+<li><p><strong>Strong abstract</strong>: Capture attention immediately</p></li>
+</ol>
+</section>
+<section id="common-pitfalls-to-avoid">
+<h3>Common Pitfalls to Avoid<a class="headerlink" href="#common-pitfalls-to-avoid" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>❌ Overly technical introduction</p></li>
+<li><p>❌ Insufficient experimental validation</p></li>
+<li><p>❌ Poor figure quality</p></li>
+<li><p>❌ Missing statistical analysis</p></li>
+<li><p>❌ Inadequate comparison with existing methods</p></li>
+<li><p>❌ Unclear significance statement</p></li>
+</ol>
+</section>
+<section id="strengthening-the-manuscript">
+<h3>Strengthening the Manuscript<a class="headerlink" href="#strengthening-the-manuscript" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>✅ Emphasize real-world impact (materials discovery)</p></li>
+<li><p>✅ Show clear performance advantages</p></li>
+<li><p>✅ Demonstrate broad applicability</p></li>
+<li><p>✅ Provide accessible tools (BgoFace)</p></li>
+<li><p>✅ Include comprehensive benchmarks</p></li>
+<li><p>✅ Offer open-source implementation</p></li>
+</ol>
+</section>
+</section>
+<section id="additional-resources">
+<h2>📖 Additional Resources<a class="headerlink" href="#additional-resources" title="Link to this heading">#</a></h2>
+<section id="nature-submission-guidelines">
+<h3>Nature Submission Guidelines<a class="headerlink" href="#nature-submission-guidelines" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.nature.com/nature/for-authors/formatting-guide">https://www.nature.com/nature/for-authors/formatting-guide</a></p></li>
+<li><p><a class="reference external" href="https://www.nature.com/nature/for-authors/final-submission">https://www.nature.com/nature/for-authors/final-submission</a></p></li>
+</ul>
+</section>
+<section id="latex-templates">
+<h3>LaTeX Templates<a class="headerlink" href="#latex-templates" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Nature provides official LaTeX templates</p></li>
+<li><p>Download from: <a class="reference external" href="https://www.nature.com/nature/for-authors/latex-template">https://www.nature.com/nature/for-authors/latex-template</a></p></li>
+</ul>
+</section>
+<section id="figure-preparation">
+<h3>Figure Preparation<a class="headerlink" href="#figure-preparation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Nature figure guidelines: <a class="reference external" href="https://www.nature.com/nature/for-authors/figure-guidelines">https://www.nature.com/nature/for-authors/figure-guidelines</a></p></li>
+<li><p>Recommended tools: Matplotlib, Inkscape, Adobe Illustrator</p></li>
+</ul>
+</section>
+<section id="statistical-analysis">
+<h3>Statistical Analysis<a class="headerlink" href="#statistical-analysis" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensure proper statistical tests</p></li>
+<li><p>Report effect sizes and confidence intervals</p></li>
+<li><p>Use appropriate multiple comparison corrections</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>🚀 Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Review and refine</strong> the manuscript</p></li>
+<li><p><strong>Generate all figures</strong> according to specifications</p></li>
+<li><p><strong>Run final benchmarks</strong> to ensure reproducibility</p></li>
+<li><p><strong>Prepare data repository</strong> (Zenodo)</p></li>
+<li><p><strong>Get co-author approval</strong></p></li>
+<li><p><strong>Submit to Nature</strong> via online portal</p></li>
+<li><p><strong>Respond to reviewers</strong> promptly and thoroughly</p></li>
+</ol>
+</section>
+<section id="license">
+<h2>📄 License<a class="headerlink" href="#license" title="Link to this heading">#</a></h2>
+<p>This manuscript and associated materials are prepared for submission to Nature journal.
+The Bgolearn software is released under MIT License.</p>
+<hr class="docutils" />
+<p><strong>Good luck with your submission! 🎉</strong></p>
+<p>For questions or assistance, contact: <a class="reference external" href="mailto:binjacobcao&#37;&#52;&#48;gmail&#46;com">binjacobcao<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./paper"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#files-overview">📁 Files Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-manuscript">Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-information">Supplementary Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figures-and-tables-guide">Figures and Tables Guide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compilation-instructions">🔧 Compilation Instructions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-main-manuscript">Compile Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compile-supplementary-information">Compile Supplementary Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-overleaf-recommended">Using Overleaf (Recommended)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-figures">📊 Creating Figures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#required-figures-for-main-manuscript">Required Figures for Main Manuscript</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-script-for-generating-figures">Python Script for Generating Figures</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-highlights-to-emphasize">📝 Key Highlights to Emphasize</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-contributions">Main Contributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-metrics">Performance Metrics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unique-features">Unique Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation-information">📚 Citation Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#primary-citation">Primary Citation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#software-citation-to-be-updated-after-publication">Software Citation (to be updated after publication)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submission-checklist">🎯 Submission Checklist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#before-submission">Before Submission</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-checklist">Figure Checklist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-checklist">Data Checklist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#supplementary-materials">Supplementary Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contact-information">📧 Contact Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revision-history">🔄 Revision History</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#version-1-0-current">Version 1.0 (Current)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#future-revisions">Future Revisions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-for-successful-submission">💡 Tips for Successful Submission</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#writing-style">Writing Style</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-pitfalls-to-avoid">Common Pitfalls to Avoid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#strengthening-the-manuscript">Strengthening the Manuscript</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-resources">📖 Additional Resources</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nature-submission-guidelines">Nature Submission Guidelines</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#latex-templates">LaTeX Templates</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figure-preparation">Figure Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-analysis">Statistical Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">🚀 Next Steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#license">📄 License</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

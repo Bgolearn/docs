@@ -1,0 +1,1118 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>MultiBgolearn: Multi-Objective Bayesian Global Optimization &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ja/multibgolearn';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/ja/multibgolearn.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fja/multibgolearn.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ja/multibgolearn.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>MultiBgolearn: Multi-Objective Bayesian Global Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-mobo-algorithms">Multiple MOBO Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-focused-design">Materials-Focused Design</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flexible-surrogate-models">Flexible Surrogate Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-format">Data Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-format">Dataset Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-space-format">Virtual Space Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-function-bgo-fit">Main Function: <code class="docutils literal notranslate"><span class="pre">bgo.fit()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#returns">Returns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methods">Optimization Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-hypervolume-improvement-ehvi">Expected Hypervolume Improvement (EHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-noisy-expected-hypervolume-improvement-qnehvi">q-Noisy Expected Hypervolume Improvement (qNEHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-pi">Probability of Improvement (PI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-models">Surrogate Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-model-selection">Automatic Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-model-selection">Manual Model Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-alloy-design">Practical Example: Alloy Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">1. Data Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-selection">2. Method Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">3. Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-settings">4. Bootstrap Settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-tips">Performance Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multibgolearn-multi-objective-bayesian-global-optimization">
+<h1>MultiBgolearn: Multi-Objective Bayesian Global Optimization<a class="headerlink" href="#multibgolearn-multi-objective-bayesian-global-optimization" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本ページは Bgolearn マニュアルの日本語版です。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MultiBgolearn extends Bgolearn to handle multi-objective optimization problems, enabling simultaneous optimization of multiple competing objectives in materials design.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>MultiBgolearn is a Python package designed for multi-objective Bayesian global optimization (MOBO), specifically tailored for materials design. It extends the functionalities of the Bgolearn package by enabling the simultaneous optimization of multiple material properties, making it highly suitable for real-world applications where trade-offs between competing objectives are common.</p>
+<div class="tip admonition">
+<p class="admonition-title">Why Multi-Objective Optimization?</p>
+<p>In materials design, we often need to optimize multiple properties simultaneously:</p>
+<ul class="simple">
+<li><p><strong>Strength vs. Ductility</strong>: Stronger materials are often more brittle</p></li>
+<li><p><strong>Performance vs. Cost</strong>: Better performance usually comes at higher cost</p></li>
+<li><p><strong>Conductivity vs. Thermal Stability</strong>: High conductivity materials may be thermally unstable</p></li>
+<li><p><strong>Corrosion Resistance vs. Mechanical Properties</strong>: Anti-corrosion treatments may affect strength</p></li>
+</ul>
+<p>MultiBgolearn helps find the optimal trade-offs between these competing objectives.</p>
+</div>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+<section id="multiple-mobo-algorithms">
+<h3>Multiple MOBO Algorithms<a class="headerlink" href="#multiple-mobo-algorithms" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Expected Hypervolume Improvement (EHVI)</strong>: Maximizes the volume of objective space</p></li>
+<li><p><strong>q-Noisy Expected Hypervolume Improvement (qNEHVI)</strong>:qNEHVI extends EHVI to handle noisy observations and batch acquisition</p></li>
+<li><p><strong>Probability of Improvement (PI)</strong>: Focuses on improvement probability</p></li>
+<li><p><strong>Upper Confidence Bound (UCB)</strong>: Balances exploration and exploitation</p></li>
+</ul>
+</section>
+<section id="materials-focused-design">
+<h3>Materials-Focused Design<a class="headerlink" href="#materials-focused-design" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Simultaneous optimization of multiple material properties</p></li>
+<li><p>Flexible objective handling (maximize/minimize)</p></li>
+<li><p>Bootstrap uncertainty quantification</p></li>
+<li><p>Automatic model selection</p></li>
+</ul>
+</section>
+<section id="flexible-surrogate-models">
+<h3>Flexible Surrogate Models<a class="headerlink" href="#flexible-surrogate-models" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>RandomForest</p></li>
+<li><p>GradientBoosting</p></li>
+<li><p>Support Vector Regression (SVR)</p></li>
+<li><p>Gaussian Process</p></li>
+<li><p>Automatic model selection</p></li>
+</ul>
+</section>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
+<p>Install MultiBgolearn using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>MultiBgolearn
+</pre></div>
+</div>
+<p>Or install both packages together:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>Bgolearn<span class="w"> </span>MultiBgolearn
+</pre></div>
+</div>
+</section>
+<section id="quick-start">
+<h2>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h2>
+<p>Here’s a simple example of using MultiBgolearn for materials optimization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># Define your dataset and virtual space paths</span>
+<span class="n">dataset_path</span> <span class="o">=</span> <span class="s1">&#39;./data/dataset.csv&#39;</span>
+<span class="n">VS_path</span> <span class="o">=</span> <span class="s1">&#39;./virtual_space/&#39;</span>
+
+<span class="c1"># Set the number of objectives (e.g., 3 for three-objective optimization)</span>
+<span class="n">object_num</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># Apply Multi-Objective Bayesian Global Optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> 
+    <span class="n">VS_path</span><span class="p">,</span> 
+    <span class="n">object_num</span><span class="p">,</span> 
+    <span class="n">max_search</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span> 
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> 
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended sample index: </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected improvements: </span><span class="si">{</span><span class="n">improvements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-format">
+<h2>Data Format<a class="headerlink" href="#data-format" title="Link to this heading">#</a></h2>
+<section id="dataset-format">
+<h3>Dataset Format<a class="headerlink" href="#dataset-format" title="Link to this heading">#</a></h3>
+<p>Your dataset should be a CSV file with the following structure:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>feature1,feature2,feature3,objective1,objective2,objective3
+1.2,3.4,5.6,100.5,0.85,7.2
+2.1,4.3,6.5,95.2,0.92,6.8
+...
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Features</strong>: Input variables (composition, processing conditions, etc.)</p></li>
+<li><p><strong>Objectives</strong>: Target properties to optimize (strength, ductility, cost, etc.)</p></li>
+</ul>
+</section>
+<section id="virtual-space-format">
+<h3>Virtual Space Format<a class="headerlink" href="#virtual-space-format" title="Link to this heading">#</a></h3>
+<p>The virtual space contains candidate points for optimization:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>feature1,feature2,feature3
+1.5,3.2,5.8
+2.3,4.1,6.2
+...
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Link to this heading">#</a></h2>
+<section id="main-function-bgo-fit">
+<h3>Main Function: <code class="docutils literal notranslate"><span class="pre">bgo.fit()</span></code><a class="headerlink" href="#main-function-bgo-fit" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="p">,</span> <span class="n">max_search</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+        <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span> <span class="n">assign_model</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="parameters">
+<h4>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table" id="multibgo-parameters">
+<caption><span class="caption-text">Parameters</span><a class="headerlink" href="#multibgo-parameters" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">dataset_path</span></code></p></td>
+<td><p>str</p></td>
+<td><p>Required</p></td>
+<td><p>Path to dataset CSV file</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">VS_path</span></code></p></td>
+<td><p>str</p></td>
+<td><p>Required</p></td>
+<td><p>Path to virtual space CSV file</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">object_num</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Required</p></td>
+<td><p>Number of objectives to optimize</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_search</span></code></p></td>
+<td><p>bool</p></td>
+<td><p>True</p></td>
+<td><p>Whether to maximize (True) or minimize (False)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">method</span></code></p></td>
+<td><p>str</p></td>
+<td><p>‘EHVI’</p></td>
+<td><p>Optimization method: ‘EHVI’, ‘qNEHVI’, ‘PI’, ‘UCB’</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">assign_model</span></code></p></td>
+<td><p>str/bool</p></td>
+<td><p>False</p></td>
+<td><p>Surrogate model or False for auto-selection</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bootstrap</span></code></p></td>
+<td><p>int</p></td>
+<td><p>5</p></td>
+<td><p>Number of bootstrap iterations</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="returns">
+<h4>Returns<a class="headerlink" href="#returns" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table" id="multibgo-returns">
+<caption><span class="caption-text">Return Values</span><a class="headerlink" href="#multibgo-returns" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">VS_recommended</span></code></p></td>
+<td><p>array</p></td>
+<td><p>Recommended data point from virtual space</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">improvements</span></code></p></td>
+<td><p>array</p></td>
+<td><p>Calculated improvements for each objective</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">index</span></code></p></td>
+<td><p>int</p></td>
+<td><p>Index of recommended point in virtual space</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+<section id="optimization-methods">
+<h2>Optimization Methods<a class="headerlink" href="#optimization-methods" title="Link to this heading">#</a></h2>
+<section id="expected-hypervolume-improvement-ehvi">
+<h3>Expected Hypervolume Improvement (EHVI)<a class="headerlink" href="#expected-hypervolume-improvement-ehvi" title="Link to this heading">#</a></h3>
+<p>EHVI focuses on maximizing the volume of the objective space dominated by the solutions. It’s particularly effective for problems with 2-4 objectives.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use EHVI for balanced multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Best for:</strong></p>
+<ul class="simple">
+<li><p>2-4 objectives</p></li>
+<li><p>Balanced exploration of Pareto front</p></li>
+<li><p>When you want to maximize dominated volume</p></li>
+</ul>
+</section>
+<section id="q-noisy-expected-hypervolume-improvement-qnehvi">
+<h3>q-Noisy Expected Hypervolume Improvement (qNEHVI)<a class="headerlink" href="#q-noisy-expected-hypervolume-improvement-qnehvi" title="Link to this heading">#</a></h3>
+<p>qNEHVI extends EHVI to handle noisy observations and batch acquisition, making it suitable for real-world scenarios with measurement uncertainty and parallel experiment.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use qNEHVI for balanced multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;qNEHVI&#39;</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>  <span class="c1"># Select 3 points simultaneously</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Best for:</strong></p>
+<ul class="simple">
+<li><p>Measurements have significant observation noise or uncertainty</p></li>
+<li><p>Multiple experiments can be conducted in parallel</p></li>
+<li><p>Known or estimable observation noise levels</p></li>
+</ul>
+</section>
+<section id="probability-of-improvement-pi">
+<h3>Probability of Improvement (PI)<a class="headerlink" href="#probability-of-improvement-pi" title="Link to this heading">#</a></h3>
+<p>PI selects points with the highest probability of improving over the best known solution.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use PI for improvement-focused optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;PI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Best for:</strong></p>
+<ul class="simple">
+<li><p>Conservative optimization</p></li>
+<li><p>When improvement probability is important</p></li>
+<li><p>Exploitation-focused search</p></li>
+</ul>
+</section>
+<section id="upper-confidence-bound-ucb">
+<h3>Upper Confidence Bound (UCB)<a class="headerlink" href="#upper-confidence-bound-ucb" title="Link to this heading">#</a></h3>
+<p>UCB explores points with the highest upper confidence bound, balancing exploration and exploitation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use UCB for exploration-exploitation balance</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;UCB&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GradientBoosting&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Best for:</strong></p>
+<ul class="simple">
+<li><p>Noisy objectives</p></li>
+<li><p>When uncertainty matters</p></li>
+<li><p>Balanced exploration-exploitation</p></li>
+</ul>
+</section>
+</section>
+<section id="surrogate-models">
+<h2>Surrogate Models<a class="headerlink" href="#surrogate-models" title="Link to this heading">#</a></h2>
+<section id="automatic-model-selection">
+<h3>Automatic Model Selection<a class="headerlink" href="#automatic-model-selection" title="Link to this heading">#</a></h3>
+<p>When <code class="docutils literal notranslate"><span class="pre">assign_model=False</span></code>, MultiBgolearn automatically selects the best model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Automatic model selection</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="kc">False</span>  <span class="c1"># Auto-select best model</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="manual-model-selection">
+<h3>Manual Model Selection<a class="headerlink" href="#manual-model-selection" title="Link to this heading">#</a></h3>
+<p>You can specify the surrogate model explicitly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Available models</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GradientBoosting&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;SVR&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;GaussianProcess&#39;</span>
+<span class="p">]</span>
+
+<span class="c1"># Use specific model</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="bootstrap-uncertainty-quantification">
+<h2>Bootstrap Uncertainty Quantification<a class="headerlink" href="#bootstrap-uncertainty-quantification" title="Link to this heading">#</a></h2>
+<p>MultiBgolearn uses bootstrap sampling to quantify uncertainty in predictions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Increase bootstrap iterations for better uncertainty estimation</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">dataset_path</span><span class="p">,</span> <span class="n">VS_path</span><span class="p">,</span> <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">10</span>  <span class="c1"># More iterations = better uncertainty estimation</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Bootstrap Benefits:</strong></p>
+<ul class="simple">
+<li><p>Robust uncertainty quantification</p></li>
+<li><p>Better handling of noisy data</p></li>
+<li><p>Improved model reliability</p></li>
+<li><p>More confident recommendations</p></li>
+</ul>
+</section>
+<section id="practical-example-alloy-design">
+<h2>Practical Example: Alloy Design<a class="headerlink" href="#practical-example-alloy-design" title="Link to this heading">#</a></h2>
+<p>Let’s optimize a three-objective alloy design problem:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">MultiBgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">bgo</span>
+
+<span class="c1"># Prepare data</span>
+<span class="c1"># Dataset: composition features + 3 objectives (strength, ductility, cost)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">],</span>    <span class="c1"># Maximize</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>      <span class="c1"># Maximize  </span>
+    <span class="s1">&#39;Cost&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">130</span><span class="p">]</span>         <span class="c1"># Minimize (convert to maximize: -Cost)</span>
+<span class="p">})</span>
+
+<span class="c1"># Convert cost to maximization problem</span>
+<span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Cost&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;Cost&#39;</span><span class="p">]</span>
+
+<span class="c1"># Save dataset</span>
+<span class="n">dataset</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Create virtual space (candidate compositions)</span>
+<span class="n">virtual_space</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Cu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
+    <span class="s1">&#39;Mg&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span>
+    <span class="s1">&#39;Si&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">virtual_space</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Multi-objective optimization</span>
+<span class="n">VS_recommended</span><span class="p">,</span> <span class="n">improvements</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="s1">&#39;alloy_dataset.csv&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;virtual_space.csv&#39;</span><span class="p">,</span>
+    <span class="n">object_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">max_search</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">method</span><span class="o">=</span><span class="s1">&#39;EHVI&#39;</span><span class="p">,</span>
+    <span class="n">assign_model</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">bootstrap</span><span class="o">=</span><span class="mi">5</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended alloy composition:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cu: </span><span class="si">{</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mg: </span><span class="si">{</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Si: </span><span class="si">{</span><span class="n">VS_recommended</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected improvements: </span><span class="si">{</span><span class="n">improvements</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="data-preparation">
+<h3>1. Data Preparation<a class="headerlink" href="#data-preparation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Ensure sufficient training data (&gt;10 samples per objective)</p></li>
+<li><p>Normalize objectives if they have different scales</p></li>
+<li><p>Handle missing values appropriately</p></li>
+</ul>
+</section>
+<section id="method-selection">
+<h3>2. Method Selection<a class="headerlink" href="#method-selection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use <strong>EHVI</strong> for 2-4 objectives with balanced exploration</p></li>
+<li><p>Use <strong>qNEHVI</strong> for measurements have significant observation noise or uncertainty</p></li>
+<li><p>Use <strong>PI</strong> for conservative, improvement-focused search</p></li>
+<li><p>Use <strong>UCB</strong> for noisy objectives or exploration needs</p></li>
+</ul>
+</section>
+<section id="model-selection">
+<h3>3. Model Selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Start with automatic model selection</p></li>
+<li><p>Use <strong>GaussianProcess</strong> for smooth, continuous objectives</p></li>
+<li><p>Use <strong>RandomForest</strong> for discrete or categorical features</p></li>
+<li><p>Use <strong>GradientBoosting</strong> for complex, nonlinear relationships</p></li>
+</ul>
+</section>
+<section id="bootstrap-settings">
+<h3>4. Bootstrap Settings<a class="headerlink" href="#bootstrap-settings" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use 5-10 bootstrap iterations for most problems</p></li>
+<li><p>Increase to 20+ for very noisy data</p></li>
+<li><p>Balance computation time vs. uncertainty quality</p></li>
+</ul>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Convergence Problems</strong></p>
+<ul class="simple">
+<li><p>Increase bootstrap iterations</p></li>
+<li><p>Try different surrogate models</p></li>
+<li><p>Check data quality and scaling</p></li>
+</ul>
+</li>
+<li><p><strong>Poor Recommendations</strong></p>
+<ul class="simple">
+<li><p>Ensure sufficient training data</p></li>
+<li><p>Verify objective definitions (max vs. min)</p></li>
+<li><p>Consider data preprocessing</p></li>
+</ul>
+</li>
+<li><p><strong>Computational Issues</strong></p>
+<ul class="simple">
+<li><p>Reduce bootstrap iterations</p></li>
+<li><p>Use simpler surrogate models</p></li>
+<li><p>Reduce virtual space size</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="performance-tips">
+<h3>Performance Tips<a class="headerlink" href="#performance-tips" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Data Size</strong>: Keep virtual space manageable (&lt;10,000 points)</p></li>
+<li><p><strong>Objectives</strong>: EHVI works best with 2-4 objectives</p></li>
+<li><p><strong>Features</strong>: Normalize features to similar scales</p></li>
+<li><p><strong>Iterations</strong>: Start with fewer bootstrap iterations for testing</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Learn about <a class="reference internal" href="multi_objective_concepts.html"><span class="doc">Multi-Objective Optimization Concepts</span></a> for theoretical background</p></li>
+<li><p>Explore <a class="reference internal" href="mobo_algorithms.html"><span class="doc">MOBO Algorithms in MultiBgolearn</span></a> for algorithm details</p></li>
+<li><p>Try <a class="reference internal" href="examples/multi_objective.html"><span class="doc">Multi-Objective Optimization Examples</span></a> for hands-on practice</p></li>
+<li><p>Understand <a class="reference internal" href="pareto_optimization.html"><span class="doc">Pareto Optimization and Trade-off Analysis</span></a> for trade-off analysis</p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more information:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Bin-Cao/MultiBgolearn">MultiBgolearn GitHub Repository</a></p></li>
+<li><p><a class="reference external" href="https://bgolearn.netlify.app/">Research Papers</a></p></li>
+<li><p><a class="reference internal" href="#examples/materials_design.md"><span class="xref myst">Materials Design Examples</span></a></p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ja"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-mobo-algorithms">Multiple MOBO Algorithms</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-focused-design">Materials-Focused Design</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flexible-surrogate-models">Flexible Surrogate Models</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation">Installation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-start">Quick Start</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-format">Data Format</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-format">Dataset Format</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#virtual-space-format">Virtual Space Format</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#api-reference">API Reference</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-function-bgo-fit">Main Function: <code class="docutils literal notranslate"><span class="pre">bgo.fit()</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">Parameters</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#returns">Returns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-methods">Optimization Methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-hypervolume-improvement-ehvi">Expected Hypervolume Improvement (EHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-noisy-expected-hypervolume-improvement-qnehvi">q-Noisy Expected Hypervolume Improvement (qNEHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-pi">Probability of Improvement (PI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#surrogate-models">Surrogate Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automatic-model-selection">Automatic Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#manual-model-selection">Manual Model Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-uncertainty-quantification">Bootstrap Uncertainty Quantification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-example-alloy-design">Practical Example: Alloy Design</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-preparation">1. Data Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#method-selection">2. Method Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">3. Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-settings">4. Bootstrap Settings</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-tips">Performance Tips</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

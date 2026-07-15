@@ -1,0 +1,1119 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>9. Multi-Objective Optimization Concepts &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'multi_objective_concepts';</script>
+    <script src="_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. MOBO Algorithms in MultiBgolearn" href="mobo_algorithms.html" />
+    <link rel="prev" title="8. MultiBgolearn: Multi-Objective Bayesian Global Optimization" href="multibgolearn.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/multi_objective_concepts.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fmulti_objective_concepts.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/multi_objective_concepts.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Multi-Objective Optimization Concepts</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-multi-objective-optimization">9.1. What is Multi-Objective Optimization?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">9.2. Key Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-dominance">9.2.1. Pareto Dominance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front">9.2.2. Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-optimality">9.2.3. Pareto Optimality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">9.3. Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-multi-objective-problem">9.3.1. General Multi-Objective Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-design-example">9.3.2. Materials Design Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-vs-single-objective">9.4. Multi-Objective vs. Single-Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-multi-objective-optimization">9.5. Challenges in Multi-Objective Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conflicting-objectives">9.5.1. 1. Conflicting Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curse-of-dimensionality">9.5.2. 2. Curse of Dimensionality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-selection">9.5.3. 3. Solution Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-bayesian-optimization-mobo">9.6. Multi-Objective Bayesian Optimization (MOBO)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages">9.6.1. Key Advantages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobo-acquisition-functions">9.7. MOBO Acquisition Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-hypervolume-improvement-ehvi">9.7.1. Expected Hypervolume Improvement (EHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-noisy-expected-hypervolume-improvement-qnehvi">9.7.2. q-Noisy Expected Hypervolume Improvement (qNEHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-pi">9.7.3. Probability of Improvement (PI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">9.7.4. Upper Confidence Bound (UCB)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypervolume-indicator">9.8. Hypervolume Indicator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">9.8.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculation-example">9.8.2. Calculation Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">9.9. Practical Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-scaling">9.9.1. Objective Scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-point-selection">9.9.2. Reference Point Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-transformation">9.9.3. Objective Transformation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-design-applications">9.10. Materials Design Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alloy-composition-optimization">9.10.1. Alloy Composition Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-parameter-optimization">9.10.2. Processing Parameter Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-functional-materials">9.10.3. Multi-Functional Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-techniques">9.11. Visualization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pareto-front">9.11.1. 2D Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.11.2. 3D Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-coordinates">9.11.3. Parallel Coordinates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making">9.12. Decision Making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preference-based-selection">9.12.1. Preference-Based Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knee-point-selection">9.12.2. Knee Point Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">9.13. Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="multi-objective-optimization-concepts">
+<h1><span class="section-number">9. </span>Multi-Objective Optimization Concepts<a class="headerlink" href="#multi-objective-optimization-concepts" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page introduces the fundamental concepts of multi-objective optimization and how they apply to materials design problems.</p>
+</div>
+<section id="what-is-multi-objective-optimization">
+<h2><span class="section-number">9.1. </span>What is Multi-Objective Optimization?<a class="headerlink" href="#what-is-multi-objective-optimization" title="Link to this heading">#</a></h2>
+<p>Multi-objective optimization (MOO) deals with problems where we need to optimize multiple, often conflicting objectives simultaneously. Unlike single-objective optimization that seeks one optimal solution, MOO typically results in a set of trade-off solutions called the <strong>Pareto front</strong>.</p>
+<div class="tip admonition">
+<p class="admonition-title">Real-World Example</p>
+<p>Consider designing a new alloy:</p>
+<ul class="simple">
+<li><p><strong>Objective 1</strong>: Maximize strength (higher is better)</p></li>
+<li><p><strong>Objective 2</strong>: Maximize ductility (higher is better)</p></li>
+<li><p><strong>Objective 3</strong>: Minimize cost (lower is better)</p></li>
+</ul>
+<p>These objectives often conflict: stronger alloys may be more brittle (less ductile) and more expensive.</p>
+</div>
+</section>
+<section id="key-concepts">
+<h2><span class="section-number">9.2. </span>Key Concepts<a class="headerlink" href="#key-concepts" title="Link to this heading">#</a></h2>
+<section id="pareto-dominance">
+<h3><span class="section-number">9.2.1. </span>Pareto Dominance<a class="headerlink" href="#pareto-dominance" title="Link to this heading">#</a></h3>
+<p>A solution <strong>dominates</strong> another if it’s better in at least one objective and no worse in all others.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Two alloy compositions</span>
+<span class="n">Alloy_A</span> <span class="o">=</span> <span class="p">[</span><span class="n">Strength</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span> <span class="n">Ductility</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Cost</span><span class="o">=</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">Alloy_B</span> <span class="o">=</span> <span class="p">[</span><span class="n">Strength</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">Ductility</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">Cost</span><span class="o">=</span><span class="mi">100</span><span class="p">]</span>
+
+<span class="c1"># Alloy A dominates Alloy B because:</span>
+<span class="c1"># - Strength: 250 &gt; 240 (better)</span>
+<span class="c1"># - Ductility: 15 = 15 (equal)</span>
+<span class="c1"># - Cost: 100 = 100 (equal)</span>
+</pre></div>
+</div>
+</section>
+<section id="pareto-front">
+<h3><span class="section-number">9.2.2. </span>Pareto Front<a class="headerlink" href="#pareto-front" title="Link to this heading">#</a></h3>
+<p>The <strong>Pareto front</strong> (or Pareto frontier) is the set of all non-dominated solutions. These represent the best possible trade-offs between objectives.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Strength</span> <span class="n">vs</span><span class="o">.</span> <span class="n">Ductility</span> <span class="n">Trade</span><span class="o">-</span><span class="n">off</span><span class="p">:</span>
+
+<span class="n">Ductility</span>
+    <span class="o">^</span>
+    <span class="o">|</span>     <span class="o">*</span> <span class="p">(</span><span class="n">Pareto</span> <span class="n">optimal</span><span class="p">)</span>
+    <span class="o">|</span>   <span class="o">*</span>   <span class="o">*</span> <span class="p">(</span><span class="n">Pareto</span> <span class="n">optimal</span><span class="p">)</span>
+    <span class="o">|</span> <span class="o">*</span>       <span class="o">*</span> <span class="p">(</span><span class="n">Pareto</span> <span class="n">optimal</span><span class="p">)</span>
+    <span class="o">|</span>           <span class="o">*</span> <span class="p">(</span><span class="n">Pareto</span> <span class="n">optimal</span><span class="p">)</span>
+    <span class="o">|</span>             <span class="o">*</span>
+    <span class="o">+----------------&gt;</span> <span class="n">Strength</span>
+    
+<span class="n">Points</span> <span class="n">on</span> <span class="n">the</span> <span class="n">curve</span> <span class="n">are</span> <span class="n">Pareto</span> <span class="n">optimal</span><span class="o">.</span>
+<span class="n">Points</span> <span class="n">below</span> <span class="n">the</span> <span class="n">curve</span> <span class="n">are</span> <span class="n">dominated</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="pareto-optimality">
+<h3><span class="section-number">9.2.3. </span>Pareto Optimality<a class="headerlink" href="#pareto-optimality" title="Link to this heading">#</a></h3>
+<p>A solution is <strong>Pareto optimal</strong> if no other solution dominates it. The goal of multi-objective optimization is to find the Pareto front.</p>
+</section>
+</section>
+<section id="mathematical-formulation">
+<h2><span class="section-number">9.3. </span>Mathematical Formulation<a class="headerlink" href="#mathematical-formulation" title="Link to this heading">#</a></h2>
+<section id="general-multi-objective-problem">
+<h3><span class="section-number">9.3.1. </span>General Multi-Objective Problem<a class="headerlink" href="#general-multi-objective-problem" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>minimize/maximize: f(x) = [f₁(x), f₂(x), ..., fₘ(x)]
+subject to: g(x) ≤ 0
+           h(x) = 0
+           x ∈ X
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">f(x)</span></code>: Vector of m objective functions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">g(x)</span></code>: Inequality constraints</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">h(x)</span></code>: Equality constraints</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code>: Decision variable space</p></li>
+</ul>
+</section>
+<section id="materials-design-example">
+<h3><span class="section-number">9.3.2. </span>Materials Design Example<a class="headerlink" href="#materials-design-example" title="Link to this heading">#</a></h3>
+<p>For alloy optimization:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>maximize: f₁(x) = Strength(Cu, Mg, Si, T_aging)
+maximize: f₂(x) = Ductility(Cu, Mg, Si, T_aging)
+minimize: f₃(x) = Cost(Cu, Mg, Si, T_aging)
+
+subject to: Cu + Mg + Si ≤ 10%  (composition constraint)
+           150 ≤ T_aging ≤ 200   (temperature constraint)
+           Cu, Mg, Si ≥ 0        (non-negativity)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-objective-vs-single-objective">
+<h2><span class="section-number">9.4. </span>Multi-Objective vs. Single-Objective<a class="headerlink" href="#multi-objective-vs-single-objective" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table" id="mo-vs-so">
+<caption><span class="caption-number">Table 9.1 </span><span class="caption-text">Comparison</span><a class="headerlink" href="#mo-vs-so" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Single-Objective</p></th>
+<th class="head"><p>Multi-Objective</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Solution</strong></p></td>
+<td><p>One optimal point</p></td>
+<td><p>Set of trade-off solutions (Pareto front)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Decision Making</strong></p></td>
+<td><p>Automatic</p></td>
+<td><p>Requires preference information</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Complexity</strong></p></td>
+<td><p>Lower</p></td>
+<td><p>Higher (curse of dimensionality)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Visualization</strong></p></td>
+<td><p>Easy (1D or 2D)</p></td>
+<td><p>Difficult (high-dimensional)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Algorithms</strong></p></td>
+<td><p>Well-established</p></td>
+<td><p>More complex, newer field</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="challenges-in-multi-objective-optimization">
+<h2><span class="section-number">9.5. </span>Challenges in Multi-Objective Optimization<a class="headerlink" href="#challenges-in-multi-objective-optimization" title="Link to this heading">#</a></h2>
+<section id="conflicting-objectives">
+<h3><span class="section-number">9.5.1. </span>1. Conflicting Objectives<a class="headerlink" href="#conflicting-objectives" title="Link to this heading">#</a></h3>
+<p>Most real-world problems involve trade-offs:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Materials examples</span>
+<span class="n">conflicts</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Strength vs. Ductility&quot;</span><span class="p">:</span> <span class="s2">&quot;Stronger materials are often more brittle&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Performance vs. Cost&quot;</span><span class="p">:</span> <span class="s2">&quot;Better performance usually costs more&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Conductivity vs. Stability&quot;</span><span class="p">:</span> <span class="s2">&quot;High conductivity may reduce thermal stability&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hardness vs. Toughness&quot;</span><span class="p">:</span> <span class="s2">&quot;Harder materials may be less tough&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="curse-of-dimensionality">
+<h3><span class="section-number">9.5.2. </span>2. Curse of Dimensionality<a class="headerlink" href="#curse-of-dimensionality" title="Link to this heading">#</a></h3>
+<p>As the number of objectives increases, the problem becomes exponentially more complex:</p>
+<ul class="simple">
+<li><p><strong>2-3 objectives</strong>: Manageable, good visualization</p></li>
+<li><p><strong>4-6 objectives</strong>: Challenging, limited visualization</p></li>
+<li><p><strong>&gt;6 objectives</strong>: Very difficult, many-objective optimization</p></li>
+</ul>
+</section>
+<section id="solution-selection">
+<h3><span class="section-number">9.5.3. </span>3. Solution Selection<a class="headerlink" href="#solution-selection" title="Link to this heading">#</a></h3>
+<p>The Pareto front provides multiple solutions, but we often need to select one:</p>
+<ul class="simple">
+<li><p><strong>A priori</strong>: Define preferences before optimization</p></li>
+<li><p><strong>A posteriori</strong>: Choose from Pareto front after optimization</p></li>
+<li><p><strong>Interactive</strong>: Iteratively refine preferences during optimization</p></li>
+</ul>
+</section>
+</section>
+<section id="multi-objective-bayesian-optimization-mobo">
+<h2><span class="section-number">9.6. </span>Multi-Objective Bayesian Optimization (MOBO)<a class="headerlink" href="#multi-objective-bayesian-optimization-mobo" title="Link to this heading">#</a></h2>
+<p>MOBO extends Bayesian optimization to handle multiple objectives by:</p>
+<ol class="arabic simple">
+<li><p><strong>Surrogate Models</strong>: Build separate models for each objective</p></li>
+<li><p><strong>Multi-Objective Acquisition</strong>: Use acquisition functions that consider all objectives</p></li>
+<li><p><strong>Pareto Front Approximation</strong>: Iteratively improve the Pareto front estimate</p></li>
+</ol>
+<section id="key-advantages">
+<h3><span class="section-number">9.6.1. </span>Key Advantages<a class="headerlink" href="#key-advantages" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">Why MOBO for Materials?</p>
+<ul class="simple">
+<li><p><strong>Expensive Experiments</strong>: Materials testing is costly and time-consuming</p></li>
+<li><p><strong>Multiple Properties</strong>: Materials have many important properties</p></li>
+<li><p><strong>Trade-off Understanding</strong>: Need to understand relationships between properties</p></li>
+<li><p><strong>Efficient Exploration</strong>: Find Pareto front with minimal experiments</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="mobo-acquisition-functions">
+<h2><span class="section-number">9.7. </span>MOBO Acquisition Functions<a class="headerlink" href="#mobo-acquisition-functions" title="Link to this heading">#</a></h2>
+<section id="expected-hypervolume-improvement-ehvi">
+<h3><span class="section-number">9.7.1. </span>Expected Hypervolume Improvement (EHVI)<a class="headerlink" href="#expected-hypervolume-improvement-ehvi" title="Link to this heading">#</a></h3>
+<p>EHVI maximizes the expected improvement in hypervolume (volume of dominated objective space):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>EHVI(x) = E[HV(F ∪ {f(x)}) - HV(F)]
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">F</span></code>: Current Pareto front approximation</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HV</span></code>: Hypervolume indicator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f(x)</span></code>: Objective vector at point x</p></li>
+</ul>
+<p><strong>Best for</strong>: 2-4 objectives, balanced exploration</p>
+</section>
+<section id="q-noisy-expected-hypervolume-improvement-qnehvi">
+<h3><span class="section-number">9.7.2. </span>q-Noisy Expected Hypervolume Improvement (qNEHVI)<a class="headerlink" href="#q-noisy-expected-hypervolume-improvement-qnehvi" title="Link to this heading">#</a></h3>
+<p>qNEHVI extends EHVI to handle noisy observations and batch acquisition, making it suitable for real-world scenarios with measurement uncertainty and parallel experiments:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>qNEHVI(x) = E_y[E[HV(F ∪ {f(x)}) - HV(F)]]
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">y</span></code>: Noisy observations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HV</span></code>: Hypervolume indicator</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">f(x)</span></code>: Objective vector at point x</p></li>
+</ul>
+<p><strong>Best for</strong>: Measurements have significant observation noise</p>
+</section>
+<section id="probability-of-improvement-pi">
+<h3><span class="section-number">9.7.3. </span>Probability of Improvement (PI)<a class="headerlink" href="#probability-of-improvement-pi" title="Link to this heading">#</a></h3>
+<p>Multi-objective PI considers improvement probability for each objective:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">P</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">dominates</span> <span class="n">at</span> <span class="n">least</span> <span class="n">one</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">F</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Best for</strong>: Conservative optimization, exploitation-focused</p>
+</section>
+<section id="upper-confidence-bound-ucb">
+<h3><span class="section-number">9.7.4. </span>Upper Confidence Bound (UCB)<a class="headerlink" href="#upper-confidence-bound-ucb" title="Link to this heading">#</a></h3>
+<p>Multi-objective UCB balances mean prediction and uncertainty:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UCB</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">β·σ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Applied to each objective separately or combined.</p>
+<p><strong>Best for</strong>: Noisy objectives, exploration-focused</p>
+</section>
+</section>
+<section id="hypervolume-indicator">
+<h2><span class="section-number">9.8. </span>Hypervolume Indicator<a class="headerlink" href="#hypervolume-indicator" title="Link to this heading">#</a></h2>
+<p>The hypervolume is a key quality indicator for Pareto fronts:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HV</span><span class="p">(</span><span class="n">F</span><span class="p">)</span> <span class="o">=</span> <span class="n">Volume</span> <span class="n">of</span> <span class="n">space</span> <span class="n">dominated</span> <span class="n">by</span> <span class="n">F</span>
+</pre></div>
+</div>
+<section id="properties">
+<h3><span class="section-number">9.8.1. </span>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Monotonic</strong>: Larger hypervolume = better Pareto front</p></li>
+<li><p><strong>Pareto Compliant</strong>: Respects Pareto dominance</p></li>
+<li><p><strong>Reference Point Dependent</strong>: Requires a reference point</p></li>
+</ul>
+</section>
+<section id="calculation-example">
+<h3><span class="section-number">9.8.2. </span>Calculation Example<a class="headerlink" href="#calculation-example" title="Link to this heading">#</a></h3>
+<p>For 2D objectives (maximize both):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pareto front points</span>
+<span class="n">pareto_points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)]</span>
+<span class="n">reference_point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Hypervolume = sum of dominated rectangles</span>
+<span class="c1"># Rectangle 1: (3-0) × (1-0) = 3</span>
+<span class="c1"># Rectangle 2: (2-0) × (2-1) = 2  </span>
+<span class="c1"># Rectangle 3: (1-0) × (3-2) = 1</span>
+<span class="c1"># Total HV = 3 + 2 + 1 = 6</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="practical-considerations">
+<h2><span class="section-number">9.9. </span>Practical Considerations<a class="headerlink" href="#practical-considerations" title="Link to this heading">#</a></h2>
+<section id="objective-scaling">
+<h3><span class="section-number">9.9.1. </span>Objective Scaling<a class="headerlink" href="#objective-scaling" title="Link to this heading">#</a></h3>
+<p>Different objectives may have different scales:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before scaling</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Strength&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">250</span><span class="p">],</span>      <span class="c1"># MPa</span>
+    <span class="s2">&quot;Ductility&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>       <span class="c1"># %</span>
+    <span class="s2">&quot;Cost&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span>            <span class="c1"># $/kg</span>
+<span class="p">}</span>
+
+<span class="c1"># After normalization (0-1 scale)</span>
+<span class="n">normalized</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Strength&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="s2">&quot;Ductility&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> 
+    <span class="s2">&quot;Cost&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reference-point-selection">
+<h3><span class="section-number">9.9.2. </span>Reference Point Selection<a class="headerlink" href="#reference-point-selection" title="Link to this heading">#</a></h3>
+<p>For hypervolume calculation, choose reference points carefully:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Good reference point (slightly worse than worst known values)</span>
+<span class="n">reference_point</span> <span class="o">=</span> <span class="p">[</span><span class="n">min_strength</span> <span class="o">-</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">range_strength</span><span class="p">,</span>
+                  <span class="n">min_ductility</span> <span class="o">-</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">range_ductility</span><span class="p">,</span>
+                  <span class="n">max_cost</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">range_cost</span><span class="p">]</span>  <span class="c1"># Note: max for minimization</span>
+</pre></div>
+</div>
+</section>
+<section id="objective-transformation">
+<h3><span class="section-number">9.9.3. </span>Objective Transformation<a class="headerlink" href="#objective-transformation" title="Link to this heading">#</a></h3>
+<p>Convert minimization to maximization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Original objectives</span>
+<span class="n">strength</span> <span class="o">=</span> <span class="mi">250</span>      <span class="c1"># maximize</span>
+<span class="n">ductility</span> <span class="o">=</span> <span class="mi">15</span>      <span class="c1"># maximize  </span>
+<span class="n">cost</span> <span class="o">=</span> <span class="mi">100</span>          <span class="c1"># minimize</span>
+
+<span class="c1"># Transformed for maximization</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span><span class="n">strength</span><span class="p">,</span> <span class="n">ductility</span><span class="p">,</span> <span class="o">-</span><span class="n">cost</span><span class="p">]</span>  <span class="c1"># Negate cost</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="materials-design-applications">
+<h2><span class="section-number">9.10. </span>Materials Design Applications<a class="headerlink" href="#materials-design-applications" title="Link to this heading">#</a></h2>
+<section id="alloy-composition-optimization">
+<h3><span class="section-number">9.10.1. </span>Alloy Composition Optimization<a class="headerlink" href="#alloy-composition-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Objectives for structural alloys</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Yield Strength&quot;</span><span class="p">,</span>     <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Ultimate Strength&quot;</span><span class="p">,</span>  <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Elongation&quot;</span><span class="p">,</span>        <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Fatigue Life&quot;</span><span class="p">,</span>      <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Cost&quot;</span><span class="p">,</span>              <span class="c1"># Minimize</span>
+    <span class="s2">&quot;Density&quot;</span>            <span class="c1"># Minimize (for aerospace)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="processing-parameter-optimization">
+<h3><span class="section-number">9.10.2. </span>Processing Parameter Optimization<a class="headerlink" href="#processing-parameter-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat treatment optimization</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Hardness&quot;</span><span class="p">,</span>          <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Toughness&quot;</span><span class="p">,</span>         <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Residual Stress&quot;</span><span class="p">,</span>   <span class="c1"># Minimize</span>
+    <span class="s2">&quot;Energy Cost&quot;</span><span class="p">,</span>       <span class="c1"># Minimize</span>
+    <span class="s2">&quot;Processing Time&quot;</span>    <span class="c1"># Minimize</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-functional-materials">
+<h3><span class="section-number">9.10.3. </span>Multi-Functional Materials<a class="headerlink" href="#multi-functional-materials" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Electronic materials</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;Electrical Conductivity&quot;</span><span class="p">,</span>  <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Thermal Conductivity&quot;</span><span class="p">,</span>     <span class="c1"># Maximize/Minimize (depends on application)</span>
+    <span class="s2">&quot;Mechanical Strength&quot;</span><span class="p">,</span>      <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Corrosion Resistance&quot;</span><span class="p">,</span>     <span class="c1"># Maximize</span>
+    <span class="s2">&quot;Manufacturing Cost&quot;</span>        <span class="c1"># Minimize</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="visualization-techniques">
+<h2><span class="section-number">9.11. </span>Visualization Techniques<a class="headerlink" href="#visualization-techniques" title="Link to this heading">#</a></h2>
+<section id="d-pareto-front">
+<h3><span class="section-number">9.11.1. </span>2D Pareto Front<a class="headerlink" href="#d-pareto-front" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Plot Pareto front</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_values</span><span class="p">,</span> <span class="n">ductility_values</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto Front&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Strength vs. Ductility Trade-off&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3><span class="section-number">9.11.2. </span>3D Pareto Front<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength</span><span class="p">,</span> <span class="n">ductility</span><span class="p">,</span> <span class="n">cost</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Strength&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility&#39;</span><span class="p">)</span> 
+<span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s1">&#39;Cost&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="parallel-coordinates">
+<h3><span class="section-number">9.11.3. </span>Parallel Coordinates<a class="headerlink" href="#parallel-coordinates" title="Link to this heading">#</a></h3>
+<p>For &gt;3 objectives, use parallel coordinate plots:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pandas.plotting</span><span class="w"> </span><span class="kn">import</span> <span class="n">parallel_coordinates</span>
+
+<span class="c1"># Create DataFrame with objectives</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Strength&#39;</span><span class="p">:</span> <span class="n">strength_values</span><span class="p">,</span>
+    <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="n">ductility_values</span><span class="p">,</span>
+    <span class="s1">&#39;Cost&#39;</span><span class="p">:</span> <span class="n">cost_values</span><span class="p">,</span>
+    <span class="s1">&#39;Corrosion&#39;</span><span class="p">:</span> <span class="n">corrosion_values</span><span class="p">,</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;Pareto&#39;</span>
+<span class="p">})</span>
+
+<span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="s1">&#39;Type&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="decision-making">
+<h2><span class="section-number">9.12. </span>Decision Making<a class="headerlink" href="#decision-making" title="Link to this heading">#</a></h2>
+<section id="preference-based-selection">
+<h3><span class="section-number">9.12.1. </span>Preference-Based Selection<a class="headerlink" href="#preference-based-selection" title="Link to this heading">#</a></h3>
+<p>After finding the Pareto front, select solutions based on preferences:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Weight-based selection</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>  <span class="c1"># [strength, ductility, cost]</span>
+
+<span class="c1"># Calculate weighted sum for each Pareto solution</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">solution</span> <span class="ow">in</span> <span class="n">pareto_front</span><span class="p">:</span>
+    <span class="n">score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">obj</span> <span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">obj</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">solution</span><span class="p">))</span>
+    <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">score</span><span class="p">)</span>
+
+<span class="c1"># Select solution with highest score</span>
+<span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">selected_solution</span> <span class="o">=</span> <span class="n">pareto_front</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="knee-point-selection">
+<h3><span class="section-number">9.12.2. </span>Knee Point Selection<a class="headerlink" href="#knee-point-selection" title="Link to this heading">#</a></h3>
+<p>The “knee point” represents the best compromise:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find knee point (maximum distance from line connecting extremes)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_knee_point</span><span class="p">(</span><span class="n">pareto_front</span><span class="p">):</span>
+    <span class="c1"># Implementation depends on specific algorithm</span>
+    <span class="c1"># Common approaches: maximum perpendicular distance, angle-based</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="next-steps">
+<h2><span class="section-number">9.13. </span>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>Now that you understand multi-objective concepts:</p>
+<ol class="arabic simple">
+<li><p><strong>Learn MOBO algorithms</strong>: <a class="reference internal" href="mobo_algorithms.html"><span class="doc">MOBO Algorithms in MultiBgolearn</span></a></p></li>
+<li><p><strong>Try MultiBgolearn</strong>: <a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a></p></li>
+<li><p><strong>Practice with examples</strong>: <a class="reference internal" href="examples/multi_objective.html"><span class="doc">Multi-Objective Optimization Examples</span></a></p></li>
+<li><p><strong>Explore Pareto optimization</strong>: <a class="reference internal" href="pareto_optimization.html"><span class="doc">Pareto Optimization and Trade-off Analysis</span></a></p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For deeper understanding:</p>
+<ul class="simple">
+<li><p>Deb, K. “Multi-Objective Optimization using Evolutionary Algorithms”</p></li>
+<li><p>Coello, C.A.C. “Evolutionary Algorithms for Solving Multi-Objective Problems”</p></li>
+<li><p>Miettinen, K. “Nonlinear Multiobjective Optimization”</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="multibgolearn.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>MultiBgolearn: Multi-Objective Bayesian Global Optimization</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="mobo_algorithms.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">10. </span>MOBO Algorithms in MultiBgolearn</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-multi-objective-optimization">9.1. What is Multi-Objective Optimization?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-concepts">9.2. Key Concepts</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-dominance">9.2.1. Pareto Dominance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-front">9.2.2. Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pareto-optimality">9.2.3. Pareto Optimality</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation">9.3. Mathematical Formulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-multi-objective-problem">9.3.1. General Multi-Objective Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-design-example">9.3.2. Materials Design Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-vs-single-objective">9.4. Multi-Objective vs. Single-Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#challenges-in-multi-objective-optimization">9.5. Challenges in Multi-Objective Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conflicting-objectives">9.5.1. 1. Conflicting Objectives</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curse-of-dimensionality">9.5.2. 2. Curse of Dimensionality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-selection">9.5.3. 3. Solution Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-bayesian-optimization-mobo">9.6. Multi-Objective Bayesian Optimization (MOBO)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-advantages">9.6.1. Key Advantages</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mobo-acquisition-functions">9.7. MOBO Acquisition Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-hypervolume-improvement-ehvi">9.7.1. Expected Hypervolume Improvement (EHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-noisy-expected-hypervolume-improvement-qnehvi">9.7.2. q-Noisy Expected Hypervolume Improvement (qNEHVI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-pi">9.7.3. Probability of Improvement (PI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">9.7.4. Upper Confidence Bound (UCB)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hypervolume-indicator">9.8. Hypervolume Indicator</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">9.8.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculation-example">9.8.2. Calculation Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-considerations">9.9. Practical Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-scaling">9.9.1. Objective Scaling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reference-point-selection">9.9.2. Reference Point Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-transformation">9.9.3. Objective Transformation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-design-applications">9.10. Materials Design Applications</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#alloy-composition-optimization">9.10.1. Alloy Composition Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-parameter-optimization">9.10.2. Processing Parameter Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-functional-materials">9.10.3. Multi-Functional Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-techniques">9.11. Visualization Techniques</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-pareto-front">9.11.1. 2D Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">9.11.2. 3D Pareto Front</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parallel-coordinates">9.11.3. Parallel Coordinates</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-making">9.12. Decision Making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preference-based-selection">9.12.1. Preference-Based Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knee-point-selection">9.12.2. Knee Point Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">9.13. Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

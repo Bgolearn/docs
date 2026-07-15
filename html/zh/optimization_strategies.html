@@ -1,0 +1,1160 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>优化策略 &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh/optimization_strategies';</script>
+    <script src="../_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/zh/optimization_strategies.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fzh/optimization_strategies.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh/optimization_strategies.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>优化策略</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">顺序优化与批量优化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">顺序优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">批量优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">探索与利用策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">以探索为重点的策略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">以剥削为重点的战略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">适应性策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">动态虚拟空间</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">多阶段优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">模型选择策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">集成方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">自适应模型选择</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">约束处理策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">软约束</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">硬性约束</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">不确定性量化策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">引导集成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">性能优化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">计算效率</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">收敛监控</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">跟踪优化进度</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">最佳实践总结</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">数据质量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">选型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">优化策略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">计算效率</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">常见问题故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">收敛性差</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">性能缓慢</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">违反约束</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">下一步</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>优化策略<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页是 Bgolearn 手册的中文版本。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页介绍了充分利用 Bgolearn 的高级优化策略和最佳实践。</p>
+</div>
+<section id="id2">
+<h2>概述<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>使用 Bgolearn 进行有效优化不仅需要了解算法，还需要了解将其应用于实际问题的策略。本页介绍了先进技术、最佳实践以及需要避免的常见陷阱。</p>
+</section>
+<section id="id3">
+<h2>顺序优化与批量优化<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id4">
+<h3>顺序优化<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p>一次进行一个实验的传统方法：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Sequential optimization loop</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># Fit model and get recommendation</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">current_data</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">current_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span>  <span class="c1"># Single recommendation</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Conduct experiment</span>
+    <span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+    <span class="n">new_x</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">new_y</span> <span class="o">=</span> <span class="n">conduct_experiment</span><span class="p">(</span><span class="n">new_x</span><span class="p">)</span>
+    
+    <span class="c1"># Update dataset</span>
+    <span class="n">current_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">current_data</span><span class="p">,</span> <span class="n">new_x</span><span class="p">])</span>
+    <span class="n">current_response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_response</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>优点：</strong></p>
+<ul class="simple">
+<li><p>每个实验的最大信息增益</p></li>
+<li><p>适应新信息</p></li>
+<li><p>降低每次迭代的计算成本</p></li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul class="simple">
+<li><p>整体进度较慢</p></li>
+<li><p>无法利用并行实验能力</p></li>
+<li><p>每个实验的开销较高</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>批量优化<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>同时选择多个实验：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch optimization</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">current_data</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">current_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">5</span>  <span class="c1"># Multiple recommendations</span>
+<span class="p">)</span>
+
+<span class="c1"># Get batch of experiments</span>
+<span class="n">batch_indices</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">]</span>
+<span class="n">batch_experiments</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">]</span>
+
+<span class="c1"># Conduct experiments in parallel</span>
+<span class="n">batch_results</span> <span class="o">=</span> <span class="n">parallel_experiments</span><span class="p">(</span><span class="n">batch_experiments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>优点：</strong></p>
+<ul class="simple">
+<li><p>整体进步更快</p></li>
+<li><p>利用并行实验能力</p></li>
+<li><p>更好的资源利用率</p></li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul class="simple">
+<li><p>批次内适应性较差</p></li>
+<li><p>更高的计算成本</p></li>
+<li><p>批次中潜在的冗余</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>探索与利用策略<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h3>以探索为重点的策略<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<p>当您需要彻底探索设计空间时：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High exploration settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>  <span class="c1"># Good uncertainty estimates</span>
+    <span class="c1"># Use acquisition functions that favor exploration</span>
+    <span class="n">Dynamic_W</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Dynamic weighting</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>使用时间：</strong></p>
+<ul class="simple">
+<li><p>优化的早期阶段</p></li>
+<li><p>巨大的、未开发的设计空间</p></li>
+<li><p>测量不确定度高</p></li>
+<li><p>以发现为中心的研究</p></li>
+</ul>
+</section>
+<section id="id8">
+<h3>以剥削为重点的战略<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>当您想要细化已知的良好区域时：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High exploitation settings</span>
+<span class="c1"># Focus virtual space around known good regions</span>
+<span class="n">good_region_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">virtual_samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">best_composition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&amp;</span> \
+                   <span class="p">(</span><span class="n">virtual_samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">best_composition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">focused_virtual</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">good_region_mask</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">focused_virtual</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">3</span>  <span class="c1"># Multiple points in good region</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>使用时间：</strong></p>
+<ul class="simple">
+<li><p>优化后期阶段</p></li>
+<li><p>易于理解的系统</p></li>
+<li><p>实验预算有限</p></li>
+<li><p>以优化为重点的研究</p></li>
+</ul>
+</section>
+</section>
+<section id="id9">
+<h2>适应性策略<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<section id="id10">
+<h3>动态虚拟空间<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<p>根据优化进度调整虚拟空间：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_virtual_space</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">initial_space</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adapt virtual space based on optimization progress.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="c1"># Early: broad exploration</span>
+        <span class="k">return</span> <span class="n">initial_space</span>
+    <span class="k">elif</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+        <span class="c1"># Middle: focus around promising regions</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">initial_space</span> <span class="o">-</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">close_mask</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">initial_space</span><span class="p">[</span><span class="n">close_mask</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Late: local refinement</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">initial_space</span> <span class="o">-</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">close_mask</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">initial_space</span><span class="p">[</span><span class="n">close_mask</span><span class="p">]</span>
+
+<span class="c1"># Use in optimization loop</span>
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">current_virtual</span> <span class="o">=</span> <span class="n">adaptive_virtual_space</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">best_so_far</span><span class="p">,</span> <span class="n">full_virtual_space</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">virtual_samples</span><span class="o">=</span><span class="n">current_virtual</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h3>多阶段优化<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<p>不同阶段不同策略：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multi_stage_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multi-stage optimization strategy.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Stage 1: Broad exploration (Random Forest for robustness)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 1: Exploration&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="c1"># Add new points...</span>
+    
+    <span class="c1"># Stage 2: Focused search (Gaussian Process for uncertainty)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 2: Focused Search&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="c1"># Add new points...</span>
+    
+    <span class="c1"># Stage 3: Local refinement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 3: Local Refinement&quot;</span><span class="p">)</span>
+    <span class="c1"># Focus on best region...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2>模型选择策略<a class="headerlink" href="#id12" title="Link to this heading">#</a></h2>
+<section id="id13">
+<h3>集成方法<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>结合多个模型进行稳健的预测：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ensemble_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use ensemble of models for robust optimization.&quot;&quot;&quot;</span>
+    
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;SVR&#39;</span><span class="p">]</span>
+    <span class="n">recommendations</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">recommendations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Remove duplicates and select diverse set</span>
+    <span class="n">unique_recommendations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">recommendations</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">unique_recommendations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># Top 5 diverse recommendations</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3>自适应模型选择<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>根据问题特征选择模型：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_model_selection</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select model based on data characteristics.&quot;&quot;&quot;</span>
+    
+    <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data_matrix</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">noise_level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">measured_response</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measured_response</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;GaussianProcess&#39;</span>  <span class="c1"># Good for small data</span>
+    <span class="k">elif</span> <span class="n">n_features</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;RandomForest&#39;</span>    <span class="c1"># Good for high dimensions</span>
+    <span class="k">elif</span> <span class="n">noise_level</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;SVR&#39;</span>            <span class="c1"># Good for noisy data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;GaussianProcess&#39;</span> <span class="c1"># Default choice</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id15">
+<h2>约束处理策略<a class="headerlink" href="#id15" title="Link to this heading">#</a></h2>
+<section id="id16">
+<h3>软约束<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p>通过惩罚方法处理约束：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_soft_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply soft constraints via penalty method.&quot;&quot;&quot;</span>
+    
+    <span class="n">penalties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+        <span class="n">penalty</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="c1"># Composition constraint</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">-</span> <span class="mf">7.0</span><span class="p">)</span>
+        
+        <span class="c1"># Ratio constraint</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Avoid division by zero</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="mf">1.5</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">&gt;</span> <span class="mf">4.0</span><span class="p">:</span>
+                <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ratio</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">))</span>
+        
+        <span class="n">penalties</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">penalty</span>
+    
+    <span class="k">return</span> <span class="n">penalties</span>
+
+<span class="c1"># Use in optimization</span>
+<span class="n">penalties</span> <span class="o">=</span> <span class="n">apply_soft_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+<span class="c1"># Modify acquisition function to include penalties</span>
+</pre></div>
+</div>
+</section>
+<section id="id17">
+<h3>硬性约束<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p>过滤虚拟空间以满足约束：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_hard_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter virtual samples to satisfy hard constraints.&quot;&quot;&quot;</span>
+    
+    <span class="n">valid_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+        <span class="c1"># Check all constraints</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">&lt;=</span> <span class="n">sample</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">4.0</span><span class="p">):</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">return</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span>
+
+<span class="c1"># Use in optimization</span>
+<span class="n">feasible_virtual</span> <span class="o">=</span> <span class="n">apply_hard_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">virtual_samples</span><span class="o">=</span><span class="n">feasible_virtual</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id18">
+<h2>不确定性量化策略<a class="headerlink" href="#id18" title="Link to this heading">#</a></h2>
+<section id="id19">
+<h3>引导集成<a class="headerlink" href="#id19" title="Link to this heading">#</a></h3>
+<p>使用多个模型拟合进行不确定性估计：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bootstrap_uncertainty</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">,</span> <span class="n">n_bootstrap</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate uncertainty using bootstrap ensemble.&quot;&quot;&quot;</span>
+    
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bootstrap</span><span class="p">):</span>
+        <span class="c1"># Bootstrap sample</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">)</span>
+        <span class="n">bootstrap_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">bootstrap_data</span> <span class="o">=</span> <span class="n">data_matrix</span><span class="p">[</span><span class="n">bootstrap_indices</span><span class="p">]</span>
+        <span class="n">bootstrap_response</span> <span class="o">=</span> <span class="n">measured_response</span><span class="p">[</span><span class="n">bootstrap_indices</span><span class="p">]</span>
+        
+        <span class="c1"># Fit model</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">bootstrap_data</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">bootstrap_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>
+        <span class="p">)</span>
+        
+        <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate statistics</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="n">mean_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">mean_pred</span><span class="p">,</span> <span class="n">std_pred</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id20">
+<h2>性能优化<a class="headerlink" href="#id20" title="Link to this heading">#</a></h2>
+<section id="id21">
+<h3>计算效率<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<p>更快优化的策略：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Reduce virtual space size</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">smart_virtual_space_reduction</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">current_best</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Intelligently reduce virtual space size.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Calculate distances from current best</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">virtual_samples</span> <span class="o">-</span> <span class="n">current_best</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Keep closest points and some random distant points</span>
+    <span class="n">n_keep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">)</span> <span class="o">*</span> <span class="n">reduction_factor</span><span class="p">)</span>
+    <span class="n">n_close</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_keep</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">n_random</span> <span class="o">=</span> <span class="n">n_keep</span> <span class="o">-</span> <span class="n">n_close</span>
+    
+    <span class="c1"># Closest points</span>
+    <span class="n">close_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)[:</span><span class="n">n_close</span><span class="p">]</span>
+    
+    <span class="c1"># Random distant points</span>
+    <span class="n">distant_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)[</span><span class="n">n_close</span><span class="p">:]</span>
+    <span class="n">random_distant</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">distant_indices</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">selected_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">close_indices</span><span class="p">,</span> <span class="n">random_distant</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">selected_indices</span><span class="p">]</span>
+
+<span class="c1"># 2. Use faster models for initial screening</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hierarchical_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use fast models for screening, then GP for refinement.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Stage 1: Fast screening with Random Forest</span>
+    <span class="n">model_rf</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+        <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">50</span>  <span class="c1"># Get many candidates</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Stage 2: Refine with Gaussian Process</span>
+    <span class="n">top_candidates</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">model_rf</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">]]</span>
+    
+    <span class="n">model_gp</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">top_candidates</span><span class="p">,</span>
+        <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">5</span>  <span class="c1"># Final selection</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">model_gp</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id22">
+<h2>收敛监控<a class="headerlink" href="#id22" title="Link to this heading">#</a></h2>
+<section id="id23">
+<h3>跟踪优化进度<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_convergence</span><span class="p">(</span><span class="n">optimization_history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor and analyze optimization convergence.&quot;&quot;&quot;</span>
+    
+    <span class="n">best_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">improvements</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optimization_history</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">best_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">improvements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">)</span>
+            <span class="n">best_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_best</span><span class="p">)</span>
+            <span class="n">improvements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_best</span> <span class="o">-</span> <span class="n">best_values</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="c1"># Check convergence criteria</span>
+    <span class="n">recent_improvements</span> <span class="o">=</span> <span class="n">improvements</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>  <span class="c1"># Last 5 iterations</span>
+    <span class="n">avg_improvement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">recent_improvements</span><span class="p">)</span>
+    
+    <span class="n">converged</span> <span class="o">=</span> <span class="n">avg_improvement</span> <span class="o">&lt;</span> <span class="mf">0.01</span>  <span class="c1"># Threshold</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;best_values&#39;</span><span class="p">:</span> <span class="n">best_values</span><span class="p">,</span>
+        <span class="s1">&#39;improvements&#39;</span><span class="p">:</span> <span class="n">improvements</span><span class="p">,</span>
+        <span class="s1">&#39;converged&#39;</span><span class="p">:</span> <span class="n">converged</span><span class="p">,</span>
+        <span class="s1">&#39;avg_recent_improvement&#39;</span><span class="p">:</span> <span class="n">avg_improvement</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id24">
+<h2>最佳实践总结<a class="headerlink" href="#id24" title="Link to this heading">#</a></h2>
+<section id="id25">
+<h3>数据质量<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>足够的数据</strong>：每个特征 &gt;10 个样本</p></li>
+<li><p><strong>代表性抽样</strong>：很好地覆盖设计空间</p></li>
+<li><p><strong>质量控制</strong>：消除异常值和错误</p></li>
+<li><p><strong>验证</strong>：使用交叉验证</p></li>
+</ol>
+</section>
+<section id="id26">
+<h3>选型<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>从简单开始</strong>：从高斯过程开始</p></li>
+<li><p><strong>考虑数据大小</strong>：RF 适用于大数据，GP 适用于小数据</p></li>
+<li><p><strong>处理噪声</strong>：噪声数据的 SVR</p></li>
+<li><p><strong>验证性能</strong>：比较多个模型</p></li>
+</ol>
+</section>
+<section id="id27">
+<h3>优化策略<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>多阶段方法</strong>：探索→聚焦→完善</p></li>
+<li><p><strong>自适应虚拟空间</strong>：根据进度进行调整</p></li>
+<li><p><strong>约束处理</strong>：选择硬约束与软约束</p></li>
+<li><p><strong>不确定性量化</strong>：使用 bootstrap 或 GP 不确定性</p></li>
+</ol>
+</section>
+<section id="id28">
+<h3>计算效率<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>智能虚拟空间</strong>：智能缩小尺寸</p></li>
+<li><p><strong>分层模型</strong>：快速筛选+精准细化</p></li>
+<li><p><strong>并行实验</strong>：使用批量优化</p></li>
+<li><p><strong>监控收敛</strong>：收敛时停止</p></li>
+</ol>
+</section>
+</section>
+<section id="id29">
+<h2>常见问题故障排除<a class="headerlink" href="#id29" title="Link to this heading">#</a></h2>
+<section id="id30">
+<h3>收敛性差<a class="headerlink" href="#id30" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>加大早期探索力度</p></li>
+<li><p>检查数据质量和预处理</p></li>
+<li><p>尝试不同的代理模型</p></li>
+<li><p>拓展虚拟空间</p></li>
+</ul>
+</section>
+<section id="id31">
+<h3>性能缓慢<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>减小虚拟空间大小</p></li>
+<li><p>使用更简单的模型（随机森林）</p></li>
+<li><p>实施分层优化</p></li>
+<li><p>并行计算</p></li>
+</ul>
+</section>
+<section id="id32">
+<h3>违反约束<a class="headerlink" href="#id32" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>对关键限制使用硬约束</p></li>
+<li><p>对偏好实施软约束</p></li>
+<li><p>验证约束定义</p></li>
+<li><p>检查可行区域大小</p></li>
+</ul>
+</section>
+</section>
+<section id="id33">
+<h2>下一步<a class="headerlink" href="#id33" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>举例练习</strong>：<a class="reference internal" href="examples/single_objective.html"><span class="doc">单目标优化示例</span></a></p></li>
+<li><p><strong>学习多目标策略</strong>：<a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn：多目标贝叶斯全局优化</span></a></p></li>
+<li><p><strong>探索高级应用</strong>：<a class="reference internal" href="materials_discovery.html"><span class="doc">使用 Bgolearn 发现材料</span></a></p></li>
+<li><p><strong>尝试批量优化</strong>：<span class="xref std std-doc">batch_optimization</span></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./zh"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">顺序优化与批量优化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">顺序优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">批量优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">探索与利用策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">以探索为重点的策略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">以剥削为重点的战略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">适应性策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">动态虚拟空间</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">多阶段优化</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">模型选择策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">集成方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">自适应模型选择</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">约束处理策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">软约束</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">硬性约束</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">不确定性量化策略</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">引导集成</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">性能优化</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">计算效率</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">收敛监控</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">跟踪优化进度</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">最佳实践总结</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">数据质量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">选型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">优化策略</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">计算效率</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">常见问题故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">收敛性差</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">性能缓慢</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">违反约束</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">下一步</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

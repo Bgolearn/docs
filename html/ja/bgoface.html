@@ -1,0 +1,1261 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>BgoFace: Graphical User Interface for Bgolearn &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ja/bgoface';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/ja/bgoface.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fja/bgoface.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ja/bgoface.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>BgoFace: Graphical User Interface for Bgolearn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboard">Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-management">Optimization Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-download-pre-built-application-recommended">Option 1: Download Pre-built Application (Recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-build-from-source">Option 2: Build from Source</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-and-setup">Clone and Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-executable">Build Executable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-interface-guide">User Interface Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-dashboard">Main Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management">Data Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-configuration">Optimization Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-monitoring">Real-Time Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis">Results Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples">Practical Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-alloy-composition-optimization">Example 1: Alloy Composition Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-multi-objective-heat-treatment">Example 2: Multi-Objective Heat Treatment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-handling">Constraint Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization">Batch Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-and-reporting">Export and Reporting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-bgolearn">Integration with Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-synchronization">Data Synchronization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-organization">Project Organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-strategy">Optimization Strategy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-development">Future Development</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planned-features">Planned Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation-and-license">Citation and License</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-use">Academic Use</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bgoface-graphical-user-interface-for-bgolearn">
+<h1>BgoFace: Graphical User Interface for Bgolearn<a class="headerlink" href="#bgoface-graphical-user-interface-for-bgolearn" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本ページは Bgolearn マニュアルの日本語版です。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://github.com/Bgolearn/BgoFace"><strong>BgoFace</strong></a> is the graphical user interface (GUI) component of the Bgolearn platform, designed to provide users with an intuitive and efficient way to interact with Bgolearn for material design and optimization.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>BgoFace serves as the user interface for Bgolearn, making the platform more accessible and user-friendly. Through BgoFace, users can easily create optimization tasks, monitor real-time progress, and visualize results using built-in tools. The design focuses on clarity and interactivity, allowing users to focus on optimization tasks without worrying about technical complexities.</p>
+<div class="tip admonition">
+<p class="admonition-title">Why BgoFace?</p>
+<p>BgoFace bridges the gap between experimental and computational domains by:</p>
+<ul class="simple">
+<li><p><strong>Simplifying complex workflows</strong> - No coding required</p></li>
+<li><p><strong>Providing intuitive controls</strong> - Visual interface for all operations</p></li>
+<li><p><strong>Integrating experimental constraints</strong> - Real-world limitations built-in</p></li>
+<li><p><strong>Enabling seamless access</strong> to active learning algorithms</p></li>
+<li><p><strong>Empowering materials exploration</strong> without deep ML expertise</p></li>
+</ul>
+</div>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Link to this heading">#</a></h2>
+<section id="dashboard">
+<h3>Dashboard<a class="headerlink" href="#dashboard" title="Link to this heading">#</a></h3>
+<p><strong>Overview Panel</strong>: Provides a snapshot of ongoing optimization tasks, including:</p>
+<ul class="simple">
+<li><p>Task status and progress indicators</p></li>
+<li><p>Key performance metrics</p></li>
+<li><p>Visual summaries of results</p></li>
+<li><p>Real-time updates</p></li>
+</ul>
+</section>
+<section id="optimization-management">
+<h3>Optimization Management<a class="headerlink" href="#optimization-management" title="Link to this heading">#</a></h3>
+<p><strong>Task Monitoring</strong>:</p>
+<ul class="simple">
+<li><p>Real-time tracking of optimization progress</p></li>
+<li><p>Intermediate results display</p></li>
+<li><p>Model performance metrics</p></li>
+<li><p>Automated notifications and alerts</p></li>
+</ul>
+<p><strong>Result Analysis</strong>:</p>
+<ul class="simple">
+<li><p>Comprehensive tools for analyzing optimization results</p></li>
+<li><p>Both numerical and graphical interpretations</p></li>
+<li><p>Export capabilities for further analysis</p></li>
+</ul>
+</section>
+<section id="visualization-tools">
+<h3>Visualization Tools<a class="headerlink" href="#visualization-tools" title="Link to this heading">#</a></h3>
+<p><strong>Built-in Plotting Interface</strong>:</p>
+<ul class="simple">
+<li><p>Scatter plots for data exploration</p></li>
+<li><p>Line charts for convergence analysis</p></li>
+<li><p>Bar graphs for feature importance</p></li>
+<li><p>Pareto front visualizations for multi-objective problems</p></li>
+<li><p>3D surface plots for response landscapes</p></li>
+</ul>
+<p><strong>Data Export Options</strong>:</p>
+<ul class="simple">
+<li><p>PNG/PDF formats for publications</p></li>
+<li><p>CSV/Excel for data analysis</p></li>
+<li><p>Interactive HTML plots</p></li>
+<li><p>High-resolution images for presentations</p></li>
+</ul>
+</section>
+</section>
+<section id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<p>BgoFace follows a modular architecture that separates the user interface from the computational backend:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   User Input    │───▶│   BgoFace GUI   │───▶│  Bgolearn Core  │
+│                 │    │                 │    │                 │
+│ • Parameters    │    │ • Task Manager  │    │ • Optimization  │
+│ • Data Upload   │    │ • Visualizer    │    │ • ML Models     │
+│ • Constraints   │    │ • Result Viewer │    │ • Algorithms    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                              │                        │
+                              ▼                        ▼
+                       ┌─────────────────┐    ┌─────────────────┐
+                       │   File System   │    │   Computation   │
+                       │                 │    │                 │
+                       │ • Data Storage  │    │ • Model Training│
+                       │ • Results Cache │    │ • Predictions   │
+                       │ • Export Files  │    │ • Optimization  │
+                       └─────────────────┘    └─────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="installation-and-setup">
+<h2>Installation and Setup<a class="headerlink" href="#installation-and-setup" title="Link to this heading">#</a></h2>
+<section id="option-1-download-pre-built-application-recommended">
+<h3>Option 1: Download Pre-built Application (Recommended)<a class="headerlink" href="#option-1-download-pre-built-application-recommended" title="Link to this heading">#</a></h3>
+<p>For Windows users, the easiest way to get started:</p>
+<ol class="arabic simple">
+<li><p><strong>Visit the Releases Page</strong>: <a class="reference external" href="https://github.com/Bgolearn/BgoFace/releases">BgoFace Releases</a></p></li>
+<li><p><strong>Download the Latest Version</strong>: Look for the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> file in the latest release</p></li>
+<li><p><strong>Run the Application</strong>: No installation required - just double-click to run!</p></li>
+</ol>
+<div class="note admonition">
+<p class="admonition-title">System Requirements</p>
+<ul class="simple">
+<li><p><strong>Operating System</strong>: Windows 10 or later</p></li>
+<li><p><strong>Memory</strong>: 4GB RAM minimum, 8GB recommended</p></li>
+<li><p><strong>Storage</strong>: 500MB free space</p></li>
+<li><p><strong>Display</strong>: 1024x768 minimum resolution</p></li>
+</ul>
+</div>
+</section>
+<section id="option-2-build-from-source">
+<h3>Option 2: Build from Source<a class="headerlink" href="#option-2-build-from-source" title="Link to this heading">#</a></h3>
+<p>For developers or users who want to customize BgoFace:</p>
+<section id="prerequisites">
+<h4>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install required packages</span>
+pip<span class="w"> </span>install<span class="w"> </span>PyQt5<span class="w"> </span>pyinstaller<span class="w"> </span>Bgolearn
+</pre></div>
+</div>
+</section>
+<section id="clone-and-setup">
+<h4>Clone and Setup<a class="headerlink" href="#clone-and-setup" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Bgolearn/BgoFace.git
+<span class="nb">cd</span><span class="w"> </span>BgoFace
+
+<span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># Run from source</span>
+python<span class="w"> </span>main.py
+</pre></div>
+</div>
+</section>
+<section id="build-executable">
+<h4>Build Executable<a class="headerlink" href="#build-executable" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create standalone executable</span>
+pyinstaller<span class="w"> </span>-F<span class="w"> </span>-w<span class="w"> </span>--add-data<span class="w"> </span><span class="s2">&quot;Images;Images&quot;</span><span class="w"> </span>main.py
+
+<span class="c1"># The executable will be in the dist/ folder</span>
+</pre></div>
+</div>
+<p><strong>PyInstaller Options Explained</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-F</span></code>: Bundle everything into a single file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-w</span></code>: Suppress console window (GUI only)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--add-data</span></code>: Include additional assets like images</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="user-interface-guide">
+<h2>User Interface Guide<a class="headerlink" href="#user-interface-guide" title="Link to this heading">#</a></h2>
+<section id="main-dashboard">
+<h3>Main Dashboard<a class="headerlink" href="#main-dashboard" title="Link to this heading">#</a></h3>
+<p>The main dashboard provides an overview of your optimization projects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Starting a new optimization project</span>
+<span class="c1"># 1. Click &quot;New Project&quot; button</span>
+<span class="c1"># 2. Select optimization type (Single/Multi-objective)</span>
+<span class="c1"># 3. Upload your dataset</span>
+<span class="c1"># 4. Configure parameters</span>
+<span class="c1"># 5. Start optimization</span>
+</pre></div>
+</div>
+<p><strong>Dashboard Components</strong>:</p>
+<ul class="simple">
+<li><p><strong>Project List</strong>: All your optimization projects</p></li>
+<li><p><strong>Quick Actions</strong>: Start new optimization, import data</p></li>
+<li><p><strong>Recent Results</strong>: Latest optimization outcomes</p></li>
+<li><p><strong>System Status</strong>: Memory usage, computation status</p></li>
+</ul>
+</section>
+<section id="data-management">
+<h3>Data Management<a class="headerlink" href="#data-management" title="Link to this heading">#</a></h3>
+<p><strong>Data Upload Interface</strong>:</p>
+<ul class="simple">
+<li><p>Drag-and-drop CSV file upload</p></li>
+<li><p>Data preview and validation</p></li>
+<li><p>Feature selection and target definition</p></li>
+<li><p>Data preprocessing options</p></li>
+</ul>
+<p><strong>Supported Data Formats</strong>:</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span># Example dataset format
+Feature1,Feature2,Feature3,Target
+2.0,1.2,0.5,250
+3.5,0.8,0.7,280
+1.8,1.5,0.3,240
+</pre></div>
+</div>
+</section>
+<section id="optimization-configuration">
+<h3>Optimization Configuration<a class="headerlink" href="#optimization-configuration" title="Link to this heading">#</a></h3>
+<p><strong>Single-Objective Setup</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Select Target</strong>: Choose the property to optimize</p></li>
+<li><p><strong>Choose Model</strong>: Gaussian Process, Random Forest, etc.</p></li>
+<li><p><strong>Set Parameters</strong>: Acquisition function, number of iterations</p></li>
+<li><p><strong>Define Constraints</strong>: Composition limits, processing ranges</p></li>
+<li><p><strong>Configure Virtual Space</strong>: Candidate points for evaluation</p></li>
+</ol>
+<p><strong>Multi-Objective Setup</strong>:</p>
+<ol class="arabic simple">
+<li><p><strong>Select Multiple Targets</strong>: Choose 2-6 objectives</p></li>
+<li><p><strong>Set Optimization Direction</strong>: Maximize/minimize each objective</p></li>
+<li><p><strong>Choose MOBO Algorithm</strong>: EHVI, PI, or UCB</p></li>
+<li><p><strong>Configure Pareto Analysis</strong>: Reference points, weights</p></li>
+</ol>
+</section>
+<section id="real-time-monitoring">
+<h3>Real-Time Monitoring<a class="headerlink" href="#real-time-monitoring" title="Link to this heading">#</a></h3>
+<p><strong>Progress Tracking</strong>:</p>
+<ul class="simple">
+<li><p>Optimization iteration counter</p></li>
+<li><p>Current best values</p></li>
+<li><p>Convergence plots</p></li>
+<li><p>Time remaining estimates</p></li>
+</ul>
+<p><strong>Live Visualization</strong>:</p>
+<ul class="simple">
+<li><p>Acquisition function landscape</p></li>
+<li><p>Model predictions vs. actual values</p></li>
+<li><p>Pareto front evolution (multi-objective)</p></li>
+<li><p>Feature importance updates</p></li>
+</ul>
+</section>
+<section id="results-analysis">
+<h3>Results Analysis<a class="headerlink" href="#results-analysis" title="Link to this heading">#</a></h3>
+<p><strong>Comprehensive Results View</strong>:</p>
+<ul class="simple">
+<li><p><strong>Summary Statistics</strong>: Best values, improvement metrics</p></li>
+<li><p><strong>Detailed Tables</strong>: All evaluated points with predictions</p></li>
+<li><p><strong>Interactive Plots</strong>: Zoom, pan, and explore results</p></li>
+<li><p><strong>Export Options</strong>: Save plots, data, and reports</p></li>
+</ul>
+</section>
+</section>
+<section id="practical-examples">
+<h2>Practical Examples<a class="headerlink" href="#practical-examples" title="Link to this heading">#</a></h2>
+<section id="example-1-alloy-composition-optimization">
+<h3>Example 1: Alloy Composition Optimization<a class="headerlink" href="#example-1-alloy-composition-optimization" title="Link to this heading">#</a></h3>
+<p><strong>Scenario</strong>: Optimize Al-Cu-Mg alloy for maximum strength</p>
+<p><strong>Steps in BgoFace</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Create New Project</strong></p>
+<ul class="simple">
+<li><p>Project Name: “Al-Cu-Mg Strength Optimization”</p></li>
+<li><p>Type: Single-Objective</p></li>
+<li><p>Target: Maximize Strength</p></li>
+</ul>
+</li>
+<li><p><strong>Upload Training Data</strong></p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Cu,Mg,Si,Strength
+2.0,1.2,0.5,250
+3.5,0.8,0.7,280
+1.8,1.5,0.3,240
+4.2,0.9,0.8,290
+</pre></div>
+</div>
+</li>
+<li><p><strong>Configure Optimization</strong></p>
+<ul class="simple">
+<li><p>Features: Cu, Mg, Si (composition percentages)</p></li>
+<li><p>Target: Strength (MPa)</p></li>
+<li><p>Model: Gaussian Process</p></li>
+<li><p>Acquisition: Expected Improvement</p></li>
+<li><p>Constraints: Cu+Mg+Si &lt; 7%</p></li>
+</ul>
+</li>
+<li><p><strong>Define Virtual Space</strong></p>
+<ul class="simple">
+<li><p>Cu range: 1.5-4.5%</p></li>
+<li><p>Mg range: 0.7-1.6%</p></li>
+<li><p>Si range: 0.2-1.0%</p></li>
+<li><p>Generate 1000 candidate compositions</p></li>
+</ul>
+</li>
+<li><p><strong>Run Optimization</strong></p>
+<ul class="simple">
+<li><p>Monitor progress in real-time</p></li>
+<li><p>View acquisition function landscape</p></li>
+<li><p>Track convergence</p></li>
+</ul>
+</li>
+<li><p><strong>Analyze Results</strong></p>
+<ul class="simple">
+<li><p>Best composition: Cu=3.8%, Mg=1.0%, Si=0.6%</p></li>
+<li><p>Predicted strength: 295 MPa</p></li>
+<li><p>Export recommendation for experimental validation</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="example-2-multi-objective-heat-treatment">
+<h3>Example 2: Multi-Objective Heat Treatment<a class="headerlink" href="#example-2-multi-objective-heat-treatment" title="Link to this heading">#</a></h3>
+<p><strong>Scenario</strong>: Optimize heat treatment for hardness and toughness</p>
+<p><strong>Steps in BgoFace</strong>:</p>
+<ol class="arabic">
+<li><p><strong>Create Multi-Objective Project</strong></p>
+<ul class="simple">
+<li><p>Objectives: Maximize Hardness, Maximize Toughness</p></li>
+<li><p>Algorithm: EHVI</p></li>
+</ul>
+</li>
+<li><p><strong>Upload Process Data</strong></p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Temperature,Time,Cooling_Rate,Hardness,Toughness
+450,2,10,180,45
+500,4,20,220,35
+550,6,15,250,25
+</pre></div>
+</div>
+</li>
+<li><p><strong>Configure Parameters</strong></p>
+<ul class="simple">
+<li><p>Features: Temperature (°C), Time (hours), Cooling Rate (°C/min)</p></li>
+<li><p>Objectives: Hardness (HV), Toughness (J)</p></li>
+<li><p>Constraints: 400°C ≤ Temperature ≤ 600°C</p></li>
+</ul>
+</li>
+<li><p><strong>Run Multi-Objective Optimization</strong></p>
+<ul class="simple">
+<li><p>Monitor Pareto front evolution</p></li>
+<li><p>View trade-off analysis</p></li>
+<li><p>Track hypervolume improvement</p></li>
+</ul>
+</li>
+<li><p><strong>Analyze Pareto Solutions</strong></p>
+<ul class="simple">
+<li><p>Explore trade-offs between hardness and toughness</p></li>
+<li><p>Select preferred solution based on requirements</p></li>
+<li><p>Export multiple recommendations</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="advanced-features">
+<h2>Advanced Features<a class="headerlink" href="#advanced-features" title="Link to this heading">#</a></h2>
+<section id="constraint-handling">
+<h3>Constraint Handling<a class="headerlink" href="#constraint-handling" title="Link to this heading">#</a></h3>
+<p><strong>Built-in Constraint Types</strong>:</p>
+<ul class="simple">
+<li><p><strong>Composition Constraints</strong>: Sum limits, ratio constraints</p></li>
+<li><p><strong>Processing Constraints</strong>: Temperature/pressure ranges</p></li>
+<li><p><strong>Custom Constraints</strong>: User-defined mathematical expressions</p></li>
+</ul>
+<p><strong>Constraint Definition Interface</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example constraint definitions in BgoFace</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;composition_sum&quot;</span><span class="p">:</span> <span class="s2">&quot;Cu + Mg + Si &lt;= 7.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;temperature_range&quot;</span><span class="p">:</span> <span class="s2">&quot;400 &lt;= Temperature &lt;= 600&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cu_mg_ratio&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5 &lt;= Cu/Mg &lt;= 4.0&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-optimization">
+<h3>Batch Optimization<a class="headerlink" href="#batch-optimization" title="Link to this heading">#</a></h3>
+<p><strong>Parallel Experiment Design</strong>:</p>
+<ul class="simple">
+<li><p>Select multiple points for simultaneous evaluation</p></li>
+<li><p>Batch acquisition functions (q-EI, q-UCB)</p></li>
+<li><p>Resource allocation optimization</p></li>
+<li><p>Experimental planning tools</p></li>
+</ul>
+</section>
+<section id="model-comparison">
+<h3>Model Comparison<a class="headerlink" href="#model-comparison" title="Link to this heading">#</a></h3>
+<p><strong>Automated Model Selection</strong>:</p>
+<ul class="simple">
+<li><p>Compare multiple surrogate models</p></li>
+<li><p>Cross-validation performance metrics</p></li>
+<li><p>Model uncertainty visualization</p></li>
+<li><p>Automatic best model selection</p></li>
+</ul>
+</section>
+<section id="export-and-reporting">
+<h3>Export and Reporting<a class="headerlink" href="#export-and-reporting" title="Link to this heading">#</a></h3>
+<p><strong>Comprehensive Export Options</strong>:</p>
+<ul class="simple">
+<li><p><strong>PDF Reports</strong>: Complete optimization summary</p></li>
+<li><p><strong>Excel Workbooks</strong>: Data tables and charts</p></li>
+<li><p><strong>Python Scripts</strong>: Reproduce analysis programmatically</p></li>
+<li><p><strong>Presentation Slides</strong>: Ready-to-use figures</p></li>
+</ul>
+</section>
+</section>
+<section id="integration-with-bgolearn">
+<h2>Integration with Bgolearn<a class="headerlink" href="#integration-with-bgolearn" title="Link to this heading">#</a></h2>
+<p>BgoFace seamlessly integrates with the Bgolearn ecosystem:</p>
+<section id="code-generation">
+<h3>Code Generation<a class="headerlink" href="#code-generation" title="Link to this heading">#</a></h3>
+<p><strong>Automatic Script Generation</strong>:</p>
+<ul class="simple">
+<li><p>BgoFace generates equivalent Python code</p></li>
+<li><p>Users can reproduce results programmatically</p></li>
+<li><p>Easy transition from GUI to scripting</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example generated code from BgoFace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Initialize optimizer</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="c1"># Configuration from BgoFace</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Mission</span><span class="o">=</span><span class="s1">&#39;Regression&#39;</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># 10-fold cross-validation</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-synchronization">
+<h3>Data Synchronization<a class="headerlink" href="#data-synchronization" title="Link to this heading">#</a></h3>
+<p><strong>Seamless Data Flow</strong>:</p>
+<ul class="simple">
+<li><p>Import data from Bgolearn projects</p></li>
+<li><p>Export results to Bgolearn format</p></li>
+<li><p>Maintain data consistency</p></li>
+<li><p>Version control integration</p></li>
+</ul>
+</section>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">#</a></h2>
+<section id="project-organization">
+<h3>Project Organization<a class="headerlink" href="#project-organization" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Use Descriptive Names</strong>: Clear project and file names</p></li>
+<li><p><strong>Document Parameters</strong>: Add notes for future reference</p></li>
+<li><p><strong>Save Intermediate Results</strong>: Regular checkpoints</p></li>
+<li><p><strong>Organize by Material System</strong>: Group related projects</p></li>
+</ol>
+</section>
+<section id="data-quality">
+<h3>Data Quality<a class="headerlink" href="#data-quality" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Validate Input Data</strong>: Check for outliers and errors</p></li>
+<li><p><strong>Sufficient Training Data</strong>: &gt;10 samples per feature</p></li>
+<li><p><strong>Representative Sampling</strong>: Cover the design space well</p></li>
+<li><p><strong>Quality Control</strong>: Remove experimental errors</p></li>
+</ol>
+</section>
+<section id="optimization-strategy">
+<h3>Optimization Strategy<a class="headerlink" href="#optimization-strategy" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start Simple</strong>: Begin with single-objective problems</p></li>
+<li><p><strong>Validate Models</strong>: Use cross-validation</p></li>
+<li><p><strong>Check Convergence</strong>: Monitor optimization progress</p></li>
+<li><p><strong>Experimental Validation</strong>: Always test recommendations</p></li>
+</ol>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues">
+<h3>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
+<p><strong>Application Won’t Start</strong>:</p>
+<ul class="simple">
+<li><p>Check system requirements</p></li>
+<li><p>Run as administrator (Windows)</p></li>
+<li><p>Verify antivirus settings</p></li>
+<li><p>Download latest version</p></li>
+</ul>
+<p><strong>Data Import Problems</strong>:</p>
+<ul class="simple">
+<li><p>Check CSV format and encoding</p></li>
+<li><p>Verify column headers</p></li>
+<li><p>Remove special characters</p></li>
+<li><p>Ensure numeric data types</p></li>
+</ul>
+<p><strong>Optimization Failures</strong>:</p>
+<ul class="simple">
+<li><p>Reduce virtual space size</p></li>
+<li><p>Check constraint definitions</p></li>
+<li><p>Verify data quality</p></li>
+<li><p>Try different surrogate models</p></li>
+</ul>
+<p><strong>Performance Issues</strong>:</p>
+<ul class="simple">
+<li><p>Close other applications</p></li>
+<li><p>Reduce dataset size</p></li>
+<li><p>Use simpler models</p></li>
+<li><p>Increase available memory</p></li>
+</ul>
+</section>
+<section id="getting-help">
+<h3>Getting Help<a class="headerlink" href="#getting-help" title="Link to this heading">#</a></h3>
+<p><strong>Support Resources</strong>:</p>
+<ul class="simple">
+<li><p><strong>User Manual</strong>: Detailed PDF guide included</p></li>
+<li><p><strong>Video Tutorials</strong>: <a class="reference external" href="https://www.bilibili.com/video/BV1LTtLeaEZp/">BiliBili Channel</a></p></li>
+<li><p><strong>GitHub Issues</strong>: <a class="reference external" href="https://github.com/Bgolearn/BgoFace/issues">Report bugs and request features</a></p></li>
+<li><p><strong>Email Support</strong>: Contact the development team</p></li>
+</ul>
+<p><strong>Community</strong>:</p>
+<ul class="simple">
+<li><p><strong>Discussion Forum</strong>: Share experiences and tips</p></li>
+<li><p><strong>Example Projects</strong>: Download sample datasets</p></li>
+<li><p><strong>Best Practices</strong>: Learn from other users</p></li>
+</ul>
+</section>
+</section>
+<section id="future-development">
+<h2>Future Development<a class="headerlink" href="#future-development" title="Link to this heading">#</a></h2>
+<section id="planned-features">
+<h3>Planned Features<a class="headerlink" href="#planned-features" title="Link to this heading">#</a></h3>
+<p><strong>Version 2.0 Roadmap</strong>:</p>
+<ul class="simple">
+<li><p><strong>Cloud Integration</strong>: Remote computation support</p></li>
+<li><p><strong>Collaborative Features</strong>: Multi-user projects</p></li>
+<li><p><strong>Advanced Visualization</strong>: 3D interactive plots</p></li>
+<li><p><strong>Machine Learning</strong>: Automated hyperparameter tuning</p></li>
+<li><p><strong>Integration</strong>: Connect with experimental equipment</p></li>
+</ul>
+<p><strong>Community Contributions</strong>:</p>
+<ul class="simple">
+<li><p>Plugin system for custom algorithms</p></li>
+<li><p>Template library for common materials</p></li>
+<li><p>Shared project repository</p></li>
+<li><p>Educational resources</p></li>
+</ul>
+</section>
+</section>
+<section id="citation-and-license">
+<h2>Citation and License<a class="headerlink" href="#citation-and-license" title="Link to this heading">#</a></h2>
+<section id="academic-use">
+<h3>Academic Use<a class="headerlink" href="#academic-use" title="Link to this heading">#</a></h3>
+<p>If you use BgoFace in your research, please cite:</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">li2025optimize</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Optimize the quantum yield of G-quartet-based circularly polarized luminescence materials via active learning strategy-BgoFace}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Li, Tianliang and Chen, Lifei and Cao, Bin and Liu, Siyuan and Lin, Lixing and Li, Zeyu and Chen, Yingying and Li, Zhenzhen and Zhang, Tong-yi and Feng, Lingyan}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Materials Genome Engineering Advances}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">number</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="p">=</span><span class="s">{e70031}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="p">=</span><span class="s">{Wiley Online Library}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="license">
+<h3>License<a class="headerlink" href="#license" title="Link to this heading">#</a></h3>
+<p><strong>Academic and Research Use Only</strong></p>
+<ul class="simple">
+<li><p>✅ Academic research and education</p></li>
+<li><p>✅ Non-commercial scientific studies</p></li>
+<li><p>✅ Open-source contributions</p></li>
+<li><p>❌ Commercial applications</p></li>
+<li><p>❌ Proprietary software integration</p></li>
+<li><p>❌ Revenue-generating activities</p></li>
+</ul>
+<p><strong>Copyright</strong>: © 2024 Bgolearn Development Team. All rights reserved.</p>
+<p><strong>Development Team</strong>:</p>
+<ul class="simple">
+<li><p><strong>Lead Developer</strong>: Bin Cao (Hong Kong University of Science and Technology, Guangzhou)</p></li>
+<li><p><strong>UI Development</strong>: Siyuan Liu (Tongji University), Bin Cao (HKUST, Guangzhou)</p></li>
+<li><p><strong>Guidance</strong>: Prof. Tong-Yi Zhang (Shanghai University), Prof. Lingyan Feng (Shanghai University)</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>Ready to start using BgoFace? Here’s what to do next:</p>
+<ol class="arabic simple">
+<li><p><strong>Download BgoFace</strong>: Get the latest version from <a class="reference external" href="https://github.com/Bgolearn/BgoFace/releases">GitHub Releases</a></p></li>
+<li><p><strong>Watch Tutorial</strong>: Follow the <a class="reference external" href="https://www.bilibili.com/video/BV1LTtLeaEZp/">video guide</a></p></li>
+<li><p><strong>Try Examples</strong>: Start with the included sample projects</p></li>
+<li><p><strong>Join Community</strong>: Connect with other users and developers</p></li>
+<li><p><strong>Explore Advanced Features</strong>: Learn about multi-objective optimization and constraints</p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Related Documentation:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="getting_started.html"><span class="doc">Getting Started with Bgolearn</span></a> - Install and setup Bgolearn</p></li>
+<li><p><a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a> - Multi-objective optimization</p></li>
+<li><p><a class="reference internal" href="materials_discovery.html"><span class="doc">Materials Discovery with Bgolearn</span></a> - Materials discovery examples</p></li>
+<li><p><span class="xref std std-doc">visualization</span> - Advanced plotting techniques</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ja"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-features">Key Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dashboard">Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-management">Optimization Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-tools">Visualization Tools</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-and-setup">Installation and Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-download-pre-built-application-recommended">Option 1: Download Pre-built Application (Recommended)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-build-from-source">Option 2: Build from Source</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#clone-and-setup">Clone and Setup</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#build-executable">Build Executable</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#user-interface-guide">User Interface Guide</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#main-dashboard">Main Dashboard</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-management">Data Management</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-configuration">Optimization Configuration</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-monitoring">Real-Time Monitoring</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#results-analysis">Results Analysis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples">Practical Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-alloy-composition-optimization">Example 1: Alloy Composition Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-multi-objective-heat-treatment">Example 2: Multi-Objective Heat Treatment</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-features">Advanced Features</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-handling">Constraint Handling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization">Batch Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">Model Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#export-and-reporting">Export and Reporting</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#integration-with-bgolearn">Integration with Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code-generation">Code Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-synchronization">Data Synchronization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices">Best Practices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-organization">Project Organization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-strategy">Optimization Strategy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-help">Getting Help</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#future-development">Future Development</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#planned-features">Planned Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citation-and-license">Citation and License</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#academic-use">Academic Use</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#license">License</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

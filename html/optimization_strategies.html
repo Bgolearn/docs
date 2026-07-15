@@ -1,0 +1,1174 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Optimization Strategies &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'optimization_strategies';</script>
+    <script src="_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. MultiBgolearn: Multi-Objective Bayesian Global Optimization" href="multibgolearn.html" />
+    <link rel="prev" title="6. Surrogate Models in Bgolearn" href="surrogate_models.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/optimization_strategies.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Foptimization_strategies.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/optimization_strategies.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Optimization Strategies</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">7.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-vs-batch-optimization">7.2. Sequential vs. Batch Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-optimization">7.2.1. Sequential Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization">7.2.2. Batch Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-vs-exploitation-strategies">7.3. Exploration vs. Exploitation Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-focused-strategies">7.3.1. Exploration-Focused Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploitation-focused-strategies">7.3.2. Exploitation-Focused Strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-strategies">7.4. Adaptive Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-virtual-space">7.4.1. Dynamic Virtual Space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-stage-optimization">7.4.2. Multi-Stage Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection-strategies">7.5. Model Selection Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-approaches">7.5.1. Ensemble Approaches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-model-selection">7.5.2. Adaptive Model Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-handling-strategies">7.6. Constraint Handling Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints">7.6.1. Soft Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraints">7.6.2. Hard Constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-strategies">7.7. Uncertainty Quantification Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-ensemble">7.7.1. Bootstrap Ensemble</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">7.8. Performance Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency">7.8.1. Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-monitoring">7.9. Convergence Monitoring</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-optimization-progress">7.9.1. Tracking Optimization Progress</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-summary">7.10. Best Practices Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">7.10.1. Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">7.10.2. Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-strategy">7.10.3. Optimization Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7.10.4. Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-common-issues">7.11. Troubleshooting Common Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-convergence">7.11.1. Poor Convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slow-performance">7.11.2. Slow Performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-violations">7.11.3. Constraint Violations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">7.12. Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="optimization-strategies">
+<h1><span class="section-number">7. </span>Optimization Strategies<a class="headerlink" href="#optimization-strategies" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page covers advanced optimization strategies and best practices for getting the most out of Bgolearn.</p>
+</div>
+<section id="overview">
+<h2><span class="section-number">7.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Effective optimization with Bgolearn requires understanding not just the algorithms, but also the strategies for applying them to real-world problems. This page covers advanced techniques, best practices, and common pitfalls to avoid.</p>
+</section>
+<section id="sequential-vs-batch-optimization">
+<h2><span class="section-number">7.2. </span>Sequential vs. Batch Optimization<a class="headerlink" href="#sequential-vs-batch-optimization" title="Link to this heading">#</a></h2>
+<section id="sequential-optimization">
+<h3><span class="section-number">7.2.1. </span>Sequential Optimization<a class="headerlink" href="#sequential-optimization" title="Link to this heading">#</a></h3>
+<p>The traditional approach where experiments are conducted one at a time:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Sequential optimization loop</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="c1"># Fit model and get recommendation</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">current_data</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">current_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span>  <span class="c1"># Single recommendation</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Conduct experiment</span>
+    <span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+    <span class="n">new_x</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">new_y</span> <span class="o">=</span> <span class="n">conduct_experiment</span><span class="p">(</span><span class="n">new_x</span><span class="p">)</span>
+    
+    <span class="c1"># Update dataset</span>
+    <span class="n">current_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">current_data</span><span class="p">,</span> <span class="n">new_x</span><span class="p">])</span>
+    <span class="n">current_response</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_response</span><span class="p">,</span> <span class="n">new_y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Maximum information gain per experiment</p></li>
+<li><p>Adaptive to new information</p></li>
+<li><p>Lower computational cost per iteration</p></li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul class="simple">
+<li><p>Slower overall progress</p></li>
+<li><p>Cannot utilize parallel experimental capabilities</p></li>
+<li><p>Higher overhead per experiment</p></li>
+</ul>
+</section>
+<section id="batch-optimization">
+<h3><span class="section-number">7.2.2. </span>Batch Optimization<a class="headerlink" href="#batch-optimization" title="Link to this heading">#</a></h3>
+<p>Selecting multiple experiments simultaneously:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch optimization</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">current_data</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">current_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">5</span>  <span class="c1"># Multiple recommendations</span>
+<span class="p">)</span>
+
+<span class="c1"># Get batch of experiments</span>
+<span class="n">batch_indices</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">]</span>
+<span class="n">batch_experiments</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">batch_indices</span><span class="p">]</span>
+
+<span class="c1"># Conduct experiments in parallel</span>
+<span class="n">batch_results</span> <span class="o">=</span> <span class="n">parallel_experiments</span><span class="p">(</span><span class="n">batch_experiments</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Advantages:</strong></p>
+<ul class="simple">
+<li><p>Faster overall progress</p></li>
+<li><p>Utilizes parallel experimental capabilities</p></li>
+<li><p>Better resource utilization</p></li>
+</ul>
+<p><strong>Disadvantages:</strong></p>
+<ul class="simple">
+<li><p>Less adaptive within batch</p></li>
+<li><p>Higher computational cost</p></li>
+<li><p>Potential redundancy in batch</p></li>
+</ul>
+</section>
+</section>
+<section id="exploration-vs-exploitation-strategies">
+<h2><span class="section-number">7.3. </span>Exploration vs. Exploitation Strategies<a class="headerlink" href="#exploration-vs-exploitation-strategies" title="Link to this heading">#</a></h2>
+<section id="exploration-focused-strategies">
+<h3><span class="section-number">7.3.1. </span>Exploration-Focused Strategies<a class="headerlink" href="#exploration-focused-strategies" title="Link to this heading">#</a></h3>
+<p>When you need to explore the design space thoroughly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High exploration settings</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>  <span class="c1"># Good uncertainty estimates</span>
+    <span class="c1"># Use acquisition functions that favor exploration</span>
+    <span class="n">Dynamic_W</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># Dynamic weighting</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Use when:</strong></p>
+<ul class="simple">
+<li><p>Early stages of optimization</p></li>
+<li><p>Large, unexplored design spaces</p></li>
+<li><p>High uncertainty in measurements</p></li>
+<li><p>Discovery-focused research</p></li>
+</ul>
+</section>
+<section id="exploitation-focused-strategies">
+<h3><span class="section-number">7.3.2. </span>Exploitation-Focused Strategies<a class="headerlink" href="#exploitation-focused-strategies" title="Link to this heading">#</a></h3>
+<p>When you want to refine known good regions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High exploitation settings</span>
+<span class="c1"># Focus virtual space around known good regions</span>
+<span class="n">good_region_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">virtual_samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">best_composition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">&amp;</span> \
+                   <span class="p">(</span><span class="n">virtual_samples</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">best_composition</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">focused_virtual</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">good_region_mask</span><span class="p">]</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">focused_virtual</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">3</span>  <span class="c1"># Multiple points in good region</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Use when:</strong></p>
+<ul class="simple">
+<li><p>Late stages of optimization</p></li>
+<li><p>Well-understood systems</p></li>
+<li><p>Limited experimental budget</p></li>
+<li><p>Optimization-focused research</p></li>
+</ul>
+</section>
+</section>
+<section id="adaptive-strategies">
+<h2><span class="section-number">7.4. </span>Adaptive Strategies<a class="headerlink" href="#adaptive-strategies" title="Link to this heading">#</a></h2>
+<section id="dynamic-virtual-space">
+<h3><span class="section-number">7.4.1. </span>Dynamic Virtual Space<a class="headerlink" href="#dynamic-virtual-space" title="Link to this heading">#</a></h3>
+<p>Adapt the virtual space based on optimization progress:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_virtual_space</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">initial_space</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adapt virtual space based on optimization progress.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
+        <span class="c1"># Early: broad exploration</span>
+        <span class="k">return</span> <span class="n">initial_space</span>
+    <span class="k">elif</span> <span class="n">iteration</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">:</span>
+        <span class="c1"># Middle: focus around promising regions</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">initial_space</span> <span class="o">-</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">close_mask</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">initial_space</span><span class="p">[</span><span class="n">close_mask</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Late: local refinement</span>
+        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">initial_space</span> <span class="o">-</span> <span class="n">best_point</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">close_mask</span> <span class="o">=</span> <span class="n">distances</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">distances</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">initial_space</span><span class="p">[</span><span class="n">close_mask</span><span class="p">]</span>
+
+<span class="c1"># Use in optimization loop</span>
+<span class="k">for</span> <span class="n">iteration</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="n">current_virtual</span> <span class="o">=</span> <span class="n">adaptive_virtual_space</span><span class="p">(</span><span class="n">iteration</span><span class="p">,</span> <span class="n">best_so_far</span><span class="p">,</span> <span class="n">full_virtual_space</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">virtual_samples</span><span class="o">=</span><span class="n">current_virtual</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-stage-optimization">
+<h3><span class="section-number">7.4.2. </span>Multi-Stage Optimization<a class="headerlink" href="#multi-stage-optimization" title="Link to this heading">#</a></h3>
+<p>Different strategies for different phases:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multi_stage_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Multi-stage optimization strategy.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Stage 1: Broad exploration (Random Forest for robustness)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 1: Exploration&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">2</span>
+        <span class="p">)</span>
+        <span class="c1"># Add new points...</span>
+    
+    <span class="c1"># Stage 2: Focused search (Gaussian Process for uncertainty)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 2: Focused Search&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span>
+        <span class="c1"># Add new points...</span>
+    
+    <span class="c1"># Stage 3: Local refinement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stage 3: Local Refinement&quot;</span><span class="p">)</span>
+    <span class="c1"># Focus on best region...</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="model-selection-strategies">
+<h2><span class="section-number">7.5. </span>Model Selection Strategies<a class="headerlink" href="#model-selection-strategies" title="Link to this heading">#</a></h2>
+<section id="ensemble-approaches">
+<h3><span class="section-number">7.5.1. </span>Ensemble Approaches<a class="headerlink" href="#ensemble-approaches" title="Link to this heading">#</a></h3>
+<p>Combine multiple models for robust predictions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">ensemble_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use ensemble of models for robust optimization.&quot;&quot;&quot;</span>
+    
+    <span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;SVR&#39;</span><span class="p">]</span>
+    <span class="n">recommendations</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">opt_num</span><span class="o">=</span><span class="mi">3</span>
+        <span class="p">)</span>
+        <span class="n">recommendations</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">model</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Remove duplicates and select diverse set</span>
+    <span class="n">unique_recommendations</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">recommendations</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">unique_recommendations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>  <span class="c1"># Top 5 diverse recommendations</span>
+</pre></div>
+</div>
+</section>
+<section id="adaptive-model-selection">
+<h3><span class="section-number">7.5.2. </span>Adaptive Model Selection<a class="headerlink" href="#adaptive-model-selection" title="Link to this heading">#</a></h3>
+<p>Choose models based on problem characteristics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adaptive_model_selection</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Select model based on data characteristics.&quot;&quot;&quot;</span>
+    
+    <span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">data_matrix</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">noise_level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">measured_response</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measured_response</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">n_samples</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;GaussianProcess&#39;</span>  <span class="c1"># Good for small data</span>
+    <span class="k">elif</span> <span class="n">n_features</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;RandomForest&#39;</span>    <span class="c1"># Good for high dimensions</span>
+    <span class="k">elif</span> <span class="n">noise_level</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;SVR&#39;</span>            <span class="c1"># Good for noisy data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;GaussianProcess&#39;</span> <span class="c1"># Default choice</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="constraint-handling-strategies">
+<h2><span class="section-number">7.6. </span>Constraint Handling Strategies<a class="headerlink" href="#constraint-handling-strategies" title="Link to this heading">#</a></h2>
+<section id="soft-constraints">
+<h3><span class="section-number">7.6.1. </span>Soft Constraints<a class="headerlink" href="#soft-constraints" title="Link to this heading">#</a></h3>
+<p>Handle constraints through penalty methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_soft_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">constraints</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply soft constraints via penalty method.&quot;&quot;&quot;</span>
+    
+    <span class="n">penalties</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">))</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+        <span class="n">penalty</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="c1"># Composition constraint</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">-</span> <span class="mf">7.0</span><span class="p">)</span>
+        
+        <span class="c1"># Ratio constraint</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># Avoid division by zero</span>
+            <span class="n">ratio</span> <span class="o">=</span> <span class="n">sample</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ratio</span> <span class="o">&lt;</span> <span class="mf">1.5</span> <span class="ow">or</span> <span class="n">ratio</span> <span class="o">&gt;</span> <span class="mf">4.0</span><span class="p">:</span>
+                <span class="n">penalty</span> <span class="o">+=</span> <span class="mi">1000</span> <span class="o">*</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ratio</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">ratio</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">))</span>
+        
+        <span class="n">penalties</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">penalty</span>
+    
+    <span class="k">return</span> <span class="n">penalties</span>
+
+<span class="c1"># Use in optimization</span>
+<span class="n">penalties</span> <span class="o">=</span> <span class="n">apply_soft_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">constraints</span><span class="p">)</span>
+<span class="c1"># Modify acquisition function to include penalties</span>
+</pre></div>
+</div>
+</section>
+<section id="hard-constraints">
+<h3><span class="section-number">7.6.2. </span>Hard Constraints<a class="headerlink" href="#hard-constraints" title="Link to this heading">#</a></h3>
+<p>Filter virtual space to satisfy constraints:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">apply_hard_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Filter virtual samples to satisfy hard constraints.&quot;&quot;&quot;</span>
+    
+    <span class="n">valid_mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">):</span>
+        <span class="c1"># Check all constraints</span>
+        <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">sample</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mf">7.0</span><span class="p">:</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="mf">1.5</span> <span class="o">&lt;=</span> <span class="n">sample</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">sample</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">4.0</span><span class="p">):</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">sample</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.2</span><span class="p">:</span>
+            <span class="n">valid_mask</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    
+    <span class="k">return</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span>
+
+<span class="c1"># Use in optimization</span>
+<span class="n">feasible_virtual</span> <span class="o">=</span> <span class="n">apply_hard_constraints</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">virtual_samples</span><span class="o">=</span><span class="n">feasible_virtual</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="uncertainty-quantification-strategies">
+<h2><span class="section-number">7.7. </span>Uncertainty Quantification Strategies<a class="headerlink" href="#uncertainty-quantification-strategies" title="Link to this heading">#</a></h2>
+<section id="bootstrap-ensemble">
+<h3><span class="section-number">7.7.1. </span>Bootstrap Ensemble<a class="headerlink" href="#bootstrap-ensemble" title="Link to this heading">#</a></h3>
+<p>Use multiple model fits for uncertainty estimation:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bootstrap_uncertainty</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">,</span> <span class="n">n_bootstrap</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Estimate uncertainty using bootstrap ensemble.&quot;&quot;&quot;</span>
+    
+    <span class="n">predictions</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bootstrap</span><span class="p">):</span>
+        <span class="c1"># Bootstrap sample</span>
+        <span class="n">n_samples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">)</span>
+        <span class="n">bootstrap_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="n">bootstrap_data</span> <span class="o">=</span> <span class="n">data_matrix</span><span class="p">[</span><span class="n">bootstrap_indices</span><span class="p">]</span>
+        <span class="n">bootstrap_response</span> <span class="o">=</span> <span class="n">measured_response</span><span class="p">[</span><span class="n">bootstrap_indices</span><span class="p">]</span>
+        
+        <span class="c1"># Fit model</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">bootstrap_data</span><span class="p">,</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">bootstrap_response</span><span class="p">,</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>
+        <span class="p">)</span>
+        
+        <span class="n">predictions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate statistics</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+    <span class="n">mean_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std_pred</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">mean_pred</span><span class="p">,</span> <span class="n">std_pred</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-optimization">
+<h2><span class="section-number">7.8. </span>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">#</a></h2>
+<section id="computational-efficiency">
+<h3><span class="section-number">7.8.1. </span>Computational Efficiency<a class="headerlink" href="#computational-efficiency" title="Link to this heading">#</a></h3>
+<p>Strategies for faster optimization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1. Reduce virtual space size</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">smart_virtual_space_reduction</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">,</span> <span class="n">current_best</span><span class="p">,</span> <span class="n">reduction_factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Intelligently reduce virtual space size.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Calculate distances from current best</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">virtual_samples</span> <span class="o">-</span> <span class="n">current_best</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="c1"># Keep closest points and some random distant points</span>
+    <span class="n">n_keep</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">)</span> <span class="o">*</span> <span class="n">reduction_factor</span><span class="p">)</span>
+    <span class="n">n_close</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_keep</span> <span class="o">*</span> <span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">n_random</span> <span class="o">=</span> <span class="n">n_keep</span> <span class="o">-</span> <span class="n">n_close</span>
+    
+    <span class="c1"># Closest points</span>
+    <span class="n">close_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)[:</span><span class="n">n_close</span><span class="p">]</span>
+    
+    <span class="c1"># Random distant points</span>
+    <span class="n">distant_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distances</span><span class="p">)[</span><span class="n">n_close</span><span class="p">:]</span>
+    <span class="n">random_distant</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">distant_indices</span><span class="p">,</span> <span class="n">n_random</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    
+    <span class="n">selected_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">close_indices</span><span class="p">,</span> <span class="n">random_distant</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">selected_indices</span><span class="p">]</span>
+
+<span class="c1"># 2. Use faster models for initial screening</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">hierarchical_optimization</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Use fast models for screening, then GP for refinement.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Stage 1: Fast screening with Random Forest</span>
+    <span class="n">model_rf</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+        <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">50</span>  <span class="c1"># Get many candidates</span>
+    <span class="p">)</span>
+    
+    <span class="c1"># Stage 2: Refine with Gaussian Process</span>
+    <span class="n">top_candidates</span> <span class="o">=</span> <span class="n">virtual_samples</span><span class="p">[</span><span class="n">model_rf</span><span class="p">[</span><span class="s1">&#39;recommended_indices&#39;</span><span class="p">]]</span>
+    
+    <span class="n">model_gp</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+        <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+        <span class="n">virtual_samples</span><span class="o">=</span><span class="n">top_candidates</span><span class="p">,</span>
+        <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+        <span class="n">opt_num</span><span class="o">=</span><span class="mi">5</span>  <span class="c1"># Final selection</span>
+    <span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">model_gp</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="convergence-monitoring">
+<h2><span class="section-number">7.9. </span>Convergence Monitoring<a class="headerlink" href="#convergence-monitoring" title="Link to this heading">#</a></h2>
+<section id="tracking-optimization-progress">
+<h3><span class="section-number">7.9.1. </span>Tracking Optimization Progress<a class="headerlink" href="#tracking-optimization-progress" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">monitor_convergence</span><span class="p">(</span><span class="n">optimization_history</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Monitor and analyze optimization convergence.&quot;&quot;&quot;</span>
+    
+    <span class="n">best_values</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">improvements</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optimization_history</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">best_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+            <span class="n">improvements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">current_best</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">best_values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">result</span><span class="p">)</span>
+            <span class="n">best_values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_best</span><span class="p">)</span>
+            <span class="n">improvements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_best</span> <span class="o">-</span> <span class="n">best_values</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    
+    <span class="c1"># Check convergence criteria</span>
+    <span class="n">recent_improvements</span> <span class="o">=</span> <span class="n">improvements</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:]</span>  <span class="c1"># Last 5 iterations</span>
+    <span class="n">avg_improvement</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">recent_improvements</span><span class="p">)</span>
+    
+    <span class="n">converged</span> <span class="o">=</span> <span class="n">avg_improvement</span> <span class="o">&lt;</span> <span class="mf">0.01</span>  <span class="c1"># Threshold</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;best_values&#39;</span><span class="p">:</span> <span class="n">best_values</span><span class="p">,</span>
+        <span class="s1">&#39;improvements&#39;</span><span class="p">:</span> <span class="n">improvements</span><span class="p">,</span>
+        <span class="s1">&#39;converged&#39;</span><span class="p">:</span> <span class="n">converged</span><span class="p">,</span>
+        <span class="s1">&#39;avg_recent_improvement&#39;</span><span class="p">:</span> <span class="n">avg_improvement</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="best-practices-summary">
+<h2><span class="section-number">7.10. </span>Best Practices Summary<a class="headerlink" href="#best-practices-summary" title="Link to this heading">#</a></h2>
+<section id="data-quality">
+<h3><span class="section-number">7.10.1. </span>Data Quality<a class="headerlink" href="#data-quality" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Sufficient Data</strong>: &gt;10 samples per feature</p></li>
+<li><p><strong>Representative Sampling</strong>: Cover design space well</p></li>
+<li><p><strong>Quality Control</strong>: Remove outliers and errors</p></li>
+<li><p><strong>Validation</strong>: Use cross-validation</p></li>
+</ol>
+</section>
+<section id="model-selection">
+<h3><span class="section-number">7.10.2. </span>Model Selection<a class="headerlink" href="#model-selection" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Start Simple</strong>: Begin with Gaussian Process</p></li>
+<li><p><strong>Consider Data Size</strong>: RF for large data, GP for small</p></li>
+<li><p><strong>Handle Noise</strong>: SVR for noisy data</p></li>
+<li><p><strong>Validate Performance</strong>: Compare multiple models</p></li>
+</ol>
+</section>
+<section id="optimization-strategy">
+<h3><span class="section-number">7.10.3. </span>Optimization Strategy<a class="headerlink" href="#optimization-strategy" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Multi-Stage Approach</strong>: Exploration → Focused → Refinement</p></li>
+<li><p><strong>Adaptive Virtual Space</strong>: Adjust based on progress</p></li>
+<li><p><strong>Constraint Handling</strong>: Choose hard vs. soft constraints</p></li>
+<li><p><strong>Uncertainty Quantification</strong>: Use bootstrap or GP uncertainty</p></li>
+</ol>
+</section>
+<section id="id1">
+<h3><span class="section-number">7.10.4. </span>Computational Efficiency<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Smart Virtual Space</strong>: Reduce size intelligently</p></li>
+<li><p><strong>Hierarchical Models</strong>: Fast screening + accurate refinement</p></li>
+<li><p><strong>Parallel Experiments</strong>: Use batch optimization</p></li>
+<li><p><strong>Monitor Convergence</strong>: Stop when converged</p></li>
+</ol>
+</section>
+</section>
+<section id="troubleshooting-common-issues">
+<h2><span class="section-number">7.11. </span>Troubleshooting Common Issues<a class="headerlink" href="#troubleshooting-common-issues" title="Link to this heading">#</a></h2>
+<section id="poor-convergence">
+<h3><span class="section-number">7.11.1. </span>Poor Convergence<a class="headerlink" href="#poor-convergence" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Increase exploration in early stages</p></li>
+<li><p>Check data quality and preprocessing</p></li>
+<li><p>Try different surrogate models</p></li>
+<li><p>Expand virtual space</p></li>
+</ul>
+</section>
+<section id="slow-performance">
+<h3><span class="section-number">7.11.2. </span>Slow Performance<a class="headerlink" href="#slow-performance" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Reduce virtual space size</p></li>
+<li><p>Use simpler models (RandomForest)</p></li>
+<li><p>Implement hierarchical optimization</p></li>
+<li><p>Parallelize computations</p></li>
+</ul>
+</section>
+<section id="constraint-violations">
+<h3><span class="section-number">7.11.3. </span>Constraint Violations<a class="headerlink" href="#constraint-violations" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Use hard constraints for critical limits</p></li>
+<li><p>Implement soft constraints for preferences</p></li>
+<li><p>Validate constraint definitions</p></li>
+<li><p>Check feasible region size</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2><span class="section-number">7.12. </span>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Practice with examples</strong>: <a class="reference internal" href="examples/single_objective.html"><span class="doc">Single-Objective Optimization Examples</span></a></p></li>
+<li><p><strong>Learn multi-objective strategies</strong>: <a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a></p></li>
+<li><p><strong>Explore advanced applications</strong>: <a class="reference internal" href="materials_discovery.html"><span class="doc">Materials Discovery with Bgolearn</span></a></p></li>
+<li><p><strong>Try batch optimization</strong>: <span class="xref std std-doc">batch_optimization</span></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="surrogate_models.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Surrogate Models in Bgolearn</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="multibgolearn.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>MultiBgolearn: Multi-Objective Bayesian Global Optimization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">7.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-vs-batch-optimization">7.2. Sequential vs. Batch Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-optimization">7.2.1. Sequential Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization">7.2.2. Batch Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-vs-exploitation-strategies">7.3. Exploration vs. Exploitation Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploration-focused-strategies">7.3.1. Exploration-Focused Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploitation-focused-strategies">7.3.2. Exploitation-Focused Strategies</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-strategies">7.4. Adaptive Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-virtual-space">7.4.1. Dynamic Virtual Space</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-stage-optimization">7.4.2. Multi-Stage Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection-strategies">7.5. Model Selection Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-approaches">7.5.1. Ensemble Approaches</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adaptive-model-selection">7.5.2. Adaptive Model Selection</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-handling-strategies">7.6. Constraint Handling Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#soft-constraints">7.6.1. Soft Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hard-constraints">7.6.2. Hard Constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-quantification-strategies">7.7. Uncertainty Quantification Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bootstrap-ensemble">7.7.1. Bootstrap Ensemble</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">7.8. Performance Optimization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-efficiency">7.8.1. Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-monitoring">7.9. Convergence Monitoring</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tracking-optimization-progress">7.9.1. Tracking Optimization Progress</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-summary">7.10. Best Practices Summary</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality">7.10.1. Data Quality</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">7.10.2. Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-strategy">7.10.3. Optimization Strategy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7.10.4. Computational Efficiency</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting-common-issues">7.11. Troubleshooting Common Issues</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-convergence">7.11.1. Poor Convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slow-performance">7.11.2. Slow Performance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constraint-violations">7.11.3. Constraint Violations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">7.12. Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

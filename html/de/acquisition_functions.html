@@ -1,0 +1,1702 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Acquisition Functions Guide &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'de/acquisition_functions';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/de/acquisition_functions.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fde/acquisition_functions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/de/acquisition_functions.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Acquisition Functions Guide</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-acquisition-functions">Available Acquisition Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-improvement-ei">Expected Improvement (EI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-expected-improvement">Logarithmic Expected Improvement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-improvement-with-plugin">Expected Improvement with Plugin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-poi">Probability of Improvement (PoI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#augmented-expected-improvement-aei">Augmented Expected Improvement (AEI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-quantile-improvement-eqi">Expected Quantile Improvement (EQI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinterpolation-expected-improvement-rei">Reinterpolation Expected Improvement (REI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-entropy-search-pes">Predictive Entropy Search (PES)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-gradient-kg">Knowledge Gradient (KG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-optimization-strategy">Sequential Optimization Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-1-complete-acquisition-functions-in-bgolearn">Table 2.1: Complete Acquisition Functions in Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-categories">Function Categories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#improvement-based-functions"><strong>Improvement-Based Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-based-functions"><strong>Confidence-Based Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theoretic-functions"><strong>Information-Theoretic Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-functions"><strong>Sampling-Based Functions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-2-parameter-details-and-default-values">Table 2.2: Parameter Details and Default Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-3-exploration-vs-exploitation-characteristics">Table 2.3: Exploration vs Exploitation Characteristics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-selection-guide">Quick Selection Guide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-4-complete-usage-examples">Table 2.4: Complete Usage Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-acquisition-functions">Comparing Acquisition Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-acquisition-functions">Visualizing Acquisition Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-acquisition-function">Choosing the Right Acquisition Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-characteristics">Performance Characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-tips">Advanced Tips</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-acquisition-functions">Custom Acquisition Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="acquisition-functions-guide">
+<h1>Acquisition Functions Guide<a class="headerlink" href="#acquisition-functions-guide" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Diese Seite ist die deutsche Version des Bgolearn-Handbuchs.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Acquisition functions are the heart of Bayesian optimization. They determine where to sample next by balancing <strong>exploration</strong> (sampling in uncertain regions) and <strong>exploitation</strong> (sampling near current best points).</p>
+</section>
+<section id="available-acquisition-functions">
+<h2>Available Acquisition Functions<a class="headerlink" href="#available-acquisition-functions" title="Link to this heading">#</a></h2>
+<section id="expected-improvement-ei">
+<h3>Expected Improvement (EI)<a class="headerlink" href="#expected-improvement-ei" title="Link to this heading">#</a></h3>
+<p>The most popular acquisition function that balances exploration and exploitation naturally.</p>
+<p><strong>Mathematical Formula:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="p">(</span><span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="o">*</span><span class="p">)</span> <span class="o">*</span> <span class="n">Φ</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span> <span class="o">+</span> <span class="n">σ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">φ</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
+<span class="n">where</span> <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="o">*</span><span class="p">)</span> <span class="o">/</span> <span class="n">σ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Usage:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create sample data</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_test_function</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a test optimization problem.&quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Negative quadratic with noise</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">]),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Generate candidates</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_candidates</span><span class="p">():</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+    <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">)</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">X1</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">X2</span><span class="o">.</span><span class="n">ravel</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">])</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">create_test_function</span><span class="p">()</span>
+<span class="n">X_candidates</span> <span class="o">=</span> <span class="n">create_candidates</span><span class="p">()</span>
+
+<span class="c1"># Initialize and fit</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">,</span> <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Expected Improvement</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">next_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EI selected point: </span><span class="si">{</span><span class="n">next_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EI values range: [</span><span class="si">{</span><span class="n">ei_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ei_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+<span class="c1"># Expected Improvement with custom baseline</span>
+<span class="n">ei_values_custom</span><span class="p">,</span> <span class="n">next_point_custom</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">(</span><span class="n">T</span><span class="o">=-</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># Custom threshold</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EI with custom baseline: </span><span class="si">{</span><span class="n">next_point_custom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>General-purpose optimization</p></li>
+<li><p>Balanced exploration-exploitation</p></li>
+<li><p>Most research applications</p></li>
+</ul>
+</section>
+<section id="logarithmic-expected-improvement">
+<h3>Logarithmic Expected Improvement<a class="headerlink" href="#logarithmic-expected-improvement" title="Link to this heading">#</a></h3>
+<p>Applies a logarithmic transform to the EI values to amplify subtle differences.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># logarithmic Expected Improvement </span>
+<span class="n">eilog_values</span><span class="p">,</span> <span class="n">next_point_eilog</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI_log</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logarithmic EI selected point: </span><span class="si">{</span><span class="n">next_point_eilog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare with standard EI</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard EI point: </span><span class="si">{</span><span class="n">next_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Logarithmic EI point: </span><span class="si">{</span><span class="n">next_point_eilog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="expected-improvement-with-plugin">
+<h3>Expected Improvement with Plugin<a class="headerlink" href="#expected-improvement-with-plugin" title="Link to this heading">#</a></h3>
+<p>Uses the model’s prediction on training data as the baseline instead of the actual best observed value.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Expected Improvement with Plugin</span>
+<span class="n">eip_values</span><span class="p">,</span> <span class="n">next_point_eip</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI_plugin</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;EI Plugin selected point: </span><span class="si">{</span><span class="n">next_point_eip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare with standard EI</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Standard EI point: </span><span class="si">{</span><span class="n">next_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Plugin EI point: </span><span class="si">{</span><span class="n">next_point_eip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>When training data has noise</p></li>
+<li><p>Model predictions are more reliable than observations</p></li>
+</ul>
+</section>
+<section id="upper-confidence-bound-ucb">
+<h3>Upper Confidence Bound (UCB)<a class="headerlink" href="#upper-confidence-bound-ucb" title="Link to this heading">#</a></h3>
+<p>Optimistic approach that selects points with high predicted mean plus uncertainty.</p>
+<p><strong>Mathematical Formula:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UCB</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="n">σ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upper Confidence Bound with different exploration parameters</span>
+<span class="n">ucb_conservative</span><span class="p">,</span> <span class="n">point_conservative</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Conservative</span>
+<span class="n">ucb_balanced</span><span class="p">,</span> <span class="n">point_balanced</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># Balanced (default)</span>
+<span class="n">ucb_exploratory</span><span class="p">,</span> <span class="n">point_exploratory</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>  <span class="c1"># Exploratory</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UCB Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conservative (α=1.0): </span><span class="si">{</span><span class="n">point_conservative</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Balanced (α=2.0): </span><span class="si">{</span><span class="n">point_balanced</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exploratory (α=3.0): </span><span class="si">{</span><span class="n">point_exploratory</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Visualize the effect of alpha</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Conservative&#39;</span><span class="p">,</span> <span class="s1">&#39;Balanced&#39;</span><span class="p">,</span> <span class="s1">&#39;Exploratory&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">alpha</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">alphas</span><span class="p">,</span> <span class="n">titles</span><span class="p">)):</span>
+    <span class="n">ucb_vals</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    
+    <span class="c1"># Reshape for 2D plot (assuming square grid)</span>
+    <span class="n">grid_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ucb_vals</span><span class="p">)))</span>
+    <span class="n">ucb_grid</span> <span class="o">=</span> <span class="n">ucb_vals</span><span class="p">[:</span><span class="n">grid_size</span><span class="o">**</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">grid_size</span><span class="p">,</span> <span class="n">grid_size</span><span class="p">)</span>
+    
+    <span class="n">im</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ucb_grid</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1"> (α=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x1&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;x2&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>Noisy functions</p></li>
+<li><p>When you want to control exploration explicitly</p></li>
+<li><p>Multi-armed bandit problems</p></li>
+</ul>
+</section>
+<section id="probability-of-improvement-poi">
+<h3>Probability of Improvement (PoI)<a class="headerlink" href="#probability-of-improvement-poi" title="Link to this heading">#</a></h3>
+<p>Selects points with highest probability of improving over current best.</p>
+<p><strong>Mathematical Formula:</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PoI</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">=</span> <span class="n">Φ</span><span class="p">((</span><span class="n">μ</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">f</span><span class="o">*</span> <span class="o">-</span> <span class="n">τ</span><span class="p">)</span> <span class="o">/</span> <span class="n">σ</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Probability of Improvement with different thresholds</span>
+<span class="n">poi_strict</span><span class="p">,</span> <span class="n">point_strict</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>  <span class="c1"># Strict improvement</span>
+<span class="n">poi_relaxed</span><span class="p">,</span> <span class="n">point_relaxed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>  <span class="c1"># Allow small degradation</span>
+<span class="n">poi_very_relaxed</span><span class="p">,</span> <span class="n">point_very_relaxed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Very relaxed</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PoI Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Strict (τ=0.0): </span><span class="si">{</span><span class="n">point_strict</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Relaxed (τ=0.1): </span><span class="si">{</span><span class="n">point_relaxed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Very Relaxed (τ=0.5): </span><span class="si">{</span><span class="n">point_very_relaxed</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Custom baseline</span>
+<span class="n">poi_custom</span><span class="p">,</span> <span class="n">point_custom</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">T</span><span class="o">=-</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom baseline (T=-1.5): </span><span class="si">{</span><span class="n">point_custom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>When any improvement is valuable</p></li>
+<li><p>Risk-averse optimization</p></li>
+<li><p>Proof-of-concept studies</p></li>
+</ul>
+</section>
+<section id="augmented-expected-improvement-aei">
+<h3>Augmented Expected Improvement (AEI)<a class="headerlink" href="#augmented-expected-improvement-aei" title="Link to this heading">#</a></h3>
+<p>Enhanced version of EI that accounts for noise and uses a more sophisticated baseline.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Augmented Expected Improvement</span>
+<span class="n">aei_default</span><span class="p">,</span> <span class="n">point_aei_default</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Augmented_EI</span><span class="p">()</span>
+<span class="n">aei_custom</span><span class="p">,</span> <span class="n">point_aei_custom</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Augmented_EI</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">tao</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AEI Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Default parameters: </span><span class="si">{</span><span class="n">point_aei_default</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Custom (α=1.5, τ=0.1): </span><span class="si">{</span><span class="n">point_aei_custom</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Parameters:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: Trade-off coefficient for baseline selection</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tao</span></code>: Noise standard deviation</p></li>
+</ul>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>Noisy experimental data</p></li>
+<li><p>When you want more sophisticated baseline selection</p></li>
+</ul>
+</section>
+<section id="expected-quantile-improvement-eqi">
+<h3>Expected Quantile Improvement (EQI)<a class="headerlink" href="#expected-quantile-improvement-eqi" title="Link to this heading">#</a></h3>
+<p>Uses quantiles instead of mean for more robust optimization.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Expected Quantile Improvement</span>
+<span class="n">eqi_median</span><span class="p">,</span> <span class="n">point_eqi_median</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EQI</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Median</span>
+<span class="n">eqi_conservative</span><span class="p">,</span> <span class="n">point_eqi_conservative</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EQI</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>  <span class="c1"># 25th percentile</span>
+<span class="n">eqi_optimistic</span><span class="p">,</span> <span class="n">point_eqi_optimistic</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EQI</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>  <span class="c1"># 75th percentile</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EQI Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Median (β=0.5): </span><span class="si">{</span><span class="n">point_eqi_median</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conservative (β=0.25): </span><span class="si">{</span><span class="n">point_eqi_conservative</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Optimistic (β=0.75): </span><span class="si">{</span><span class="n">point_eqi_optimistic</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>Robust optimization</p></li>
+<li><p>When you want to optimize specific quantiles</p></li>
+<li><p>Risk management scenarios</p></li>
+</ul>
+</section>
+<section id="reinterpolation-expected-improvement-rei">
+<h3>Reinterpolation Expected Improvement (REI)<a class="headerlink" href="#reinterpolation-expected-improvement-rei" title="Link to this heading">#</a></h3>
+<p>Uses reinterpolated values for baseline calculation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reinterpolation Expected Improvement</span>
+<span class="n">rei_values</span><span class="p">,</span> <span class="n">point_rei</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Reinterpolation_EI</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;REI selected point: </span><span class="si">{</span><span class="n">point_rei</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>When model predictions on training data are unreliable</p></li>
+<li><p>Iterative refinement scenarios</p></li>
+</ul>
+</section>
+<section id="predictive-entropy-search-pes">
+<h3>Predictive Entropy Search (PES)<a class="headerlink" href="#predictive-entropy-search-pes" title="Link to this heading">#</a></h3>
+<p>Information-theoretic approach that maximizes information gain about the optimum.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Predictive Entropy Search</span>
+<span class="n">pes_default</span><span class="p">,</span> <span class="n">point_pes_default</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PES</span><span class="p">()</span>  <span class="c1"># Default 100 samples</span>
+<span class="n">pes_high_precision</span><span class="p">,</span> <span class="n">point_pes_high</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PES</span><span class="p">(</span><span class="n">sam_num</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>  <span class="c1"># Higher precision</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PES Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Default (100 samples): </span><span class="si">{</span><span class="n">point_pes_default</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;High precision (500 samples): </span><span class="si">{</span><span class="n">point_pes_high</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>Information-theoretic optimization</p></li>
+<li><p>When you want to maximize learning about the optimum</p></li>
+<li><p>Academic research</p></li>
+</ul>
+</section>
+<section id="knowledge-gradient-kg">
+<h3>Knowledge Gradient (KG)<a class="headerlink" href="#knowledge-gradient-kg" title="Link to this heading">#</a></h3>
+<p>Estimates the value of information from each potential measurement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Knowledge Gradient</span>
+<span class="n">kg_fast</span><span class="p">,</span> <span class="n">point_kg_fast</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Knowledge_G</span><span class="p">(</span><span class="n">MC_num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Fast approximation</span>
+<span class="n">kg_accurate</span><span class="p">,</span> <span class="n">point_kg_accurate</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Knowledge_G</span><span class="p">(</span><span class="n">MC_num</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># More accurate</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KG Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fast (1 MC sample): </span><span class="si">{</span><span class="n">point_kg_fast</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Accurate (5 MC samples): </span><span class="si">{</span><span class="n">point_kg_accurate</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Parallel version (if supported)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">kg_parallel</span><span class="p">,</span> <span class="n">point_kg_parallel</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Knowledge_G</span><span class="p">(</span><span class="n">MC_num</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">Proc_num</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parallel (2 processes): </span><span class="si">{</span><span class="n">point_kg_parallel</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Parallel processing not available on this system&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>When measurement cost varies</p></li>
+<li><p>Portfolio optimization</p></li>
+<li><p>Multi-fidelity optimization</p></li>
+</ul>
+<!-- 
+### Thompson Sampling
+
+Probabilistic approach that samples from the posterior distribution.
+
+```python
+# Thompson Sampling
+ts_point, ts_value, ts_uncertainty = model.Thompson_sampling()
+
+print("Thompson Sampling Results:")
+print(f"Selected point: {ts_point}")
+print(f"Sampled value: {ts_value:.4f}")
+print(f"Uncertainty: {ts_uncertainty:.4f}")
+
+# Multiple Thompson samples
+print("\nMultiple Thompson samples:")
+for i in range(5):
+    point, value, uncertainty = model.Thompson_sampling()
+    print(f"Sample {i+1}: point={point}, value={value:.4f}")
+``` -->
+<p><strong>When to use:</strong></p>
+<ul class="simple">
+<li><p>Exploration-heavy scenarios</p></li>
+<li><p>Multi-armed bandit problems</p></li>
+<li><p>When you want diverse sampling strategies</p></li>
+</ul>
+</section>
+</section>
+<section id="sequential-optimization-strategy">
+<h2>Sequential Optimization Strategy<a class="headerlink" href="#sequential-optimization-strategy" title="Link to this heading">#</a></h2>
+<p>For multiple experiments, use sequential optimization by updating the model:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Sequential optimization example</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sequential_optimization</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform sequential optimization.&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_iterations</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Iteration </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> ===&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get recommendation using EI</span>
+        <span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+        <span class="n">next_point</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended point: </span><span class="si">{</span><span class="n">next_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Simulate experiment (replace with actual experiment)</span>
+        <span class="c1"># For demo, we&#39;ll use the true function</span>
+        <span class="n">simulated_result</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">next_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">next_point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">()</span>
+
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;iteration&#39;</span><span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+            <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">next_point</span><span class="p">,</span>
+            <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">simulated_result</span>
+        <span class="p">})</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Experimental result: </span><span class="si">{</span><span class="n">simulated_result</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># In practice, you would retrain the model with new data here</span>
+        <span class="c1"># model = retrain_with_new_data(model, next_point, simulated_result)</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># Run sequential optimization</span>
+<span class="n">optimization_results</span> <span class="o">=</span> <span class="n">sequential_optimization</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">n_iterations</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="table-2-1-complete-acquisition-functions-in-bgolearn">
+<h2>Table 2.1: Complete Acquisition Functions in Bgolearn<a class="headerlink" href="#table-2-1-complete-acquisition-functions-in-bgolearn" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No.</p></th>
+<th class="head"><p>Function Name</p></th>
+<th class="head"><p>Method Call</p></th>
+<th class="head"><p>Parameters</p></th>
+<th class="head"><p>Return Format</p></th>
+<th class="head"><p>Mathematical Basis</p></th>
+<th class="head"><p>Primary Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><strong>Expected Improvement</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.EI(T=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>: baseline threshold (float, optional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>EI(x) = (μ(x) - f*) × Φ(Z) + σ(x) × φ(Z)</p></td>
+<td><p>General-purpose optimization</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><strong>Logarithmic Expected Improvement</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.EI_log(T=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code>: baseline threshold (float, optional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>EI_log(x) = log[(μ(x) - f*) × Φ(Z) + σ(x) × φ(Z)]</p></td>
+<td><p>General-purpose optimization</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><strong>EI with Plugin</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.EI_plugin()</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>EI with model prediction baseline</p></td>
+<td><p>Noisy experimental data</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><strong>Augmented Expected Improvement</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.Augmented_EI(alpha=1,</span> <span class="pre">tao=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: trade-off coefficient (float)<br><code class="docutils literal notranslate"><span class="pre">tao</span></code>: noise std (float)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>Enhanced EI with noise consideration</p></td>
+<td><p>Noisy optimization problems</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p><strong>Expected Quantile Improvement</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.EQI(beta=0.5,</span> <span class="pre">tao_new=0)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">beta</span></code>: quantile level (0-1)<br><code class="docutils literal notranslate"><span class="pre">tao_new</span></code>: noise std (float)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>Quantile-based improvement</p></td>
+<td><p>Robust optimization</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p><strong>Reinterpolation EI</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.Reinterpolation_EI()</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>EI with reinterpolated baseline</p></td>
+<td><p>Model refinement scenarios</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p><strong>Upper Confidence Bound</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.UCB(alpha=1)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: exploration weight (float)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>UCB(x) = μ(x) ± α × σ(x)</p></td>
+<td><p>High exploration needs</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p><strong>Probability of Improvement</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.PoI(tao=0,</span> <span class="pre">T=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tao</span></code>: improvement threshold (float)<br><code class="docutils literal notranslate"><span class="pre">T</span></code>: baseline (float, optional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>PoI(x) = Φ((μ(x) - f* - τ) / σ(x))</p></td>
+<td><p>Risk-averse optimization</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p><strong>Predictive Entropy Search</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.PES(sam_num=500)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sam_num</span></code>: Monte Carlo samples (int)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>Information-theoretic approach</p></td>
+<td><p>Maximum information gain</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p><strong>Knowledge Gradient</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.Knowledge_G(MC_num=1,</span> <span class="pre">Proc_num=None)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MC_num</span></code>: MC simulations (1-10)<br><code class="docutils literal notranslate"><span class="pre">Proc_num</span></code>: processors (int, optional)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(values,</span> <span class="pre">points)</span></code></p></td>
+<td><p>Value of information estimation</p></td>
+<td><p>Multi-fidelity optimization</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p><strong>Thompson Sampling</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">model.Thompson_sampling()</span></code></p></td>
+<td><p>None</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">(point,</span> <span class="pre">value,</span> <span class="pre">uncertainty)</span></code></p></td>
+<td><p>Posterior sampling</p></td>
+<td><p>Diverse exploration strategies</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="function-categories">
+<h3>Function Categories<a class="headerlink" href="#function-categories" title="Link to this heading">#</a></h3>
+<section id="improvement-based-functions">
+<h4><strong>Improvement-Based Functions</strong><a class="headerlink" href="#improvement-based-functions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>EI, EI_log, EI_plugin, Augmented_EI, EQI, Reinterpolation_EI</strong>: Focus on expected improvement over current best</p></li>
+<li><p><strong>Mathematical Foundation</strong>: Based on improvement probability and magnitude</p></li>
+<li><p><strong>Best For</strong>: General optimization, noisy data, robust optimization</p></li>
+</ul>
+</section>
+<section id="confidence-based-functions">
+<h4><strong>Confidence-Based Functions</strong><a class="headerlink" href="#confidence-based-functions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>UCB, PoI</strong>: Based on confidence bounds and improvement probability</p></li>
+<li><p><strong>Mathematical Foundation</strong>: Statistical confidence intervals</p></li>
+<li><p><strong>Best For</strong>: Exploration control, risk management</p></li>
+</ul>
+</section>
+<section id="information-theoretic-functions">
+<h4><strong>Information-Theoretic Functions</strong><a class="headerlink" href="#information-theoretic-functions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>PES, Knowledge_G</strong>: Maximize information gain about the optimum</p></li>
+<li><p><strong>Mathematical Foundation</strong>: Entropy and information theory</p></li>
+<li><p><strong>Best For</strong>: Learning about the function, multi-fidelity problems</p></li>
+</ul>
+</section>
+<section id="sampling-based-functions">
+<h4><strong>Sampling-Based Functions</strong><a class="headerlink" href="#sampling-based-functions" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>Thompson_sampling</strong>: Probabilistic sampling from posterior</p></li>
+<li><p><strong>Mathematical Foundation</strong>: Bayesian posterior sampling</p></li>
+<li><p><strong>Best For</strong>: Diverse exploration, multi-armed bandits</p></li>
+</ul>
+</section>
+</section>
+<section id="table-2-2-parameter-details-and-default-values">
+<h3>Table 2.2: Parameter Details and Default Values<a class="headerlink" href="#table-2-2-parameter-details-and-default-values" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Parameter</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Range/Options</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>EI</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Any float or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Baseline threshold for improvement</p></td>
+<td><p>Lower T → more exploration</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>EI_log</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Any float or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Baseline threshold for improvement</p></td>
+<td><p>Lower T → more exploration</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Augmented_EI</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>&gt; 0</p></td>
+<td><p>Trade-off coefficient</p></td>
+<td><p>Higher α → more conservative baseline</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tao</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>≥ 0</p></td>
+<td><p>Noise standard deviation</p></td>
+<td><p>Higher τ → accounts for more noise</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>EQI</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">beta</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></td>
+<td><p>[0, 1]</p></td>
+<td><p>Quantile level (0.5 = median)</p></td>
+<td><p>Lower β → more conservative</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tao_new</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>≥ 0</p></td>
+<td><p>Noise standard deviation</p></td>
+<td><p>Higher τ → more robust</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>UCB</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>&gt; 0</p></td>
+<td><p>Exploration weight</p></td>
+<td><p>Higher α → more exploration</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PoI</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tao</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>≥ 0</p></td>
+<td><p>Improvement threshold</p></td>
+<td><p>Higher τ → easier to satisfy</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code></p></td>
+<td><p>float</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Any float or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Baseline threshold</p></td>
+<td><p>Custom baseline override</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PES</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sam_num</span></code></p></td>
+<td><p>int</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">500</span></code></p></td>
+<td><p>&gt; 0</p></td>
+<td><p>Monte Carlo samples</p></td>
+<td><p>Higher → more accurate, slower</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Knowledge_G</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MC_num</span></code></p></td>
+<td><p>int</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>1-10</p></td>
+<td><p>Monte Carlo simulations</p></td>
+<td><p>Higher → more accurate, slower</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Proc_num</span></code></p></td>
+<td><p>int</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>&gt; 0 or <code class="docutils literal notranslate"><span class="pre">None</span></code></p></td>
+<td><p>Number of processors</p></td>
+<td><p>Parallel processing control</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="table-2-3-exploration-vs-exploitation-characteristics">
+<h3>Table 2.3: Exploration vs Exploitation Characteristics<a class="headerlink" href="#table-2-3-exploration-vs-exploitation-characteristics" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Exploration Level</p></th>
+<th class="head"><p>Exploitation Level</p></th>
+<th class="head"><p>Balance Type</p></th>
+<th class="head"><p>Tuning Parameter</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>EI</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> (baseline)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>EI_log</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">T</span></code> (baseline)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>EI_plugin</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Augmented_EI</strong></p></td>
+<td><p>Medium-High</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced+</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">tao</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>EQI</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>Medium-High</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">beta</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reinterpolation_EI</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p>None</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>UCB</strong></p></td>
+<td><p><strong>High</strong></p></td>
+<td><p>Low-Medium</p></td>
+<td><p><strong>Exploration-heavy</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>PoI</strong></p></td>
+<td><p>Low</p></td>
+<td><p><strong>High</strong></p></td>
+<td><p><strong>Exploitation-heavy</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tao</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>PES</strong></p></td>
+<td><p><strong>High</strong></p></td>
+<td><p>Low</p></td>
+<td><p><strong>Exploration-heavy</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">sam_num</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Knowledge_G</strong></p></td>
+<td><p>Medium-High</p></td>
+<td><p>Medium</p></td>
+<td><p><strong>Balanced</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">MC_num</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Thompson_sampling</strong></p></td>
+<td><p><strong>High</strong></p></td>
+<td><p>Low</p></td>
+<td><p><strong>Exploration-heavy</strong></p></td>
+<td><p>None</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="quick-selection-guide">
+<h3>Quick Selection Guide<a class="headerlink" href="#quick-selection-guide" title="Link to this heading">#</a></h3>
+<p><strong>For beginners</strong>: Start with <strong>Expected Improvement (EI)</strong> - it’s the most widely used and well-understood.</p>
+<p><strong>For noisy data</strong>: Use <strong>Augmented EI</strong> or <strong>UCB</strong> with appropriate parameters.</p>
+<p><strong>For risk-averse optimization</strong>: Use <strong>Probability of Improvement (PoI)</strong>.</p>
+<p><strong>For maximum exploration</strong>: Use <strong>UCB</strong> with high alpha or <strong>Thompson Sampling</strong>.</p>
+<p><strong>For information-theoretic approaches</strong>: Use <strong>PES</strong> or <strong>Knowledge Gradient</strong>.</p>
+<p><strong>For robust optimization</strong>: Use <strong>Expected Quantile Improvement (EQI)</strong>.</p>
+</section>
+</section>
+<section id="table-2-4-complete-usage-examples">
+<h2>Table 2.4: Complete Usage Examples<a class="headerlink" href="#table-2-4-complete-usage-examples" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Complete demonstration of all acquisition functions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create sample optimization problem</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">demonstrate_all_acquisition_functions</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Demonstrate all 10 acquisition functions in Bgolearn.&quot;&quot;&quot;</span>
+
+    <span class="c1"># Setup data</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">X_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">])</span>
+    <span class="n">y_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">X_train</span><span class="p">[</span><span class="s1">&#39;x2&#39;</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+    <span class="n">X_candidates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x1&#39;</span><span class="p">,</span> <span class="s1">&#39;x2&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Fit model</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">,</span> <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All Bgolearn Acquisition Functions Demo&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+    <span class="c1"># 1. Expected Improvement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">1. Expected Improvement (EI)&quot;</span><span class="p">)</span>
+    <span class="n">ei_values</span><span class="p">,</span> <span class="n">ei_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">ei_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   EI range: [</span><span class="si">{</span><span class="n">ei_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ei_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 2. EI with Plugin</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Expected Improvement with Plugin&quot;</span><span class="p">)</span>
+    <span class="n">eip_values</span><span class="p">,</span> <span class="n">eip_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI_plugin</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">eip_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   EI Plugin range: [</span><span class="si">{</span><span class="n">eip_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">eip_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 3. Augmented EI</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Augmented Expected Improvement&quot;</span><span class="p">)</span>
+    <span class="n">aei_values</span><span class="p">,</span> <span class="n">aei_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Augmented_EI</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">tao</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">aei_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   AEI range: [</span><span class="si">{</span><span class="n">aei_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">aei_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 4. Expected Quantile Improvement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">4. Expected Quantile Improvement&quot;</span><span class="p">)</span>
+    <span class="n">eqi_values</span><span class="p">,</span> <span class="n">eqi_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EQI</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">tao_new</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">eqi_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   EQI range: [</span><span class="si">{</span><span class="n">eqi_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">eqi_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 5. Reinterpolation EI</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">5. Reinterpolation Expected Improvement&quot;</span><span class="p">)</span>
+    <span class="n">rei_values</span><span class="p">,</span> <span class="n">rei_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Reinterpolation_EI</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">rei_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   REI range: [</span><span class="si">{</span><span class="n">rei_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">rei_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 6. Upper Confidence Bound</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">6. Upper Confidence Bound&quot;</span><span class="p">)</span>
+    <span class="n">ucb_values</span><span class="p">,</span> <span class="n">ucb_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">ucb_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   UCB range: [</span><span class="si">{</span><span class="n">ucb_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ucb_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 7. Probability of Improvement</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">7. Probability of Improvement&quot;</span><span class="p">)</span>
+    <span class="n">poi_values</span><span class="p">,</span> <span class="n">poi_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">poi_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   PoI range: [</span><span class="si">{</span><span class="n">poi_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">poi_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 8. Predictive Entropy Search</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">8. Predictive Entropy Search&quot;</span><span class="p">)</span>
+    <span class="n">pes_values</span><span class="p">,</span> <span class="n">pes_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PES</span><span class="p">(</span><span class="n">sam_num</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">pes_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   PES range: [</span><span class="si">{</span><span class="n">pes_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">pes_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 9. Knowledge Gradient</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">9. Knowledge Gradient&quot;</span><span class="p">)</span>
+    <span class="n">kg_values</span><span class="p">,</span> <span class="n">kg_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Knowledge_G</span><span class="p">(</span><span class="n">MC_num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">kg_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   KG range: [</span><span class="si">{</span><span class="n">kg_values</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">kg_values</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+    <span class="c1"># 10. Thompson Sampling (different return format)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">10. Thompson Sampling&quot;</span><span class="p">)</span>
+    <span class="n">ts_point</span><span class="p">,</span> <span class="n">ts_value</span><span class="p">,</span> <span class="n">ts_uncertainty</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">Thompson_sampling</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Selected point: </span><span class="si">{</span><span class="n">ts_point</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Sampled value: </span><span class="si">{</span><span class="n">ts_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Uncertainty: </span><span class="si">{</span><span class="n">ts_uncertainty</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All 10 acquisition functions demonstrated successfully!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Run the demonstration</span>
+<span class="n">demonstrate_all_acquisition_functions</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="comparing-acquisition-functions">
+<h2>Comparing Acquisition Functions<a class="headerlink" href="#comparing-acquisition-functions" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare all acquisition functions</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compare_acquisition_functions</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compare different acquisition functions.&quot;&quot;&quot;</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Standard acquisition functions (return values, points)</span>
+    <span class="n">methods</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;EI&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">(),</span>
+        <span class="s1">&#39;EI_Plugin&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">EI_plugin</span><span class="p">(),</span>
+        <span class="s1">&#39;Augmented_EI&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Augmented_EI</span><span class="p">(),</span>
+        <span class="s1">&#39;EQI&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">EQI</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>
+        <span class="s1">&#39;Reinterpolation_EI&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Reinterpolation_EI</span><span class="p">(),</span>
+        <span class="s1">&#39;UCB&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">),</span>
+        <span class="s1">&#39;PoI&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.01</span><span class="p">),</span>
+        <span class="s1">&#39;PES&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">PES</span><span class="p">(</span><span class="n">sam_num</span><span class="o">=</span><span class="mi">100</span><span class="p">),</span>
+        <span class="s1">&#39;Knowledge_G&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Knowledge_G</span><span class="p">(</span><span class="n">MC_num</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="c1"># Thompson Sampling (different return format)</span>
+    <span class="n">ts_methods</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;Thompson_Sampling&#39;</span><span class="p">:</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">Thompson_sampling</span><span class="p">()</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">values</span><span class="p">,</span> <span class="n">point</span> <span class="o">=</span> <span class="n">method</span><span class="p">()</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">point</span><span class="p">,</span>
+                <span class="s1">&#39;max_value&#39;</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
+                <span class="s1">&#39;mean_value&#39;</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span>
+                <span class="s1">&#39;std_value&#39;</span><span class="p">:</span> <span class="n">values</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+            <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error with </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Handle Thompson Sampling separately (different return format)</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">ts_methods</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">point</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">uncertainty</span> <span class="o">=</span> <span class="n">method</span><span class="p">()</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">point</span><span class="p">,</span>
+                <span class="s1">&#39;sampled_value&#39;</span><span class="p">:</span> <span class="n">value</span><span class="p">,</span>
+                <span class="s1">&#39;uncertainty&#39;</span><span class="p">:</span> <span class="n">uncertainty</span>
+            <span class="p">}</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error with </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="c1"># Run comparison</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">compare_acquisition_functions</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acquisition Function Comparison:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">comparison</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: Point=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;max_value&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;                Max=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;max_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;Mean=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;Std=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;std_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="s1">&#39;sampled_value&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;                Sampled Value=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;sampled_value&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;Uncertainty=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;uncertainty&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: Failed&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizing-acquisition-functions">
+<h2>Visualizing Acquisition Functions<a class="headerlink" href="#visualizing-acquisition-functions" title="Link to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Basic visualization using matplotlib</span>
+
+<span class="c1"># Example: 1D acquisition function visualization</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">visualize_1d_acquisition</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Visualize acquisition functions for 1D problems.&quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+    <span class="c1"># Create 1D test problem</span>
+    <span class="n">x_1d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">y_1d</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">x_1d</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+    <span class="c1"># Select training points</span>
+    <span class="n">train_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">X_train_1d</span> <span class="o">=</span> <span class="n">x_1d</span><span class="p">[</span><span class="n">train_indices</span><span class="p">]</span>
+    <span class="n">y_train_1d</span> <span class="o">=</span> <span class="n">y_1d</span><span class="p">[</span><span class="n">train_indices</span><span class="p">]</span>
+
+    <span class="c1"># Fit model</span>
+    <span class="n">optimizer_1d</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+    <span class="n">model_1d</span> <span class="o">=</span> <span class="n">optimizer_1d</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X_train_1d</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">y_train_1d</span><span class="p">),</span>
+        <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x_1d</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">]),</span>
+        <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Get acquisition values</span>
+    <span class="n">ei_vals</span><span class="p">,</span> <span class="n">ei_point</span> <span class="o">=</span> <span class="n">model_1d</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+
+    <span class="c1"># Create custom plot</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="c1"># Plot 1: Objective function and model</span>
+    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">x_1d</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_1d</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True function&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_train_1d</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="n">y_train_1d</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Training data&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">model_1d</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GP mean&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span>
+                     <span class="n">model_1d</span><span class="o">.</span><span class="n">virtual_samples_mean</span> <span class="o">-</span> <span class="n">model_1d</span><span class="o">.</span><span class="n">virtual_samples_std</span><span class="p">,</span>
+                     <span class="n">model_1d</span><span class="o">.</span><span class="n">virtual_samples_mean</span> <span class="o">+</span> <span class="n">model_1d</span><span class="o">.</span><span class="n">virtual_samples_std</span><span class="p">,</span>
+                     <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;GP uncertainty&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ei_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Next point&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Objective Value&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gaussian Process Model&#39;</span><span class="p">)</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax1</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Plot 2: Acquisition function</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">ei_vals</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expected Improvement&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">ei_point</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Next point&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;EI Value&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Expected Improvement Acquisition Function&#39;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Run 1D visualization</span>
+<span class="n">visualize_1d_acquisition</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="choosing-the-right-acquisition-function">
+<h2>Choosing the Right Acquisition Function<a class="headerlink" href="#choosing-the-right-acquisition-function" title="Link to this heading">#</a></h2>
+<section id="decision-tree">
+<h3>Decision Tree<a class="headerlink" href="#decision-tree" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Are you doing parallel experiments?
+├─ Yes → Use batch_EI() or batch_UCB()
+└─ No → Continue below
+
+Is your function very noisy?
+├─ Yes → Use UCB (high α) or AEI
+└─ No → Continue below
+
+Do you want balanced exploration/exploitation?
+├─ Yes → Use EI (recommended for most cases)
+└─ No → Continue below
+
+Do you want more exploration?
+├─ Yes → Use UCB (high α) or PES
+└─ No → Use PoI or EQI
+</pre></div>
+</div>
+</section>
+<section id="performance-characteristics">
+<h3>Performance Characteristics<a class="headerlink" href="#performance-characteristics" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Exploration</p></th>
+<th class="head"><p>Exploitation</p></th>
+<th class="head"><p>Noise Robustness</p></th>
+<th class="head"><p>Computational Cost</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EI</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>Low</p></td>
+</tr>
+<tr class="row-odd"><td><p>UCB</p></td>
+<td><p>High</p></td>
+<td><p>Low</p></td>
+<td><p>High</p></td>
+<td><p>Low</p></td>
+</tr>
+<tr class="row-even"><td><p>PoI</p></td>
+<td><p>Low</p></td>
+<td><p>High</p></td>
+<td><p>Low</p></td>
+<td><p>Low</p></td>
+</tr>
+<tr class="row-odd"><td><p>AEI</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>High</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-even"><td><p>EQI</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>High</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-odd"><td><p>REI</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-even"><td><p>PES</p></td>
+<td><p>High</p></td>
+<td><p>Low</p></td>
+<td><p>Medium</p></td>
+<td><p>High</p></td>
+</tr>
+<tr class="row-odd"><td><p>KG</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>Medium</p></td>
+<td><p>High</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="advanced-tips">
+<h2>Advanced Tips<a class="headerlink" href="#advanced-tips" title="Link to this heading">#</a></h2>
+<section id="custom-acquisition-functions">
+<h3>Custom Acquisition Functions<a class="headerlink" href="#custom-acquisition-functions" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># You can implement custom acquisition functions</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CustomAcquisition</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">X_train</span> <span class="o">=</span> <span class="n">X_train</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span> <span class="o">=</span> <span class="n">y_train</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_best</span> <span class="o">=</span> <span class="n">y_train</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>  <span class="c1"># For maximization</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">custom_ei_variant</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Custom EI variant with additional parameter.&quot;&quot;&quot;</span>
+        <span class="n">mean</span><span class="p">,</span> <span class="n">std</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit_pre</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_train</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_train</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">)</span>
+        
+        <span class="n">improvement</span> <span class="o">=</span> <span class="n">mean</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_best</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="n">improvement</span> <span class="o">/</span> <span class="p">(</span><span class="n">std</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">)</span>
+        
+        <span class="c1"># Custom modification: add beta parameter</span>
+        <span class="n">ei</span> <span class="o">=</span> <span class="n">improvement</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">beta</span> <span class="o">*</span> <span class="n">std</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">ei</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Usage would require integration with the main framework</span>
+</pre></div>
+</div>
+</section>
+<section id="parameter-tuning">
+<h3>Parameter Tuning<a class="headerlink" href="#parameter-tuning" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Systematic parameter exploration</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">tune_acquisition_parameters</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tune acquisition function parameters.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># UCB alpha tuning</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
+    <span class="n">ucb_results</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">:</span>
+        <span class="n">ucb_vals</span><span class="p">,</span> <span class="n">point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+        <span class="n">ucb_results</span><span class="p">[</span><span class="n">alpha</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">point</span><span class="p">,</span>
+            <span class="s1">&#39;max_acquisition&#39;</span><span class="p">:</span> <span class="n">ucb_vals</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;UCB Alpha Tuning:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">ucb_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;α=</span><span class="si">{</span><span class="n">alpha</span><span class="si">}</span><span class="s2">: max_acq=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;max_acquisition&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># PoI tau tuning</span>
+    <span class="n">taus</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]</span>
+    <span class="n">poi_results</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">for</span> <span class="n">tau</span> <span class="ow">in</span> <span class="n">taus</span><span class="p">:</span>
+        <span class="n">poi_vals</span><span class="p">,</span> <span class="n">point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="n">tau</span><span class="p">)</span>
+        <span class="n">poi_results</span><span class="p">[</span><span class="n">tau</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">point</span><span class="p">,</span>
+            <span class="s1">&#39;max_acquisition&#39;</span><span class="p">:</span> <span class="n">poi_vals</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PoI Tau Tuning:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tau</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">poi_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;τ=</span><span class="si">{</span><span class="n">tau</span><span class="si">}</span><span class="s2">: max_acq=</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;max_acquisition&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">tune_acquisition_parameters</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./de"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#available-acquisition-functions">Available Acquisition Functions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-improvement-ei">Expected Improvement (EI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logarithmic-expected-improvement">Logarithmic Expected Improvement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-improvement-with-plugin">Expected Improvement with Plugin</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-confidence-bound-ucb">Upper Confidence Bound (UCB)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#probability-of-improvement-poi">Probability of Improvement (PoI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#augmented-expected-improvement-aei">Augmented Expected Improvement (AEI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-quantile-improvement-eqi">Expected Quantile Improvement (EQI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reinterpolation-expected-improvement-rei">Reinterpolation Expected Improvement (REI)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#predictive-entropy-search-pes">Predictive Entropy Search (PES)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-gradient-kg">Knowledge Gradient (KG)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-optimization-strategy">Sequential Optimization Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-1-complete-acquisition-functions-in-bgolearn">Table 2.1: Complete Acquisition Functions in Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#function-categories">Function Categories</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#improvement-based-functions"><strong>Improvement-Based Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confidence-based-functions"><strong>Confidence-Based Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theoretic-functions"><strong>Information-Theoretic Functions</strong></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-based-functions"><strong>Sampling-Based Functions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-2-parameter-details-and-default-values">Table 2.2: Parameter Details and Default Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-3-exploration-vs-exploitation-characteristics">Table 2.3: Exploration vs Exploitation Characteristics</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#quick-selection-guide">Quick Selection Guide</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-2-4-complete-usage-examples">Table 2.4: Complete Usage Examples</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparing-acquisition-functions">Comparing Acquisition Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-acquisition-functions">Visualizing Acquisition Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choosing-the-right-acquisition-function">Choosing the Right Acquisition Function</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-characteristics">Performance Characteristics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-tips">Advanced Tips</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#custom-acquisition-functions">Custom Acquisition Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-tuning">Parameter Tuning</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+.bgolearn-language-switcher {
+  display: inline-flex;
+  align-items: center;
+}
+
+.bgolearn-language-switcher__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.bgolearn-language-switcher__current {
+  font-size: 0.85rem;
+}
+
+.bgolearn-language-switcher__link.active {
+  font-weight: 700;
+}
+
+.bd-article > .bgolearn-language-switcher {
+  float: right;
+  margin: 0 0 1rem 1rem;
+}
+
+@media (max-width: 640px) {
+  .bgolearn-language-switcher__current {
+    display: none;
+  }
+}

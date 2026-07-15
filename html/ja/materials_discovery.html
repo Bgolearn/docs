@@ -1,0 +1,1312 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Materials Discovery with Bgolearn &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ja/materials_discovery';</script>
+    <script src="../_static/language-switcher.js?v=81745f29"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/ja/materials_discovery.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fja/materials_discovery.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ja/materials_discovery.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Materials Discovery with Bgolearn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-discovery-workflow">Materials Discovery Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#candidate-space-generation">Candidate Space Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-objective-optimization">Single-Objective Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-working-example">Complete Working Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-points-for-success">Key Points for Success:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-materials-discovery">Best Practices for Materials Discovery</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-and-preprocessing">Data Quality and Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-design-strategies">Experimental Design Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation-for-materials">Model Validation for Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="materials-discovery-with-bgolearn">
+<h1>Materials Discovery with Bgolearn<a class="headerlink" href="#materials-discovery-with-bgolearn" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本ページは Bgolearn マニュアルの日本語版です。</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p>Bgolearn is specifically designed for materials discovery workflows, providing specialized tools and examples for accelerating materials research through Bayesian optimization. This guide demonstrates how to apply Bgolearn to real materials science problems.</p>
+</section>
+<section id="materials-discovery-workflow">
+<h2>Materials Discovery Workflow<a class="headerlink" href="#materials-discovery-workflow" title="Link to this heading">#</a></h2>
+<section id="problem-definition">
+<h3>Problem Definition<a class="headerlink" href="#problem-definition" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Define a materials discovery problem</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MaterialsOptimizationProblem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Example: Optimizing alloy composition for maximum strength.</span>
+<span class="sd">    </span>
+<span class="sd">    This example demonstrates a typical materials discovery workflow</span>
+<span class="sd">    where we want to find the optimal composition and processing</span>
+<span class="sd">    conditions for a new alloy.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;Al_content&#39;</span><span class="p">,</span>      <span class="c1"># Aluminum content (0-1)</span>
+            <span class="s1">&#39;Cu_content&#39;</span><span class="p">,</span>      <span class="c1"># Copper content (0-1) </span>
+            <span class="s1">&#39;Mg_content&#39;</span><span class="p">,</span>      <span class="c1"># Magnesium content (0-1)</span>
+            <span class="s1">&#39;Temperature&#39;</span><span class="p">,</span>     <span class="c1"># Processing temperature (K)</span>
+            <span class="s1">&#39;Pressure&#39;</span><span class="p">,</span>        <span class="c1"># Processing pressure (GPa)</span>
+            <span class="s1">&#39;Time&#39;</span>            <span class="c1"># Processing time (hours)</span>
+        <span class="p">]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_properties</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">,</span>  <span class="c1"># MPa</span>
+            <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span>        <span class="c1"># %</span>
+            <span class="s1">&#39;Corrosion_Resistance&#39;</span>  <span class="c1"># Arbitrary units</span>
+        <span class="p">]</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_initial_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">30</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate initial experimental data.&quot;&quot;&quot;</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+        
+        <span class="c1"># Composition constraints (sum to 1, with balance element)</span>
+        <span class="n">al_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">cu_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+        <span class="n">mg_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+        
+        <span class="c1"># Normalize compositions</span>
+        <span class="n">total_content</span> <span class="o">=</span> <span class="n">al_content</span> <span class="o">+</span> <span class="n">cu_content</span> <span class="o">+</span> <span class="n">mg_content</span>
+        <span class="n">al_content</span> <span class="o">=</span> <span class="n">al_content</span> <span class="o">/</span> <span class="n">total_content</span> <span class="o">*</span> <span class="mf">0.9</span>  <span class="c1"># Leave 10% for other elements</span>
+        <span class="n">cu_content</span> <span class="o">=</span> <span class="n">cu_content</span> <span class="o">/</span> <span class="n">total_content</span> <span class="o">*</span> <span class="mf">0.9</span>
+        <span class="n">mg_content</span> <span class="o">=</span> <span class="n">mg_content</span> <span class="o">/</span> <span class="n">total_content</span> <span class="o">*</span> <span class="mf">0.9</span>
+        
+        <span class="c1"># Processing conditions</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>  <span class="c1"># K</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>    <span class="c1"># GPa</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>         <span class="c1"># hours</span>
+        
+        <span class="c1"># Create feature matrix</span>
+        <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">al_content</span><span class="p">,</span> <span class="n">cu_content</span><span class="p">,</span> <span class="n">mg_content</span><span class="p">,</span> 
+                           <span class="n">temperature</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">time</span><span class="p">])</span>
+        
+        <span class="c1"># Simulate complex property relationships</span>
+        <span class="n">tensile_strength</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_tensile_strength</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">ductility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_ductility</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        <span class="n">corrosion_resistance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_corrosion_resistance</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+        
+        <span class="c1"># Create DataFrames</span>
+        <span class="n">features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+        <span class="n">properties_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+            <span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">:</span> <span class="n">tensile_strength</span><span class="p">,</span>
+            <span class="s1">&#39;Ductility&#39;</span><span class="p">:</span> <span class="n">ductility</span><span class="p">,</span>
+            <span class="s1">&#39;Corrosion_Resistance&#39;</span><span class="p">:</span> <span class="n">corrosion_resistance</span>
+        <span class="p">})</span>
+        
+        <span class="k">return</span> <span class="n">features_df</span><span class="p">,</span> <span class="n">properties_df</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_tensile_strength</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate tensile strength calculation.&quot;&quot;&quot;</span>
+        <span class="n">al</span><span class="p">,</span> <span class="n">cu</span><span class="p">,</span> <span class="n">mg</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="c1"># Complex non-linear relationships</span>
+        <span class="n">base_strength</span> <span class="o">=</span> <span class="mi">200</span> <span class="o">+</span> <span class="mi">300</span> <span class="o">*</span> <span class="n">al</span> <span class="o">+</span> <span class="mi">400</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">+</span> <span class="mi">150</span> <span class="o">*</span> <span class="n">mg</span>
+        <span class="n">temp_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">600</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">600</span>  <span class="c1"># Optimal around 600K</span>
+        <span class="n">pressure_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">pressure</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">time_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">time</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">interaction</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">al</span> <span class="o">*</span> <span class="n">cu</span>  <span class="c1"># Al-Cu interaction</span>
+        
+        <span class="n">strength</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_strength</span> <span class="o">*</span> <span class="n">temp_effect</span> <span class="o">*</span> <span class="n">pressure_effect</span> <span class="o">*</span> 
+                   <span class="n">time_effect</span> <span class="o">+</span> <span class="n">interaction</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">al</span><span class="p">)))</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">strength</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Minimum strength</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_ductility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate ductility calculation.&quot;&quot;&quot;</span>
+        <span class="n">al</span><span class="p">,</span> <span class="n">cu</span><span class="p">,</span> <span class="n">mg</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="c1"># Ductility often trades off with strength</span>
+        <span class="n">base_ductility</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">+</span> <span class="mi">10</span> <span class="o">*</span> <span class="n">mg</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">cu</span>  <span class="c1"># Mg increases, Cu decreases ductility</span>
+        <span class="n">temp_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.002</span> <span class="o">*</span> <span class="p">(</span><span class="n">temp</span> <span class="o">-</span> <span class="mi">500</span><span class="p">)</span>  <span class="c1"># Higher temp increases ductility</span>
+        <span class="n">pressure_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">pressure</span>   <span class="c1"># Pressure decreases ductility</span>
+        
+        <span class="n">ductility</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_ductility</span> <span class="o">*</span> <span class="n">temp_effect</span> <span class="o">*</span> <span class="n">pressure_effect</span> <span class="o">+</span> 
+                    <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">al</span><span class="p">)))</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">ductility</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Minimum ductility</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_corrosion_resistance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate corrosion resistance calculation.&quot;&quot;&quot;</span>
+        <span class="n">al</span><span class="p">,</span> <span class="n">cu</span><span class="p">,</span> <span class="n">mg</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="c1"># Al and Mg improve corrosion resistance, Cu decreases it</span>
+        <span class="n">base_resistance</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">al</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mg</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">cu</span>
+        <span class="n">processing_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.001</span> <span class="o">*</span> <span class="n">temp</span> <span class="o">-</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">pressure</span>
+        
+        <span class="n">resistance</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_resistance</span> <span class="o">*</span> <span class="n">processing_effect</span> <span class="o">+</span> 
+                     <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">al</span><span class="p">)))</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">resistance</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># Minimum resistance</span>
+
+<span class="c1"># Create materials problem</span>
+<span class="n">materials_problem</span> <span class="o">=</span> <span class="n">MaterialsOptimizationProblem</span><span class="p">()</span>
+<span class="n">X_initial</span><span class="p">,</span> <span class="n">y_initial</span> <span class="o">=</span> <span class="n">materials_problem</span><span class="o">.</span><span class="n">generate_initial_data</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">25</span><span class="p">)</span>
+
+<span class="c1"># Create training data variables for consistency</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">X_initial</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>  <span class="c1"># Focus on tensile strength</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Initial experimental data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features shape: </span><span class="si">{</span><span class="n">X_initial</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Properties shape: </span><span class="si">{</span><span class="n">y_initial</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training data shape: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Training target shape: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Feature ranges:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_initial</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Property ranges:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_initial</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+<section id="candidate-space-generation">
+<h3>Candidate Space Generation<a class="headerlink" href="#candidate-space-generation" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_materials_candidates</span><span class="p">(</span><span class="n">n_candidates</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate candidate materials for optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    This function creates a diverse set of candidate compositions</span>
+<span class="sd">    and processing conditions while respecting materials constraints.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+    
+    <span class="n">candidates</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_candidates</span><span class="p">):</span>
+        <span class="c1"># Generate compositions with constraints</span>
+        <span class="n">al</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">cu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">-</span> <span class="n">al</span><span class="p">))</span>
+        <span class="n">mg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span> <span class="o">-</span> <span class="n">al</span> <span class="o">-</span> <span class="n">cu</span><span class="p">))</span>
+        
+        <span class="c1"># Normalize to ensure realistic compositions</span>
+        <span class="n">total</span> <span class="o">=</span> <span class="n">al</span> <span class="o">+</span> <span class="n">cu</span> <span class="o">+</span> <span class="n">mg</span>
+        <span class="k">if</span> <span class="n">total</span> <span class="o">&gt;</span> <span class="mf">0.9</span><span class="p">:</span>  <span class="c1"># Leave room for other elements</span>
+            <span class="n">al</span> <span class="o">=</span> <span class="n">al</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mf">0.9</span>
+            <span class="n">cu</span> <span class="o">=</span> <span class="n">cu</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mf">0.9</span>
+            <span class="n">mg</span> <span class="o">=</span> <span class="n">mg</span> <span class="o">/</span> <span class="n">total</span> <span class="o">*</span> <span class="mf">0.9</span>
+        
+        <span class="c1"># Processing conditions</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+        <span class="n">pressure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">5.0</span><span class="p">)</span>
+        <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+        
+        <span class="n">candidates</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">al</span><span class="p">,</span> <span class="n">cu</span><span class="p">,</span> <span class="n">mg</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">pressure</span><span class="p">,</span> <span class="n">time</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">materials_problem</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="c1"># Generate candidate space</span>
+<span class="n">X_candidates</span> <span class="o">=</span> <span class="n">generate_materials_candidates</span><span class="p">(</span><span class="n">n_candidates</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidate materials&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Candidate composition ranges:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg_content&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># Visualize candidate space</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Composition triangle (simplified as 2D)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> 
+                 <span class="n">c</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Al Content&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cu Content&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Composition Space (colored by Mg)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Processing conditions</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Pressure&#39;</span><span class="p">],</span> 
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Pressure (GPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Processing Conditions&#39;</span><span class="p">)</span>
+
+<span class="c1"># Time distribution</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Processing Time (hours)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Time Distribution&#39;</span><span class="p">)</span>
+
+<span class="c1"># Initial data properties</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">],</span> 
+                 <span class="n">c</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Corrosion_Resistance&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;plasma&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Property Trade-offs (colored by Corrosion Resistance)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Property distributions</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> 
+              <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tensile Strength&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Strength Distribution&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> 
+              <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ductility&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ductility Distribution&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;materials_candidate_space.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="single-objective-optimization">
+<h3>Single-Objective Optimization<a class="headerlink" href="#single-objective-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize for maximum tensile strength</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Single-Objective Optimization: Tensile Strength ===&quot;</span><span class="p">)</span>
+
+<span class="n">optimizer_strength</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model_strength</span> <span class="o">=</span> <span class="n">optimizer_strength</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Maximize strength</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model fitted for tensile strength optimization&quot;</span><span class="p">)</span>
+
+<span class="c1"># Try different acquisition functions</span>
+<span class="n">acquisition_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Expected Improvement</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">ei_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;EI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">ei_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1"># Upper Confidence Bound</span>
+<span class="n">ucb_values</span><span class="p">,</span> <span class="n">ucb_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;UCB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">ucb_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ucb_values</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1"># Probability of Improvement</span>
+<span class="n">poi_values</span><span class="p">,</span> <span class="n">poi_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;PoI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">poi_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">poi_values</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Acquisition Function Recommendations:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">acquisition_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+    <span class="n">pred_strength</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;predicted_strength&#39;</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Al: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Cu: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Mg: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Temp: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">K, Pressure: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">GPa, Time: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Predicted Strength: </span><span class="si">{</span><span class="n">pred_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Multiple recommendations for sequential experiments</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Multiple Recommendations for Sequential Experiments ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get multiple recommendations using opt_num parameter</span>
+<span class="n">model_multi</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># Request 5 recommendations</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># Get recommendations using Expected Improvement</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model_multi</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+
+<span class="c1"># The model returns the best recommendation</span>
+<span class="c1"># For multiple experiments, you can use the top EI values</span>
+<span class="n">top_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)[</span><span class="o">-</span><span class="mi">5</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Top 5 indices</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top 5 recommended experiments:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">top_indices</span><span class="p">):</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">X_candidates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">pred_strength</span> <span class="o">=</span> <span class="n">model_multi</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">ei_value</span> <span class="o">=</span> <span class="n">ei_values</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Rank </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2"> (EI=</span><span class="si">{</span><span class="n">ei_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Composition: Al=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Cu=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Mg=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Processing: T=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">K, P=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">GPa, t=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Predicted Strength: </span><span class="si">{</span><span class="n">pred_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="multi-objective-optimization">
+<h3>Multi-Objective Optimization<a class="headerlink" href="#multi-objective-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-objective optimization: Strength vs Ductility</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Multi-Objective Optimization: Strength vs Ductility ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fit separate models for each property using Bgolearn</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fitting model for ductility optimization...&quot;</span><span class="p">)</span>
+<span class="n">opt_ductility</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">fitted_model_ductility</span> <span class="o">=</span> <span class="n">opt_ductility</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">],</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Maximize ductility</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Getting predictions from both models...&quot;</span><span class="p">)</span>
+<span class="c1"># Get predictions for all candidates using Bgolearn&#39;s built-in functionality</span>
+<span class="n">strength_pred</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+<span class="n">ductility_pred</span> <span class="o">=</span> <span class="n">fitted_model_ductility</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+
+<span class="c1"># Create combined objective (weighted sum)</span>
+<span class="c1"># User can adjust weights based on priorities</span>
+<span class="n">w_strength</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># Weight for strength</span>
+<span class="n">w_ductility</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># Weight for ductility</span>
+
+<span class="c1"># Normalize objectives to [0, 1] scale</span>
+<span class="n">strength_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">strength_pred</span> <span class="o">-</span> <span class="n">strength_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">strength_pred</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">strength_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="n">ductility_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">ductility_pred</span> <span class="o">-</span> <span class="n">ductility_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">ductility_pred</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">ductility_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+
+<span class="n">combined_objective</span> <span class="o">=</span> <span class="n">w_strength</span> <span class="o">*</span> <span class="n">strength_norm</span> <span class="o">+</span> <span class="n">w_ductility</span> <span class="o">*</span> <span class="n">ductility_norm</span>
+
+<span class="c1"># Find best multi-objective solution</span>
+<span class="n">best_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">combined_objective</span><span class="p">)</span>
+<span class="n">best_point</span> <span class="o">=</span> <span class="n">X_candidates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multi-Objective Optimization Results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Weights: Strength=</span><span class="si">{</span><span class="n">w_strength</span><span class="si">}</span><span class="s2">, Ductility=</span><span class="si">{</span><span class="n">w_ductility</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best composition:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Al: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Cu: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mg: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing conditions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Temperature: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> K&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Pressure: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Pressure&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Time: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted properties:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Tensile Strength: </span><span class="si">{</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Ductility: </span><span class="si">{</span><span class="n">ductility_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+    
+<span class="c1"># Find Pareto front approximation using Bgolearn predictions</span>
+<span class="n">pareto_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">)):</span>
+    <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">strength_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span>
+            <span class="n">ductility_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">and</span>
+            <span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">strength_pred</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">or</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">i</span><span class="p">])):</span>
+            <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">break</span>
+    <span class="k">if</span> <span class="n">is_pareto</span><span class="p">:</span>
+        <span class="n">pareto_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> points on Pareto front&quot;</span><span class="p">)</span>
+    
+<span class="c1"># Visualize multi-objective results using matplotlib</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Pareto front</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">,</span> <span class="n">ductility_pred</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All candidates&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pareto_indices</span><span class="p">:</span>
+    <span class="n">pareto_strength</span> <span class="o">=</span> <span class="n">strength_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">]</span>
+    <span class="n">pareto_ductility</span> <span class="o">=</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">pareto_strength</span><span class="p">,</span> <span class="n">pareto_ductility</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span>
+                   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto front&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">],</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">],</span>
+               <span class="n">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Best weighted&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Multi-Objective Trade-off&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+    
+<span class="c1"># Combined objective landscape</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span>
+                         <span class="n">c</span><span class="o">=</span><span class="n">combined_objective</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">],</span> <span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span>
+               <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Al Content&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cu Content&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Combined Objective in Composition Space&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Combined Objective&#39;</span><span class="p">)</span>
+
+<span class="c1"># Weight sensitivity analysis</span>
+<span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">best_strengths</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">best_ductilities</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">w_s</span> <span class="ow">in</span> <span class="n">weights</span><span class="p">:</span>
+    <span class="n">w_d</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">w_s</span>
+    <span class="n">combined</span> <span class="o">=</span> <span class="n">w_s</span> <span class="o">*</span> <span class="n">strength_norm</span> <span class="o">+</span> <span class="n">w_d</span> <span class="o">*</span> <span class="n">ductility_norm</span>
+    <span class="n">best_idx_w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">combined</span><span class="p">)</span>
+    <span class="n">best_strengths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">best_idx_w</span><span class="p">])</span>
+    <span class="n">best_ductilities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ductility_pred</span><span class="p">[</span><span class="n">best_idx_w</span><span class="p">])</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">best_strengths</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Strength&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Weight for Strength&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Tensile Strength (MPa)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+
+<span class="n">ax2_twin</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+<span class="n">ax2_twin</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">weights</span><span class="p">,</span> <span class="n">best_ductilities</span><span class="p">,</span> <span class="s1">&#39;s-&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ductility&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax2_twin</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Ductility (%)&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">ax2_twin</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelcolor</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Weight Sensitivity Analysis&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;multi_objective_optimization.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Multi-objective optimization completed using Bgolearn&#39;s built-in capabilities!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="complete-working-example">
+<h3>Complete Working Example<a class="headerlink" href="#complete-working-example" title="Link to this heading">#</a></h3>
+<p>Here’s a complete, working example that demonstrates proper data formatting for Bgolearn:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Materials Discovery with Bgolearn - Complete Working Example</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Materials Discovery with Bgolearn ===&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Step 1: Create sample materials data with proper pandas format</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Creating sample materials dataset...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate synthetic aluminum alloy data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n_samples</span> <span class="o">=</span> <span class="mi">25</span>
+
+<span class="c1"># Composition features (Al, Cu, Mg content)</span>
+<span class="n">al_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.80</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+<span class="n">cu_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+<span class="n">mg_content</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+
+<span class="c1"># Processing parameters</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">600</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>  <span class="c1"># °C</span>
+<span class="n">pressure</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>         <span class="c1"># GPa</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>            <span class="c1"># hours</span>
+
+<span class="c1"># CRITICAL: Create DataFrame with column names (REQUIRED by Bgolearn)</span>
+<span class="n">data_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Al_content&#39;</span><span class="p">:</span> <span class="n">al_content</span><span class="p">,</span>
+    <span class="s1">&#39;Cu_content&#39;</span><span class="p">:</span> <span class="n">cu_content</span><span class="p">,</span>
+    <span class="s1">&#39;Mg_content&#39;</span><span class="p">:</span> <span class="n">mg_content</span><span class="p">,</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="n">temperature</span><span class="p">,</span>
+    <span class="s1">&#39;Pressure&#39;</span><span class="p">:</span> <span class="n">pressure</span><span class="p">,</span>
+    <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="n">time</span>
+<span class="p">})</span>
+
+<span class="c1"># Simulate tensile strength (target property)</span>
+<span class="n">strength</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="mi">500</span> <span class="o">*</span> <span class="n">al_content</span> <span class="o">+</span>           <span class="c1"># Al base strength</span>
+    <span class="mi">800</span> <span class="o">*</span> <span class="n">cu_content</span> <span class="o">+</span>           <span class="c1"># Cu strengthening</span>
+    <span class="mi">1200</span> <span class="o">*</span> <span class="n">mg_content</span> <span class="o">+</span>          <span class="c1"># Mg strengthening</span>
+    <span class="mf">0.5</span> <span class="o">*</span> <span class="n">temperature</span> <span class="o">+</span>          <span class="c1"># Temperature effect</span>
+    <span class="mi">20</span> <span class="o">*</span> <span class="n">pressure</span> <span class="o">+</span>              <span class="c1"># Pressure effect</span>
+    <span class="o">-</span><span class="mi">5</span> <span class="o">*</span> <span class="n">time</span> <span class="o">+</span>                  <span class="c1"># Time degradation</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>  <span class="c1"># Measurement noise</span>
+<span class="p">)</span>
+
+<span class="c1"># CRITICAL: Create Series for target (REQUIRED by Bgolearn)</span>
+<span class="n">measured_response</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">strength</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dataset created: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_matrix</span><span class="p">)</span><span class="si">}</span><span class="s2"> samples&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">data_matrix</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target range: </span><span class="si">{</span><span class="n">measured_response</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">measured_response</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Create candidate materials for optimization</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Creating candidate materials...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Generate candidate space</span>
+<span class="n">n_candidates</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">candidates_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Al_content&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Cu_content&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Mg_content&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Temperature&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">350</span><span class="p">,</span> <span class="mi">650</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Pressure&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">),</span>
+    <span class="s1">&#39;Time&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">n_candidates</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># CRITICAL: Create DataFrame for candidates (REQUIRED by Bgolearn)</span>
+<span class="n">virtual_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">candidates_data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Candidates created: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">virtual_samples</span><span class="p">)</span><span class="si">}</span><span class="s2"> materials&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 3: Initialize and fit Bgolearn with proper data types</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Fitting Bgolearn model...&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initialize optimizer</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="c1"># CRITICAL: All inputs must be pandas DataFrame/Series</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>        <span class="c1"># DataFrame with column names</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>  <span class="c1"># Series with target values</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>     <span class="c1"># DataFrame with same columns</span>
+    <span class="n">Mission</span><span class="o">=</span><span class="s1">&#39;Regression&#39;</span><span class="p">,</span>           <span class="c1"># Continuous target</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>   <span class="c1"># Surrogate model</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>                     <span class="c1"># Single recommendation</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>              <span class="c1"># False = maximization</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>                     <span class="c1"># 5-fold cross-validation</span>
+    <span class="n">Dynamic_W</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>               <span class="c1"># Static weights</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>                <span class="c1"># Normalize features</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>                        <span class="c1"># Random seed</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Optimization completed successfully!&quot;</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Get recommendations using Expected Improvement</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=== Getting Recommendations ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get EI recommendation</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">ei_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Best recommendation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Al: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Cu: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Mg: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Temperature: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Pressure: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> GPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Time: </span><span class="si">{</span><span class="n">ei_points</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> hours&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get predicted strength</span>
+<span class="n">best_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span>
+<span class="n">predicted_strength</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+<span class="n">prediction_std</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_std</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Predicted strength: </span><span class="si">{</span><span class="n">predicted_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">prediction_std</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Expected Improvement: </span><span class="si">{</span><span class="n">ei_values</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Materials discovery analysis completed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="key-points-for-success">
+<h3>Key Points for Success:<a class="headerlink" href="#key-points-for-success" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Always use pandas DataFrames/Series</strong>: Bgolearn requires pandas format, not numpy arrays</p></li>
+<li><p><strong>Include column names</strong>: DataFrames must have proper column names</p></li>
+<li><p><strong>Match column names</strong>: <code class="docutils literal notranslate"><span class="pre">virtual_samples</span></code> must have same columns as <code class="docutils literal notranslate"><span class="pre">data_matrix</span></code></p></li>
+<li><p><strong>Use Series for targets</strong>: <code class="docutils literal notranslate"><span class="pre">Measured_response</span></code> should be a pandas Series</p></li>
+<li><p><strong>Check data types</strong>: Use <code class="docutils literal notranslate"><span class="pre">type(data_matrix)</span></code> to verify it’s a DataFrame</p></li>
+</ol>
+</section>
+<section id="best-practices-for-materials-discovery">
+<h3>Best Practices for Materials Discovery<a class="headerlink" href="#best-practices-for-materials-discovery" title="Link to this heading">#</a></h3>
+</section>
+<section id="data-quality-and-preprocessing">
+<h3>Data Quality and Preprocessing<a class="headerlink" href="#data-quality-and-preprocessing" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">materials_data_preprocessing_tips</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Best practices for materials data preprocessing.&quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Materials Data Preprocessing Best Practices ===&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 1. Composition normalization</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Composition Normalization:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Ensure compositions sum to 1 (or known total)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Handle trace elements consistently&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Use atomic fractions or weight fractions consistently&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 2. Feature scaling</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">2. Feature Scaling:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Temperature: Often log-scale or normalized&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Pressure: Consider log-scale for wide ranges&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Time: Often log-scale for processing time&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Compositions: Usually already normalized&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># 3. Property transformations</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">3. Property Transformations:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Strength: Usually linear scale&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Ductility: May benefit from log transformation&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Electrical properties: Often log-scale&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   - Consider physical constraints (positive values)&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Example preprocessing</span>
+    <span class="n">X_processed</span> <span class="o">=</span> <span class="n">X_initial</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    
+    <span class="c1"># Log-transform time (processing time often has log-normal distribution)</span>
+    <span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Log_Time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+    
+    <span class="c1"># Normalize temperature to [0, 1] range</span>
+    <span class="n">temp_min</span><span class="p">,</span> <span class="n">temp_max</span> <span class="o">=</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">800</span>
+    <span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Temp_Normalized&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">temp_min</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">temp_max</span> <span class="o">-</span> <span class="n">temp_min</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Example preprocessing applied:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Original time range: [</span><span class="si">{</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Log time range: [</span><span class="si">{</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Log_Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Log_Time&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Normalized temp range: [</span><span class="si">{</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Temp_Normalized&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">X_processed</span><span class="p">[</span><span class="s1">&#39;Temp_Normalized&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+<span class="n">materials_data_preprocessing_tips</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="experimental-design-strategies">
+<h3>Experimental Design Strategies<a class="headerlink" href="#experimental-design-strategies" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">experimental_design_strategies</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Strategies for effective experimental design in materials discovery.&quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Experimental Design Strategies ===&quot;</span><span class="p">)</span>
+    
+    <span class="n">strategies</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;Space-filling initial design&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Use Latin Hypercube Sampling for initial experiments&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Ensure good coverage of composition and processing space&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Include known good materials as benchmarks&quot;</span>
+        <span class="p">],</span>
+        
+        <span class="s2">&quot;Acquisition function selection&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;EI: Good general choice, balances exploration/exploitation&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;UCB: Better for noisy experiments, adjustable exploration&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Sequential optimization: Build experiments one at a time for maximum learning&quot;</span>
+        <span class="p">],</span>
+        
+        <span class="s2">&quot;Constraint handling&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Define feasible composition ranges early&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Consider processing equipment limitations&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Include cost constraints if relevant&quot;</span>
+        <span class="p">],</span>
+        
+        <span class="s2">&quot;Multi-objective considerations&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Identify property trade-offs early&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Use weighted objectives or Pareto optimization&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Consider manufacturing constraints&quot;</span>
+        <span class="p">],</span>
+        
+        <span class="s2">&quot;Iterative refinement&quot;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s2">&quot;Start with broad exploration, then focus&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Update models frequently with new data&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Monitor convergence and adjust strategy&quot;</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="k">for</span> <span class="n">strategy</span><span class="p">,</span> <span class="n">tips</span> <span class="ow">in</span> <span class="n">strategies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">tip</span> <span class="ow">in</span> <span class="n">tips</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • </span><span class="si">{</span><span class="n">tip</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">experimental_design_strategies</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="model-validation-for-materials">
+<h3>Model Validation for Materials<a class="headerlink" href="#model-validation-for-materials" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">materials_model_validation</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Specific validation approaches for materials models.&quot;&quot;&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Materials Model Validation ===&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Cross-validation with composition awareness</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">GroupKFold</span>
+    
+    <span class="c1"># Group by similar compositions for more realistic CV</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">create_composition_groups</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">n_groups</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create groups based on composition similarity.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+        
+        <span class="n">compositions</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="s1">&#39;Al_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu_content&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg_content&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">n_groups</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">groups</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">compositions</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">groups</span>
+    
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">create_composition_groups</span><span class="p">(</span><span class="n">X_initial</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span><span class="si">}</span><span class="s2"> composition groups for CV&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Group sizes:&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">groups</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">groups</span><span class="p">)])</span>
+    
+    <span class="c1"># Physics-based validation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Physics-based validation checks:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Strength should generally increase with certain alloying elements&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Ductility often trades off with strength&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Temperature effects should follow known metallurgy&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Composition effects should be physically reasonable&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Extrapolation warnings</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Extrapolation detection:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Monitor when predictions go outside training data range&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Check for unrealistic property combinations&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;• Validate against known materials databases&quot;</span><span class="p">)</span>
+
+<span class="n">materials_model_validation</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>This comprehensive materials discovery guide demonstrates:</p>
+<ol class="arabic simple">
+<li><p><strong>Problem Setup</strong>: Realistic materials optimization with compositions and processing</p></li>
+<li><p><strong>Single-Objective</strong>: Optimizing individual properties like tensile strength</p></li>
+<li><p><strong>Multi-Objective</strong>: Balancing competing properties like strength vs ductility</p></li>
+<li><p><strong>Constraints</strong>: Handling composition and processing limitations</p></li>
+<li><p><strong>Iterative Design</strong>: Simulating real experimental workflows</p></li>
+<li><p><strong>Best Practices</strong>: Data preprocessing, validation, and experimental strategies</p></li>
+</ol>
+<p>Bgolearn provides the tools needed for efficient materials discovery, helping researchers find optimal compositions and processing conditions with minimal experiments.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ja"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-discovery-workflow">Materials Discovery Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-definition">Problem Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#candidate-space-generation">Candidate Space Generation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#single-objective-optimization">Single-Objective Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-working-example">Complete Working Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-points-for-success">Key Points for Success:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-practices-for-materials-discovery">Best Practices for Materials Discovery</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-quality-and-preprocessing">Data Quality and Preprocessing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-design-strategies">Experimental Design Strategies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-validation-for-materials">Model Validation for Materials</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1258 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>BgoFace：Bgolearn 的图形用户界面 &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh/bgoface';</script>
+    <script src="../_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/zh/bgoface.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fzh/bgoface.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh/bgoface.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>BgoFace：Bgolearn 的图形用户界面</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">主要特点</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">仪表板</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">优化管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可视化工具</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建筑学</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">安装和设置</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">选项 1：下载预构建的应用程序（推荐）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">选项 2：从源代码构建</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">先决条件</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">克隆和设置</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">构建可执行文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">用户界面指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">主仪表板</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">数据管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">优化配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">实时监控</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">结果分析</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">实际例子</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">示例1：合金成分优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">示例 2：多目标热处理</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">高级功能</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">约束处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">批量优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">型号对比</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">导出和报告</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bgolearn">与 Bgolearn 集成</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">代码生成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">数据同步</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">最佳实践</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">项目组织</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">数据质量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">优化策略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id34">常见问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">寻求帮助</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">未来发展</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id37">计划的功能</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id38">引用和许可</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id39">学术用途</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id40">执照</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id41">下一步</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="bgoface-bgolearn">
+<h1>BgoFace：Bgolearn 的图形用户界面<a class="headerlink" href="#bgoface-bgolearn" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页是 Bgolearn 手册的中文版本。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://github.com/Bgolearn/BgoFace"><strong>BgoFace</strong></a> 是 Bgolearn 平台的图形用户界面 (GUI) 组件，旨在为用户提供直观、高效的方式与 Bgolearn 进行交互，以进行材料设计和优化。</p>
+</div>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>BgoFace 作为 Bgolearn 的用户界面，使平台更易于访问和用户友好。通过BgoFace，用户可以轻松创建优化任务、监控实时进度并使用内置工具可视化结果。该设计注重清晰度和交互性，让用户能够专注于优化任务，而不必担心技术复杂性。</p>
+<div class="tip admonition">
+<p class="admonition-title">为什么使用 BgoFace？</p>
+<p>BgoFace 通过以下方式弥合了实验和计算领域之间的差距：</p>
+<ul class="simple">
+<li><p><strong>简化复杂的工作流程</strong> - 无需编码</p></li>
+<li><p><strong>提供直观的控制</strong> - 所有操作的可视化界面</p></li>
+<li><p><strong>整合实验约束</strong> - 内置现实世界的限制</p></li>
+<li><p><strong>实现主动学习算法的无缝访问</strong></p></li>
+<li><p><strong>赋能材料探索</strong>，无需深厚的机器学习专业知识</p></li>
+</ul>
+</div>
+</section>
+<section id="id2">
+<h2>主要特点<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<section id="id3">
+<h3>仪表板<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<p><strong>概述面板</strong>：提供正在进行的优化任务的快照，包括：</p>
+<ul class="simple">
+<li><p>任务状态和进度指示器</p></li>
+<li><p>关键绩效指标</p></li>
+<li><p>结果的可视化总结</p></li>
+<li><p>实时更新</p></li>
+</ul>
+</section>
+<section id="id4">
+<h3>优化管理<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<p><strong>任务监控</strong>：</p>
+<ul class="simple">
+<li><p>实时跟踪优化进度</p></li>
+<li><p>中间结果显示</p></li>
+<li><p>模型性能指标</p></li>
+<li><p>自动通知和警报</p></li>
+</ul>
+<p><strong>结果分析</strong>：</p>
+<ul class="simple">
+<li><p>用于分析优化结果的综合工具</p></li>
+<li><p>数字和图形解释</p></li>
+<li><p>导出功能以供进一步分析</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>可视化工具<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p><strong>内置绘图界面</strong>：</p>
+<ul class="simple">
+<li><p>用于数据探索的散点图</p></li>
+<li><p>用于收敛分析的折线图</p></li>
+<li><p>特征重要性的条形图</p></li>
+<li><p>多目标问题的帕累托前沿可视化</p></li>
+<li><p>响应景观的 3D 曲面图</p></li>
+</ul>
+<p><strong>数据导出选项</strong>：</p>
+<ul class="simple">
+<li><p>用于出版物的 PNG/PDF 格式</p></li>
+<li><p>用于数据分析的 CSV/Excel</p></li>
+<li><p>交互式 HTML 绘图</p></li>
+<li><p>用于演示的高分辨率图像</p></li>
+</ul>
+</section>
+</section>
+<section id="id6">
+<h2>建筑学<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
+<p>BgoFace 遵循模块化架构，将用户界面与计算后端分开：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│   User Input    │───▶│   BgoFace GUI   │───▶│  Bgolearn Core  │
+│                 │    │                 │    │                 │
+│ • Parameters    │    │ • Task Manager  │    │ • Optimization  │
+│ • Data Upload   │    │ • Visualizer    │    │ • ML Models     │
+│ • Constraints   │    │ • Result Viewer │    │ • Algorithms    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+                              │                        │
+                              ▼                        ▼
+                       ┌─────────────────┐    ┌─────────────────┐
+                       │   File System   │    │   Computation   │
+                       │                 │    │                 │
+                       │ • Data Storage  │    │ • Model Training│
+                       │ • Results Cache │    │ • Predictions   │
+                       │ • Export Files  │    │ • Optimization  │
+                       └─────────────────┘    └─────────────────┘
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h2>安装和设置<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h3>选项 1：下载预构建的应用程序（推荐）<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<p>对于 Windows 用户，最简单的入门方法：</p>
+<ol class="arabic simple">
+<li><p><strong>访问版本页面</strong>：<a class="reference external" href="https://github.com/Bgolearn/BgoFace/releases">BgoFace 版本</a></p></li>
+<li><p><strong>Download the Latest Version</strong>: Look for the <code class="docutils literal notranslate"><span class="pre">.exe</span></code> file in the latest release</p></li>
+<li><p><strong>运行应用程序</strong>：无需安装 - 只需双击即可运行！</p></li>
+</ol>
+<div class="note admonition">
+<p class="admonition-title">系统要求</p>
+<ul class="simple">
+<li><p><strong>操作系统</strong>：Windows 10 或更高版本</p></li>
+<li><p><strong>内存</strong>：最低 4GB RAM，建议 8GB</p></li>
+<li><p><strong>存储</strong>：500MB 可用空间</p></li>
+<li><p><strong>显示</strong>：最小分辨率 1024x768</p></li>
+</ul>
+</div>
+</section>
+<section id="id9">
+<h3>选项 2：从源代码构建<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>对于想要定制BgoFace的开发者或用户：</p>
+<section id="id10">
+<h4>先决条件<a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install required packages</span>
+pip<span class="w"> </span>install<span class="w"> </span>PyQt5<span class="w"> </span>pyinstaller<span class="w"> </span>Bgolearn
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h4>克隆和设置<a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Clone the repository</span>
+git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Bgolearn/BgoFace.git
+<span class="nb">cd</span><span class="w"> </span>BgoFace
+
+<span class="c1"># Install dependencies</span>
+pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+
+<span class="c1"># Run from source</span>
+python<span class="w"> </span>main.py
+</pre></div>
+</div>
+</section>
+<section id="id12">
+<h4>构建可执行文件<a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create standalone executable</span>
+pyinstaller<span class="w"> </span>-F<span class="w"> </span>-w<span class="w"> </span>--add-data<span class="w"> </span><span class="s2">&quot;Images;Images&quot;</span><span class="w"> </span>main.py
+
+<span class="c1"># The executable will be in the dist/ folder</span>
+</pre></div>
+</div>
+<p><strong>PyInstaller 选项解释</strong>：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-F</span></code>：将所有内容捆绑到一个文件中</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-w</span></code>：抑制控制台窗口（仅限 GUI）</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--add-data</span></code>：包括图像等附加资源</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="id13">
+<h2>用户界面指南<a class="headerlink" href="#id13" title="Link to this heading">#</a></h2>
+<section id="id14">
+<h3>主仪表板<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<p>主仪表板提供了优化项目的概述：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Starting a new optimization project</span>
+<span class="c1"># 1. Click &quot;New Project&quot; button</span>
+<span class="c1"># 2. Select optimization type (Single/Multi-objective)</span>
+<span class="c1"># 3. Upload your dataset</span>
+<span class="c1"># 4. Configure parameters</span>
+<span class="c1"># 5. Start optimization</span>
+</pre></div>
+</div>
+<p><strong>仪表板组件</strong>：</p>
+<ul class="simple">
+<li><p><strong>项目列表</strong>：您所有的优化项目</p></li>
+<li><p><strong>快速操作</strong>：开始新的优化，导入数据</p></li>
+<li><p><strong>最新结果</strong>：最新优化结果</p></li>
+<li><p><strong>系统状态</strong>：内存使用情况、计算状态</p></li>
+</ul>
+</section>
+<section id="id15">
+<h3>数据管理<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<p><strong>数据上传接口</strong>：</p>
+<ul class="simple">
+<li><p>拖放 CSV 文件上传</p></li>
+<li><p>数据预览和验证</p></li>
+<li><p>特征选择和目标定义</p></li>
+<li><p>数据预处理选项</p></li>
+</ul>
+<p><strong>支持的数据格式</strong>：</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span># Example dataset format
+Feature1,Feature2,Feature3,Target
+2.0,1.2,0.5,250
+3.5,0.8,0.7,280
+1.8,1.5,0.3,240
+</pre></div>
+</div>
+</section>
+<section id="id16">
+<h3>优化配置<a class="headerlink" href="#id16" title="Link to this heading">#</a></h3>
+<p><strong>单目标设置</strong>：</p>
+<ol class="arabic simple">
+<li><p><strong>选择目标</strong>：选择要优化的属性</p></li>
+<li><p><strong>选择模型</strong>：高斯过程、随机森林等。</p></li>
+<li><p><strong>设置参数</strong>：采集函数、迭代次数</p></li>
+<li><p><strong>定义约束</strong>：成分限制、加工范围</p></li>
+<li><p><strong>配置虚拟空间</strong>：评估候选点</p></li>
+</ol>
+<p><strong>多目标设置</strong>：</p>
+<ol class="arabic simple">
+<li><p><strong>选择多个目标</strong>：选择2-6个目标</p></li>
+<li><p><strong>设置优化方向</strong>：最大化/最小化每个目标</p></li>
+<li><p><strong>选择 MOBO 算法</strong>：EHVI、PI 或 UCB</p></li>
+<li><p><strong>配置帕累托分析</strong>：参考点、权重</p></li>
+</ol>
+</section>
+<section id="id17">
+<h3>实时监控<a class="headerlink" href="#id17" title="Link to this heading">#</a></h3>
+<p><strong>进度跟踪</strong>：</p>
+<ul class="simple">
+<li><p>优化迭代计数器</p></li>
+<li><p>当前最佳值</p></li>
+<li><p>收敛图</p></li>
+<li><p>剩余时间估计</p></li>
+</ul>
+<p><strong>实时可视化</strong>：</p>
+<ul class="simple">
+<li><p>采集功能景观</p></li>
+<li><p>模型预测与实际值</p></li>
+<li><p>帕累托前沿演化（多目标）</p></li>
+<li><p>功能重要性更新</p></li>
+</ul>
+</section>
+<section id="id18">
+<h3>结果分析<a class="headerlink" href="#id18" title="Link to this heading">#</a></h3>
+<p><strong>综合结果视图</strong>：</p>
+<ul class="simple">
+<li><p><strong>统计摘要</strong>：最佳值、改进指标</p></li>
+<li><p><strong>详细表格</strong>：所有带有预测的评估点</p></li>
+<li><p><strong>交互式绘图</strong>：缩放、平移和探索结果</p></li>
+<li><p><strong>导出选项</strong>：保存绘图、数据和报告</p></li>
+</ul>
+</section>
+</section>
+<section id="id19">
+<h2>实际例子<a class="headerlink" href="#id19" title="Link to this heading">#</a></h2>
+<section id="id20">
+<h3>示例1：合金成分优化<a class="headerlink" href="#id20" title="Link to this heading">#</a></h3>
+<p><strong>场景</strong>：优化 Al-Cu-Mg 合金以获得最大强度</p>
+<p><strong>BgoFace 中的步骤</strong>：</p>
+<ol class="arabic">
+<li><p><strong>创建新项目</strong></p>
+<ul class="simple">
+<li><p>项目名称：“Al-Cu-Mg强度优化”</p></li>
+<li><p>类型：单目标</p></li>
+<li><p>目标：力量最大化</p></li>
+</ul>
+</li>
+<li><p><strong>上传训练数据</strong></p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Cu,Mg,Si,Strength
+2.0,1.2,0.5,250
+3.5,0.8,0.7,280
+1.8,1.5,0.3,240
+4.2,0.9,0.8,290
+</pre></div>
+</div>
+</li>
+<li><p><strong>配置优化</strong></p>
+<ul class="simple">
+<li><p>特性：Cu、Mg、Si（成分百分比）</p></li>
+<li><p>目标：强度（MPa）</p></li>
+<li><p>模型：高斯过程</p></li>
+<li><p>收购：预期改善</p></li>
+<li><p>限制条件：Cu+Mg+Si &lt; 7%</p></li>
+</ul>
+</li>
+<li><p><strong>定义虚拟空间</strong></p>
+<ul class="simple">
+<li><p>铜范围：1.5-4.5%</p></li>
+<li><p>镁范围：0.7-1.6%</p></li>
+<li><p>Si范围：0.2-1.0%</p></li>
+<li><p>生成 1000 个候选作品</p></li>
+</ul>
+</li>
+<li><p><strong>运行优化</strong></p>
+<ul class="simple">
+<li><p>实时监控进度</p></li>
+<li><p>查看采集功能景观</p></li>
+<li><p>轨道收敛</p></li>
+</ul>
+</li>
+<li><p><strong>分析结果</strong></p>
+<ul class="simple">
+<li><p>最佳成分：Cu=3.8%、Mg=1.0%、Si=0.6%</p></li>
+<li><p>预测强度：295 MPa</p></li>
+<li><p>用于实验验证的导出建议</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="id21">
+<h3>示例 2：多目标热处理<a class="headerlink" href="#id21" title="Link to this heading">#</a></h3>
+<p><strong>场景</strong>：优化热处理以提高硬度和韧性</p>
+<p><strong>BgoFace 中的步骤</strong>：</p>
+<ol class="arabic">
+<li><p><strong>创建多目标项目</strong></p>
+<ul class="simple">
+<li><p>目标：最大化硬度、最大化韧性</p></li>
+<li><p>算法：EHVI</p></li>
+</ul>
+</li>
+<li><p><strong>上传过程数据</strong></p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>Temperature,Time,Cooling_Rate,Hardness,Toughness
+450,2,10,180,45
+500,4,20,220,35
+550,6,15,250,25
+</pre></div>
+</div>
+</li>
+<li><p><strong>配置参数</strong></p>
+<ul class="simple">
+<li><p>特征：温度（°C）、时间（小时）、冷却速率（°C/分钟）</p></li>
+<li><p>目标：硬度 (HV)、韧性 (J)</p></li>
+<li><p>限制条件：400°C ≤ 温度 ≤ 600°C</p></li>
+</ul>
+</li>
+<li><p><strong>运行多目标优化</strong></p>
+<ul class="simple">
+<li><p>监控帕累托前沿演化</p></li>
+<li><p>查看权衡分析</p></li>
+<li><p>跟踪超容量改进</p></li>
+</ul>
+</li>
+<li><p><strong>分析帕累托解</strong></p>
+<ul class="simple">
+<li><p>探索硬度和韧性之间的权衡</p></li>
+<li><p>根据需求选择首选解决方案</p></li>
+<li><p>导出多个推荐</p></li>
+</ul>
+</li>
+</ol>
+</section>
+</section>
+<section id="id22">
+<h2>高级功能<a class="headerlink" href="#id22" title="Link to this heading">#</a></h2>
+<section id="id23">
+<h3>约束处理<a class="headerlink" href="#id23" title="Link to this heading">#</a></h3>
+<p><strong>内置约束类型</strong>：</p>
+<ul class="simple">
+<li><p><strong>成分限制</strong>：总和限制、比率限制</p></li>
+<li><p><strong>加工限制</strong>：温度/压力范围</p></li>
+<li><p><strong>自定义约束</strong>：用户定义的数学表达式</p></li>
+</ul>
+<p><strong>约束定义接口</strong>：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example constraint definitions in BgoFace</span>
+<span class="n">constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;composition_sum&quot;</span><span class="p">:</span> <span class="s2">&quot;Cu + Mg + Si &lt;= 7.0&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;temperature_range&quot;</span><span class="p">:</span> <span class="s2">&quot;400 &lt;= Temperature &lt;= 600&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;cu_mg_ratio&quot;</span><span class="p">:</span> <span class="s2">&quot;1.5 &lt;= Cu/Mg &lt;= 4.0&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id24">
+<h3>批量优化<a class="headerlink" href="#id24" title="Link to this heading">#</a></h3>
+<p><strong>并行实验设计</strong>：</p>
+<ul class="simple">
+<li><p>选择多个点同时评估</p></li>
+<li><p>批量采集功能（q-EI、q-UCB）</p></li>
+<li><p>资源配置优化</p></li>
+<li><p>实验规划工具</p></li>
+</ul>
+</section>
+<section id="id25">
+<h3>型号对比<a class="headerlink" href="#id25" title="Link to this heading">#</a></h3>
+<p><strong>自动模型选择</strong>：</p>
+<ul class="simple">
+<li><p>比较多个替代模型</p></li>
+<li><p>交叉验证性能指标</p></li>
+<li><p>模型不确定性可视化</p></li>
+<li><p>自动最佳模型选择</p></li>
+</ul>
+</section>
+<section id="id26">
+<h3>导出和报告<a class="headerlink" href="#id26" title="Link to this heading">#</a></h3>
+<p><strong>全面的导出选项</strong>：</p>
+<ul class="simple">
+<li><p><strong>PDF 报告</strong>：完整的优化摘要</p></li>
+<li><p><strong>Excel 工作簿</strong>：数据表和图表</p></li>
+<li><p><strong>Python 脚本</strong>：以编程方式重现分析</p></li>
+<li><p><strong>演示幻灯片</strong>：即用型图形</p></li>
+</ul>
+</section>
+</section>
+<section id="bgolearn">
+<h2>与 Bgolearn 集成<a class="headerlink" href="#bgolearn" title="Link to this heading">#</a></h2>
+<p>BgoFace与Bgolearn生态系统无缝集成：</p>
+<section id="id27">
+<h3>代码生成<a class="headerlink" href="#id27" title="Link to this heading">#</a></h3>
+<p><strong>自动脚本生成</strong>：</p>
+<ul class="simple">
+<li><p>BgoFace 生成等效的 Python 代码</p></li>
+<li><p>用户可以通过编程方式重现结果</p></li>
+<li><p>从 GUI 轻松过渡到脚本编写</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example generated code from BgoFace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Initialize optimizer</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="c1"># Configuration from BgoFace</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Mission</span><span class="o">=</span><span class="s1">&#39;Regression&#39;</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>  <span class="c1"># 10-fold cross-validation</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id28">
+<h3>数据同步<a class="headerlink" href="#id28" title="Link to this heading">#</a></h3>
+<p><strong>无缝数据流</strong>：</p>
+<ul class="simple">
+<li><p>从 Bgolearn 项目导入数据</p></li>
+<li><p>将结果导出为 Bgolearn 格式</p></li>
+<li><p>保持数据一致性</p></li>
+<li><p>版本控制集成</p></li>
+</ul>
+</section>
+</section>
+<section id="id29">
+<h2>最佳实践<a class="headerlink" href="#id29" title="Link to this heading">#</a></h2>
+<section id="id30">
+<h3>项目组织<a class="headerlink" href="#id30" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>使用描述性名称</strong>：清除项目和文件名</p></li>
+<li><p><strong>文档参数</strong>：添加注释以供将来参考</p></li>
+<li><p><strong>保存中间结果</strong>：定期检查点</p></li>
+<li><p><strong>按材料系统组织</strong>：组相关项目</p></li>
+</ol>
+</section>
+<section id="id31">
+<h3>数据质量<a class="headerlink" href="#id31" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>验证输入数据</strong>：检查异常值和错误</p></li>
+<li><p><strong>足够的训练数据</strong>：每个特征 &gt;10 个样本</p></li>
+<li><p><strong>代表性抽样</strong>：很好地覆盖设计空间</p></li>
+<li><p><strong>质量控制</strong>：消除实验错误</p></li>
+</ol>
+</section>
+<section id="id32">
+<h3>优化策略<a class="headerlink" href="#id32" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>从简单开始</strong>：从单目标问题开始</p></li>
+<li><p><strong>验证模型</strong>：使用交叉验证</p></li>
+<li><p><strong>检查收敛</strong>：监控优化进度</p></li>
+<li><p><strong>实验验证</strong>：始终测试建议</p></li>
+</ol>
+</section>
+</section>
+<section id="id33">
+<h2>故障排除<a class="headerlink" href="#id33" title="Link to this heading">#</a></h2>
+<section id="id34">
+<h3>常见问题<a class="headerlink" href="#id34" title="Link to this heading">#</a></h3>
+<p><strong>应用程序无法启动</strong>：</p>
+<ul class="simple">
+<li><p>检查系统要求</p></li>
+<li><p>以管理员身份运行 (Windows)</p></li>
+<li><p>验证防病毒设置</p></li>
+<li><p>下载最新版本</p></li>
+</ul>
+<p><strong>数据导入问题</strong>：</p>
+<ul class="simple">
+<li><p>检查 CSV 格式和编码</p></li>
+<li><p>验证列标题</p></li>
+<li><p>删除特殊字符</p></li>
+<li><p>确保数字数据类型</p></li>
+</ul>
+<p><strong>优化失败</strong>：</p>
+<ul class="simple">
+<li><p>减小虚拟空间大小</p></li>
+<li><p>检查约束定义</p></li>
+<li><p>验证数据质量</p></li>
+<li><p>尝试不同的代理模型</p></li>
+</ul>
+<p><strong>性能问题</strong>：</p>
+<ul class="simple">
+<li><p>关闭其他应用程序</p></li>
+<li><p>减小数据集大小</p></li>
+<li><p>使用更简单的模型</p></li>
+<li><p>增加可用内存</p></li>
+</ul>
+</section>
+<section id="id35">
+<h3>寻求帮助<a class="headerlink" href="#id35" title="Link to this heading">#</a></h3>
+<p><strong>支持资源</strong>：</p>
+<ul class="simple">
+<li><p><strong>用户手册</strong>：包含详细的 PDF 指南</p></li>
+<li><p><strong>视频教程</strong>：【哔哩哔哩频道】(<a class="reference external" href="https://www.bilibili.com/video/BV1LTtLeaEZp/">https://www.bilibili.com/video/BV1LTtLeaEZp/</a>)</p></li>
+<li><p><strong>GitHub 问题</strong>：<a class="reference external" href="https://github.com/Bgolearn/BgoFace/issues">报告错误并请求功能</a></p></li>
+<li><p><strong>电子邮件支持</strong>：联系开发团队</p></li>
+</ul>
+<p><strong>社区</strong>：</p>
+<ul class="simple">
+<li><p><strong>讨论论坛</strong>：分享经验和技巧</p></li>
+<li><p><strong>示例项目</strong>：下载示例数据集</p></li>
+<li><p><strong>最佳实践</strong>：向其他用户学习</p></li>
+</ul>
+</section>
+</section>
+<section id="id36">
+<h2>未来发展<a class="headerlink" href="#id36" title="Link to this heading">#</a></h2>
+<section id="id37">
+<h3>计划的功能<a class="headerlink" href="#id37" title="Link to this heading">#</a></h3>
+<p><strong>2.0 版路线图</strong>：</p>
+<ul class="simple">
+<li><p><strong>云集成</strong>：远程计算支持</p></li>
+<li><p><strong>协作功能</strong>：多用户项目</p></li>
+<li><p><strong>高级可视化</strong>：3D 交互式绘图</p></li>
+<li><p><strong>机器学习</strong>：自动超参数调整</p></li>
+<li><p><strong>集成</strong>：与实验设备连接</p></li>
+</ul>
+<p><strong>社区贡献</strong>：</p>
+<ul class="simple">
+<li><p>用于自定义算法的插件系统</p></li>
+<li><p>常用材质模板库</p></li>
+<li><p>共享项目存储库</p></li>
+<li><p>教育资源</p></li>
+</ul>
+</section>
+</section>
+<section id="id38">
+<h2>引用和许可<a class="headerlink" href="#id38" title="Link to this heading">#</a></h2>
+<section id="id39">
+<h3>学术用途<a class="headerlink" href="#id39" title="Link to this heading">#</a></h3>
+<p>如果您在研究中使用 BgoFace，请引用：</p>
+<div class="highlight-bibtex notranslate"><div class="highlight"><pre><span></span><span class="nc">@article</span><span class="p">{</span><span class="nl">li2025optimize</span><span class="p">,</span>
+<span class="w">  </span><span class="na">title</span><span class="p">=</span><span class="s">{Optimize the quantum yield of G-quartet-based circularly polarized luminescence materials via active learning strategy-BgoFace}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">author</span><span class="p">=</span><span class="s">{Li, Tianliang and Chen, Lifei and Cao, Bin and Liu, Siyuan and Lin, Lixing and Li, Zeyu and Chen, Yingying and Li, Zhenzhen and Zhang, Tong-yi and Feng, Lingyan}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">journal</span><span class="p">=</span><span class="s">{Materials Genome Engineering Advances}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">volume</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">number</span><span class="p">=</span><span class="s">{3}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">pages</span><span class="p">=</span><span class="s">{e70031}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">year</span><span class="p">=</span><span class="s">{2025}</span><span class="p">,</span>
+<span class="w">  </span><span class="na">publisher</span><span class="p">=</span><span class="s">{Wiley Online Library}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id40">
+<h3>执照<a class="headerlink" href="#id40" title="Link to this heading">#</a></h3>
+<p><strong>仅供学术和研究使用</strong></p>
+<ul class="simple">
+<li><p>✅ 学术研究和教育</p></li>
+<li><p>✅ 非商业性科学研究</p></li>
+<li><p>✅ 开源贡献</p></li>
+<li><p>❌商业应用</p></li>
+<li><p>❌ 专有软件集成</p></li>
+<li><p>❌ 创收活动</p></li>
+</ul>
+<p><strong>版权</strong>：© 2024 Bgolearn 开发团队。版权所有。</p>
+<p><strong>开发团队</strong>：</p>
+<ul class="simple">
+<li><p><strong>首席开发人员</strong>：曹斌（香港科技大学，广州）</p></li>
+<li><p><strong>UI开发</strong>：Siyuan Liu（同济大学）、Bin Cao（香港科技大学，广州）</p></li>
+<li><p><strong>指导</strong>：张同义教授（上海大学）、冯凌燕教授（上海大学）</p></li>
+</ul>
+</section>
+</section>
+<section id="id41">
+<h2>下一步<a class="headerlink" href="#id41" title="Link to this heading">#</a></h2>
+<p>准备好开始使用 BgoFace 了吗？接下来要做的事情如下：</p>
+<ol class="arabic simple">
+<li><p><strong>下载BgoFace</strong>：从<a class="reference external" href="https://github.com/Bgolearn/BgoFace/releases">GitHub发布</a>获取最新版本</p></li>
+<li><p><strong>观看教程</strong>：按照<a class="reference external" href="https://www.bilibili.com/video/BV1LTtLeaEZp/">视频指南</a></p></li>
+<li><p><strong>尝试示例</strong>：从包含的示例项目开始</p></li>
+<li><p><strong>加入社区</strong>：与其他用户和开发人员联系</p></li>
+<li><p><strong>探索高级功能</strong>：了解多目标优化和约束</p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>相关文档：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="getting_started.html"><span class="doc">开始使用 Bgolearn</span></a> - 安装和设置 Bgolearn</p></li>
+<li><p><a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn：多目标贝叶斯全局优化</span></a> - 多目标优化</p></li>
+<li><p><a class="reference internal" href="materials_discovery.html"><span class="doc">使用 Bgolearn 发现材料</span></a> - 材料发现示例</p></li>
+<li><p><span class="xref std std-doc">visualization</span> - 高级绘图技术</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./zh"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">主要特点</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">仪表板</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">优化管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可视化工具</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">建筑学</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">安装和设置</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">选项 1：下载预构建的应用程序（推荐）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">选项 2：从源代码构建</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">先决条件</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">克隆和设置</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">构建可执行文件</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">用户界面指南</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">主仪表板</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">数据管理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">优化配置</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">实时监控</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">结果分析</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">实际例子</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">示例1：合金成分优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">示例 2：多目标热处理</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">高级功能</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">约束处理</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">批量优化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">型号对比</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">导出和报告</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bgolearn">与 Bgolearn 集成</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id27">代码生成</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id28">数据同步</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id29">最佳实践</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id30">项目组织</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id31">数据质量</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id32">优化策略</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id33">故障排除</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id34">常见问题</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id35">寻求帮助</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id36">未来发展</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id37">计划的功能</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id38">引用和许可</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id39">学术用途</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id40">执照</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id41">下一步</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

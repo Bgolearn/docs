@@ -1,0 +1,1640 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Surrogate Models in Bgolearn &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'surrogate_models';</script>
+    <script src="_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Optimization Strategies" href="optimization_strategies.html" />
+    <link rel="prev" title="5. Acquisition Functions Guide" href="acquisition_functions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/surrogate_models.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fsurrogate_models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/surrogate_models.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Surrogate Models in Bgolearn</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">6.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-process-gaussianprocess">6.2. Gaussian Process (GaussianProcess)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">6.2.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">6.2.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">6.2.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-use-cases">6.2.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-alloy-optimization-with-gp">6.2.5. Example: Alloy Optimization with GP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-randomforest">6.3. Random Forest (RandomForest)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.3.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.3.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.3.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-processing-parameter-optimization">6.3.5. Example: Processing Parameter Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-regression-svr">6.4. Support Vector Regression (SVR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.4.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">6.4.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">6.4.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-high-dimensional-optimization">6.4.5. Example: High-Dimensional Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-mlp">6.5. Multi-Layer Perceptron (MLP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.5.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">6.5.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.5.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.5.4. Best Use Cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost">6.6. AdaBoost</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.6.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.6.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6.6.3. Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection-guidelines">6.7. Model Selection Guidelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">6.7.1. Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-selection-criteria">6.7.2. Detailed Selection Criteria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples">6.8. Practical Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">6.8.1. Model Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning">6.8.2. Hyperparameter Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topics">6.9. Advanced Topics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">6.9.1. Ensemble Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning">6.9.2. Transfer Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-learning">6.9.3. Online Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">6.10. Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">6.10.1. Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">6.10.2. Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">6.11. Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="surrogate-models-in-bgolearn">
+<h1><span class="section-number">6. </span>Surrogate Models in Bgolearn<a class="headerlink" href="#surrogate-models-in-bgolearn" title="Link to this heading">#</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Important</strong>: All data must be pandas DataFrames/Series, not numpy arrays!</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_matrix</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> with column names</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Measured_response</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtual_samples</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code> with same column names</p></li>
+</ul>
+<p>Using numpy arrays will cause: <code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'numpy.ndarray'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'columns'</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This page explains the different surrogate models available in Bgolearn and how to choose the right one for your optimization problem.</p>
+</div>
+<section id="overview">
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Surrogate models (also called metamodels) are the core of Bayesian optimization. They approximate the expensive-to-evaluate objective function and provide uncertainty estimates that guide the optimization process.</p>
+<p>Bgolearn supports several surrogate models, each with different strengths and use cases:</p>
+<ol class="arabic simple">
+<li><p><strong>Gaussian Process (GP)</strong> - Default and most common</p></li>
+<li><p><strong>Random Forest (RF)</strong> - Good for discrete/categorical features</p></li>
+<li><p><strong>Support Vector Regression (SVR)</strong> - Robust to noise</p></li>
+<li><p><strong>Multi-Layer Perceptron (MLP)</strong> - Neural network approach</p></li>
+<li><p><strong>AdaBoost</strong> - Ensemble method</p></li>
+</ol>
+</section>
+<section id="gaussian-process-gaussianprocess">
+<h2><span class="section-number">6.2. </span>Gaussian Process (GaussianProcess)<a class="headerlink" href="#gaussian-process-gaussianprocess" title="Link to this heading">#</a></h2>
+<section id="theory">
+<h3><span class="section-number">6.2.1. </span>Theory<a class="headerlink" href="#theory" title="Link to this heading">#</a></h3>
+<p>Gaussian Processes are the gold standard for Bayesian optimization. They provide both predictions and uncertainty estimates in a principled way.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Use Gaussian Process (default)</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span>  <span class="c1"># Explicit specification</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="advantages">
+<h3><span class="section-number">6.2.2. </span>Advantages<a class="headerlink" href="#advantages" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">GP Strengths</p>
+<ul class="simple">
+<li><p><strong>Uncertainty Quantification</strong>: Provides prediction uncertainty</p></li>
+<li><p><strong>Theoretical Foundation</strong>: Well-established Bayesian framework</p></li>
+<li><p><strong>Smooth Interpolation</strong>: Works well for continuous functions</p></li>
+<li><p><strong>Few Hyperparameters</strong>: Relatively easy to tune</p></li>
+<li><p><strong>Global Optimization</strong>: Good for finding global optima</p></li>
+</ul>
+</div>
+</section>
+<section id="limitations">
+<h3><span class="section-number">6.2.3. </span>Limitations<a class="headerlink" href="#limitations" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">GP Limitations</p>
+<ul class="simple">
+<li><p><strong>Computational Cost</strong>: O(n³) scaling with training data</p></li>
+<li><p><strong>Smoothness Assumption</strong>: Assumes smooth underlying function</p></li>
+<li><p><strong>High-Dimensional Challenges</strong>: Struggles with many features (&gt;20)</p></li>
+<li><p><strong>Categorical Features</strong>: Not naturally suited for discrete variables</p></li>
+</ul>
+</div>
+</section>
+<section id="best-use-cases">
+<h3><span class="section-number">6.2.4. </span>Best Use Cases<a class="headerlink" href="#best-use-cases" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Continuous optimization problems</strong></p></li>
+<li><p><strong>Smooth objective functions</strong></p></li>
+<li><p><strong>Small to medium datasets</strong> (&lt;1000 samples)</p></li>
+<li><p><strong>When uncertainty is important</strong></p></li>
+<li><p><strong>Materials property optimization</strong></p></li>
+</ul>
+</section>
+<section id="example-alloy-optimization-with-gp">
+<h3><span class="section-number">6.2.5. </span>Example: Alloy Optimization with GP<a class="headerlink" href="#example-alloy-optimization-with-gp" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Alloy composition optimization - use pandas DataFrame</span>
+<span class="n">data_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>  <span class="c1"># Cu, Mg, Si</span>
+    <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="n">strength_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">])</span>  <span class="c1"># MPa</span>
+<span class="n">measured_response</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">strength_values</span><span class="p">)</span>
+
+
+<span class="n">virtual_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="c1"># GP optimization</span>
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">strength_values</span><span class="p">,</span>  <span class="c1"># Series</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>  <span class="c1"># 2-fold cross-validation</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GP optimization completed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="random-forest-randomforest">
+<h2><span class="section-number">6.3. </span>Random Forest (RandomForest)<a class="headerlink" href="#random-forest-randomforest" title="Link to this heading">#</a></h2>
+<section id="id1">
+<h3><span class="section-number">6.3.1. </span>Theory<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Random Forest builds multiple decision trees and averages their predictions. It’s particularly good for handling discrete features and non-linear relationships.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use Random Forest</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3><span class="section-number">6.3.2. </span>Advantages<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">RF Strengths</p>
+<ul class="simple">
+<li><p><strong>Handles Discrete Features</strong>: Natural for categorical variables</p></li>
+<li><p><strong>Non-linear Relationships</strong>: Captures complex patterns</p></li>
+<li><p><strong>Robust to Outliers</strong>: Less sensitive to noisy data</p></li>
+<li><p><strong>Fast Training</strong>: Efficient for large datasets</p></li>
+<li><p><strong>Feature Importance</strong>: Provides feature ranking</p></li>
+<li><p><strong>No Assumptions</strong>: Doesn’t assume function smoothness</p></li>
+</ul>
+</div>
+</section>
+<section id="id3">
+<h3><span class="section-number">6.3.3. </span>Limitations<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">RF Limitations</p>
+<ul class="simple">
+<li><p><strong>Limited Uncertainty</strong>: Poor uncertainty quantification</p></li>
+<li><p><strong>Overfitting Risk</strong>: Can overfit with small datasets</p></li>
+<li><p><strong>Discontinuous</strong>: Creates step-wise predictions</p></li>
+<li><p><strong>Hyperparameter Tuning</strong>: Many parameters to optimize</p></li>
+</ul>
+</div>
+</section>
+<section id="id4">
+<h3><span class="section-number">6.3.4. </span>Best Use Cases<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Discrete/categorical features</strong></p></li>
+<li><p><strong>Large datasets</strong> (&gt;1000 samples)</p></li>
+<li><p><strong>Non-smooth functions</strong></p></li>
+<li><p><strong>When robustness is important</strong></p></li>
+<li><p><strong>Mixed variable types</strong></p></li>
+</ul>
+</section>
+<section id="example-processing-parameter-optimization">
+<h3><span class="section-number">6.3.5. </span>Example: Processing Parameter Optimization<a class="headerlink" href="#example-processing-parameter-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Processing parameters with discrete levels - use pandas DataFrame</span>
+<span class="n">processing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">450</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>    <span class="c1"># Temperature, Time, Atmosphere (1=N2, 2=Ar, 3=Air)</span>
+    <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">550</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">480</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Atmosphere&#39;</span><span class="p">])</span>
+
+<span class="n">hardness_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+
+<span class="n">virtual_processing</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">475</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">525</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">490</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Atmosphere&#39;</span><span class="p">])</span>
+
+<span class="c1"># Random Forest for mixed variables</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">processing_data</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">hardness_values</span><span class="p">,</span>  <span class="c1"># Series</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_processing</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="s1">&#39;LOOCV&#39;</span>  <span class="c1"># Leave-one-out cross-validation</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Random Forest optimization completed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="support-vector-regression-svr">
+<h2><span class="section-number">6.4. </span>Support Vector Regression (SVR)<a class="headerlink" href="#support-vector-regression-svr" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h3><span class="section-number">6.4.1. </span>Theory<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<p>SVR uses support vector machines for regression, finding a function that deviates from targets by at most ε while being as flat as possible.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use SVR</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;SVR&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">6.4.2. </span>Advantages<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">SVR Strengths</p>
+<ul class="simple">
+<li><p><strong>Robust to Noise</strong>: Handles noisy data well</p></li>
+<li><p><strong>High-Dimensional</strong>: Works with many features</p></li>
+<li><p><strong>Kernel Flexibility</strong>: Different kernel functions available</p></li>
+<li><p><strong>Sparse Solution</strong>: Uses only support vectors</p></li>
+<li><p><strong>Regularization</strong>: Built-in overfitting protection</p></li>
+</ul>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">6.4.3. </span>Limitations<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">SVR Limitations</p>
+<ul class="simple">
+<li><p><strong>Parameter Sensitivity</strong>: Requires careful tuning</p></li>
+<li><p><strong>No Uncertainty</strong>: Doesn’t provide prediction uncertainty</p></li>
+<li><p><strong>Kernel Selection</strong>: Choosing the right kernel is crucial</p></li>
+<li><p><strong>Computational Cost</strong>: Can be slow for large datasets</p></li>
+</ul>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">6.4.4. </span>Best Use Cases<a class="headerlink" href="#id8" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Noisy data</strong></p></li>
+<li><p><strong>High-dimensional problems</strong></p></li>
+<li><p><strong>When robustness is critical</strong></p></li>
+<li><p><strong>Non-linear relationships</strong></p></li>
+</ul>
+</section>
+<section id="example-high-dimensional-optimization">
+<h3><span class="section-number">6.4.5. </span>Example: High-Dimensional Optimization<a class="headerlink" href="#example-high-dimensional-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># High-dimensional alloy with many elements - use pandas DataFrame</span>
+<span class="n">element_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Al&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe&#39;</span><span class="p">,</span> <span class="s1">&#39;Mn&#39;</span><span class="p">,</span> <span class="s1">&#39;Cr&#39;</span><span class="p">,</span> <span class="s1">&#39;Zn&#39;</span><span class="p">]</span>
+<span class="n">high_dim_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">20</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>  <span class="c1"># 8 alloying elements</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">element_names</span>
+<span class="p">)</span>
+<span class="n">high_dim_response</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">200</span><span class="p">)</span>
+
+<span class="n">high_dim_virtual</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="mi">50</span><span class="p">,</span> <span class="mi">8</span><span class="p">)),</span>
+    <span class="n">columns</span><span class="o">=</span><span class="n">element_names</span>
+<span class="p">)</span>
+
+<span class="c1"># SVR for high-dimensional problem</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">high_dim_data</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">high_dim_response</span><span class="p">,</span>  <span class="c1"># Series</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">high_dim_virtual</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;SVR&#39;</span><span class="p">,</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SVR optimization completed!&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="multi-layer-perceptron-mlp">
+<h2><span class="section-number">6.5. </span>Multi-Layer Perceptron (MLP)<a class="headerlink" href="#multi-layer-perceptron-mlp" title="Link to this heading">#</a></h2>
+<section id="id9">
+<h3><span class="section-number">6.5.1. </span>Theory<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
+<p>MLP is a neural network with multiple hidden layers that can approximate complex non-linear functions.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use MLP</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;MLP&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">6.5.2. </span>Advantages<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">MLP Strengths</p>
+<ul class="simple">
+<li><p><strong>Universal Approximator</strong>: Can approximate any continuous function</p></li>
+<li><p><strong>Non-linear Modeling</strong>: Excellent for complex relationships</p></li>
+<li><p><strong>Scalable</strong>: Can handle large datasets</p></li>
+<li><p><strong>Flexible Architecture</strong>: Customizable network structure</p></li>
+</ul>
+</div>
+</section>
+<section id="id11">
+<h3><span class="section-number">6.5.3. </span>Limitations<a class="headerlink" href="#id11" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">MLP Limitations</p>
+<ul class="simple">
+<li><p><strong>Requires Large Data</strong>: Needs substantial training data</p></li>
+<li><p><strong>Hyperparameter Tuning</strong>: Many parameters to optimize</p></li>
+<li><p><strong>Overfitting Risk</strong>: Can easily overfit small datasets</p></li>
+<li><p><strong>No Uncertainty</strong>: Doesn’t provide uncertainty estimates</p></li>
+<li><p><strong>Training Instability</strong>: Can be sensitive to initialization</p></li>
+</ul>
+</div>
+</section>
+<section id="id12">
+<h3><span class="section-number">6.5.4. </span>Best Use Cases<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Large datasets</strong> (&gt;500 samples)</p></li>
+<li><p><strong>Complex non-linear relationships</strong></p></li>
+<li><p><strong>When sufficient data is available</strong></p></li>
+<li><p><strong>Pattern recognition tasks</strong></p></li>
+</ul>
+</section>
+</section>
+<section id="adaboost">
+<h2><span class="section-number">6.6. </span>AdaBoost<a class="headerlink" href="#adaboost" title="Link to this heading">#</a></h2>
+<section id="id13">
+<h3><span class="section-number">6.6.1. </span>Theory<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<p>AdaBoost (Adaptive Boosting) combines multiple weak learners to create a strong predictor.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use AdaBoost</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;AdaBoost&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id14">
+<h3><span class="section-number">6.6.2. </span>Advantages<a class="headerlink" href="#id14" title="Link to this heading">#</a></h3>
+<div class="tip admonition">
+<p class="admonition-title">AdaBoost Strengths</p>
+<ul class="simple">
+<li><p><strong>Ensemble Method</strong>: Combines multiple models</p></li>
+<li><p><strong>Adaptive</strong>: Focuses on difficult examples</p></li>
+<li><p><strong>Reduces Bias</strong>: Often improves prediction accuracy</p></li>
+<li><p><strong>Versatile</strong>: Works with different base learners</p></li>
+</ul>
+</div>
+</section>
+<section id="id15">
+<h3><span class="section-number">6.6.3. </span>Limitations<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">AdaBoost Limitations</p>
+<ul class="simple">
+<li><p><strong>Sensitive to Noise</strong>: Can overfit noisy data</p></li>
+<li><p><strong>Computational Cost</strong>: Slower than single models</p></li>
+<li><p><strong>Parameter Tuning</strong>: Requires careful tuning</p></li>
+<li><p><strong>Limited Uncertainty</strong>: Poor uncertainty quantification</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="model-selection-guidelines">
+<h2><span class="section-number">6.7. </span>Model Selection Guidelines<a class="headerlink" href="#model-selection-guidelines" title="Link to this heading">#</a></h2>
+<section id="decision-tree">
+<h3><span class="section-number">6.7.1. </span>Decision Tree<a class="headerlink" href="#decision-tree" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Start Here
+    ↓
+Do you have uncertainty requirements?
+    ↓ Yes                    ↓ No
+Gaussian Process         What type of features?
+    ↓                        ↓
+Is data smooth?         Continuous → SVR/MLP
+    ↓ Yes    ↓ No           ↓
+    GP    Random Forest   Discrete → Random Forest
+                             ↓
+                        Large dataset?
+                             ↓ Yes    ↓ No
+                            MLP    Random Forest
+</pre></div>
+</div>
+</section>
+<section id="detailed-selection-criteria">
+<h3><span class="section-number">6.7.2. </span>Detailed Selection Criteria<a class="headerlink" href="#detailed-selection-criteria" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table" id="model-selection">
+<caption><span class="caption-number">Table 6.1 </span><span class="caption-text">Model Selection Guide</span><a class="headerlink" href="#model-selection" title="Link to this table">#</a></caption>
+<thead>
+<tr class="row-odd"><th class="head"><p>Criterion</p></th>
+<th class="head"><p>Gaussian Process</p></th>
+<th class="head"><p>Random Forest</p></th>
+<th class="head"><p>SVR</p></th>
+<th class="head"><p>MLP</p></th>
+<th class="head"><p>AdaBoost</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Data Size</strong></p></td>
+<td><p>&lt;1000</p></td>
+<td><blockquote>
+<div><p>500</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>500</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>500</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>500</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Feature Types</strong></p></td>
+<td><p>Continuous</p></td>
+<td><p>Mixed</p></td>
+<td><p>Continuous</p></td>
+<td><p>Continuous</p></td>
+<td><p>Mixed</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Uncertainty</strong></p></td>
+<td><p>Excellent</p></td>
+<td><p>Poor</p></td>
+<td><p>None</p></td>
+<td><p>None</p></td>
+<td><p>Poor</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Noise Tolerance</strong></p></td>
+<td><p>Medium</p></td>
+<td><p>High</p></td>
+<td><p>High</p></td>
+<td><p>Medium</p></td>
+<td><p>Low</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Training Speed</strong></p></td>
+<td><p>Slow</p></td>
+<td><p>Fast</p></td>
+<td><p>Medium</p></td>
+<td><p>Slow</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Prediction Speed</strong></p></td>
+<td><p>Fast</p></td>
+<td><p>Fast</p></td>
+<td><p>Fast</p></td>
+<td><p>Fast</p></td>
+<td><p>Medium</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="practical-examples">
+<h2><span class="section-number">6.8. </span>Practical Examples<a class="headerlink" href="#practical-examples" title="Link to this heading">#</a></h2>
+<section id="model-comparison">
+<h3><span class="section-number">6.8.1. </span>Model Comparison<a class="headerlink" href="#model-comparison" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create test data for model comparison</span>
+<span class="n">data_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="n">measured_response</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">])</span>
+
+<span class="n">virtual_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="c1"># Compare all models on the same problem</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;SVR&#39;</span><span class="p">,</span> <span class="s1">&#39;MLP&#39;</span><span class="p">,</span> <span class="s1">&#39;AdaBoost&#39;</span><span class="p">]</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">model_name</span> <span class="ow">in</span> <span class="n">models</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing </span><span class="si">{</span><span class="n">model_name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+            <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+            <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>  <span class="c1"># Series</span>
+            <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>  <span class="c1"># DataFrame</span>
+            <span class="n">Classifier</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span>
+            <span class="n">CV_test</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>  <span class="c1"># 5-fold cross-validation</span>
+            <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+        
+        <span class="c1"># Get results using EI</span>
+        <span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+        <span class="n">recommended_point</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Get model performance metrics (if available)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Access cross-validation score if available</span>
+            <span class="n">cv_score</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="s1">&#39;cv_score_&#39;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">cv_score</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;recommended_point&#39;</span><span class="p">:</span> <span class="n">recommended_point</span><span class="p">,</span>
+            <span class="s1">&#39;ei_max&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ei_values</span><span class="p">),</span>
+            <span class="s1">&#39;cv_score&#39;</span><span class="p">:</span> <span class="n">cv_score</span><span class="p">,</span>
+            <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Success: EI max = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Failed: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">results</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+<span class="c1"># Display comparison</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Model Performance Comparison:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">model</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: Success - EI max = </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;ei_max&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">model</span><span class="si">:</span><span class="s2">15s</span><span class="si">}</span><span class="s2">: Failed - </span><span class="si">{</span><span class="n">result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Unknown error&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="hyperparameter-tuning">
+<h3><span class="section-number">6.8.2. </span>Hyperparameter Tuning<a class="headerlink" href="#hyperparameter-tuning" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Hyperparameter tuning in Bgolearn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Create test data</span>
+<span class="n">data_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">450</span><span class="p">],</span>  <span class="c1"># Cu, Mg, Si, Temperature</span>
+    <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">480</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">520</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">490</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">510</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mi">470</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">])</span>
+
+<span class="n">strength_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">275</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">295</span><span class="p">])</span>
+
+<span class="n">virtual_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mi">485</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">505</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">515</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">,</span> <span class="s1">&#39;Temperature&#39;</span><span class="p">])</span>
+
+<span class="c1"># Hyperparameter tuning: compare different cross-validation settings</span>
+<span class="n">cv_settings</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;LOOCV&#39;</span><span class="p">]</span>
+<span class="n">normalization_settings</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">]</span>
+
+<span class="n">best_score</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+<span class="n">best_config</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting hyperparameter tuning...&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">cv_test</span> <span class="ow">in</span> <span class="n">cv_settings</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">normalize</span> <span class="ow">in</span> <span class="n">normalization_settings</span><span class="p">:</span>
+        <span class="n">config_name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CV_</span><span class="si">{</span><span class="n">cv_test</span><span class="si">}</span><span class="s2">_Norm_</span><span class="si">{</span><span class="n">normalize</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Testing configuration: </span><span class="si">{</span><span class="n">config_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+                <span class="n">Measured_response</span><span class="o">=</span><span class="n">strength_values</span><span class="p">,</span>
+                <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+                <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span>
+                <span class="n">CV_test</span><span class="o">=</span><span class="n">cv_test</span><span class="p">,</span>
+                <span class="n">Normalize</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span>
+                <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>  <span class="c1"># Ensure reproducibility</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Get EI values as performance metric</span>
+            <span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+            <span class="n">max_ei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span>
+
+            <span class="c1"># Calculate prediction quality</span>
+            <span class="n">predicted_mean</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+            <span class="n">predicted_std</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_std</span>
+
+            <span class="c1"># Combined score: EI max + inverse of prediction uncertainty</span>
+            <span class="n">uncertainty_score</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_std</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)</span>
+            <span class="n">combined_score</span> <span class="o">=</span> <span class="n">max_ei</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">uncertainty_score</span>
+
+            <span class="n">results</span><span class="p">[</span><span class="n">config_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;max_ei&#39;</span><span class="p">:</span> <span class="n">max_ei</span><span class="p">,</span>
+                <span class="s1">&#39;mean_uncertainty&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted_std</span><span class="p">),</span>
+                <span class="s1">&#39;combined_score&#39;</span><span class="p">:</span> <span class="n">combined_score</span><span class="p">,</span>
+                <span class="s1">&#39;recommended_point&#39;</span><span class="p">:</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">True</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="n">combined_score</span> <span class="o">&gt;</span> <span class="n">best_score</span><span class="p">:</span>
+                <span class="n">best_score</span> <span class="o">=</span> <span class="n">combined_score</span>
+                <span class="n">best_config</span> <span class="o">=</span> <span class="n">config_name</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Success - EI max: </span><span class="si">{</span><span class="n">max_ei</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">, Combined score: </span><span class="si">{</span><span class="n">combined_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Failed: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">results</span><span class="p">[</span><span class="n">config_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;success&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+<span class="c1"># Display tuning results</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Hyperparameter tuning results:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Configuration&#39;</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;EI Max&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Mean Uncertainty&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Combined Score&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">config</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">config</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;max_ei&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;10.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;mean_uncertainty&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;combined_score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">config</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Failed&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Best configuration: </span><span class="si">{</span><span class="n">best_config</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Best score: </span><span class="si">{</span><span class="n">best_score</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">best_config</span> <span class="ow">and</span> <span class="n">results</span><span class="p">[</span><span class="n">best_config</span><span class="p">][</span><span class="s1">&#39;success&#39;</span><span class="p">]:</span>
+    <span class="n">best_point</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">best_config</span><span class="p">][</span><span class="s1">&#39;recommended_point&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; Next experiment point recommended by best configuration:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Cu: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, T: </span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">K&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-topics">
+<h2><span class="section-number">6.9. </span>Advanced Topics<a class="headerlink" href="#advanced-topics" title="Link to this heading">#</a></h2>
+<section id="ensemble-methods">
+<h3><span class="section-number">6.9.1. </span>Ensemble Methods<a class="headerlink" href="#ensemble-methods" title="Link to this heading">#</a></h3>
+<p>Implement ensemble methods in Bgolearn by combining multiple surrogate models for improved performance:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># Create test data</span>
+<span class="n">data_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">1.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="n">strength_values</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">250</span><span class="p">,</span> <span class="mi">280</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">265</span><span class="p">,</span> <span class="mi">275</span><span class="p">])</span>
+
+<span class="n">virtual_samples</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">[</span><span class="mf">2.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.0</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Si&#39;</span><span class="p">])</span>
+
+<span class="c1"># Define ensemble method class</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BgolearnEnsemble</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Bgolearn ensemble method implementation&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;SVR&#39;</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_types</span> <span class="o">=</span> <span class="n">model_types</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_matrix</span><span class="p">,</span> <span class="n">measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Train all models&quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; Training ensemble models...&quot;</span><span class="p">)</span>
+
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">model_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model_types</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Training </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">model</span> <span class="o">=</span> <span class="n">opt</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+                    <span class="n">Measured_response</span><span class="o">=</span><span class="n">measured_response</span><span class="p">,</span>
+                    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+                    <span class="n">Classifier</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span>
+                    <span class="n">CV_test</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">kwargs</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2"> training successful&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">model_type</span><span class="si">}</span><span class="s2"> training failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Calculate model weights (based on EI performance)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_weights</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_weights</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calculate model weights based on EI performance&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">ei_scores</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ei_values</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+                <span class="n">ei_scores</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">ei_scores</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+        <span class="c1"># Normalize weights</span>
+        <span class="n">total_score</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">ei_scores</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">total_score</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">score</span><span class="o">/</span><span class="n">total_score</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">score</span> <span class="ow">in</span> <span class="n">ei_scores</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Equal weights</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">weights</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="mf">1.0</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model weights: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">ensemble_EI</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensemble expected improvement&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No trained models available&quot;</span><span class="p">)</span>
+
+        <span class="n">ensemble_ei</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ensemble_points</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ei_values</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+                <span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">ensemble_ei</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">ensemble_ei</span> <span class="o">=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">ei_values</span>
+                    <span class="n">ensemble_points</span> <span class="o">=</span> <span class="n">points</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">ensemble_ei</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">ei_values</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> EI calculation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Find the point corresponding to maximum EI</span>
+        <span class="k">if</span> <span class="n">ensemble_ei</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">max_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ensemble_ei</span><span class="p">)</span>
+            <span class="n">best_point</span> <span class="o">=</span> <span class="n">ensemble_points</span><span class="p">[</span><span class="n">max_idx</span><span class="p">:</span><span class="n">max_idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Maintain dimensions</span>
+            <span class="k">return</span> <span class="n">ensemble_ei</span><span class="p">,</span> <span class="n">best_point</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All model EI calculations failed&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">ensemble_predictions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ensemble predictions&quot;&quot;&quot;</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">uncertainties</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pred_mean</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+                <span class="n">pred_std</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_std</span>
+
+                <span class="n">predictions</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred_mean</span>
+                <span class="n">uncertainties</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pred_std</span>
+
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> prediction failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">predictions</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All model predictions failed&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Weighted average predictions</span>
+        <span class="n">ensemble_mean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">ensemble_std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">uncertainties</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pred</span> <span class="ow">in</span> <span class="n">predictions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">weight</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+            <span class="n">ensemble_mean</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">pred</span>
+            <span class="n">ensemble_std</span> <span class="o">+=</span> <span class="n">weight</span> <span class="o">*</span> <span class="n">uncertainties</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">ensemble_mean</span><span class="p">,</span> <span class="n">ensemble_std</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_model_comparison</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get model comparison results&quot;&quot;&quot;</span>
+        <span class="n">comparison</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ei_values</span><span class="p">,</span> <span class="n">points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+                <span class="n">pred_mean</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+                <span class="n">pred_std</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_std</span>
+
+                <span class="n">comparison</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;max_ei&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ei_values</span><span class="p">),</span>
+                    <span class="s1">&#39;mean_prediction&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pred_mean</span><span class="p">),</span>
+                    <span class="s1">&#39;mean_uncertainty&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">pred_std</span><span class="p">),</span>
+                    <span class="s1">&#39;weight&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                    <span class="s1">&#39;recommended_point&#39;</span><span class="p">:</span> <span class="n">points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">}</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">comparison</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+
+        <span class="k">return</span> <span class="n">comparison</span>
+
+<span class="c1"># Using ensemble methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting ensemble method demonstration&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># Create and train ensemble model</span>
+<span class="n">ensemble</span> <span class="o">=</span> <span class="n">BgolearnEnsemble</span><span class="p">(</span>
+    <span class="n">model_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="s1">&#39;RandomForest&#39;</span><span class="p">,</span> <span class="s1">&#39;SVR&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ensemble</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">data_matrix</span><span class="p">,</span>
+    <span class="n">measured_response</span><span class="o">=</span><span class="n">strength_values</span><span class="p">,</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">virtual_samples</span><span class="p">,</span>
+    <span class="n">seed</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Get ensemble predictions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Ensemble prediction results:&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ensemble_mean</span><span class="p">,</span> <span class="n">ensemble_std</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">ensemble_predictions</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ensemble prediction mean: </span><span class="si">{</span><span class="n">ensemble_mean</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  <span class="c1"># Show first 3</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ensemble prediction std: </span><span class="si">{</span><span class="n">ensemble_std</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ensemble prediction failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get ensemble EI</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Ensemble Expected Improvement:&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">ensemble_ei</span><span class="p">,</span> <span class="n">ensemble_point</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">ensemble_EI</span><span class="p">()</span>
+    <span class="n">max_ei_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ensemble_ei</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Maximum ensemble EI value: </span><span class="si">{</span><span class="n">ensemble_ei</span><span class="p">[</span><span class="n">max_ei_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Recommended next experiment point: Cu=</span><span class="si">{</span><span class="n">ensemble_point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Mg=</span><span class="si">{</span><span class="n">ensemble_point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">, Si=</span><span class="si">{</span><span class="n">ensemble_point</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ensemble EI calculation failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Model comparison</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Model performance comparison:&quot;</span><span class="p">)</span>
+<span class="n">comparison</span> <span class="o">=</span> <span class="n">ensemble</span><span class="o">.</span><span class="n">get_model_comparison</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Model&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Max EI&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Weight&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Mean Uncertainty&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">55</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">metrics</span> <span class="ow">in</span> <span class="n">comparison</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">if</span> <span class="s1">&#39;error&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">metrics</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;max_ei&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;10.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;8.3f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;mean_uncertainty&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Failed&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;-&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Ensemble method advantages:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Combines strengths of multiple models&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Improves prediction stability&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Reduces single model bias&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  - Automatic weight allocation&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="transfer-learning">
+<h3><span class="section-number">6.9.2. </span>Transfer Learning<a class="headerlink" href="#transfer-learning" title="Link to this heading">#</a></h3>
+<p>Use pre-trained models for related problems:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conceptual transfer learning</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">transfer_learning</span><span class="p">(</span><span class="n">source_model</span><span class="p">,</span> <span class="n">target_data</span><span class="p">,</span> <span class="n">target_response</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Transfer knowledge from source to target problem.&quot;&quot;&quot;</span>
+    <span class="c1"># Use source model as initialization</span>
+    <span class="c1"># Fine-tune on target data</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+<section id="online-learning">
+<h3><span class="section-number">6.9.3. </span>Online Learning<a class="headerlink" href="#online-learning" title="Link to this heading">#</a></h3>
+<p>Update models with new data:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conceptual online learning</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">online_update</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">new_x</span><span class="p">,</span> <span class="n">new_y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Update model with new observation.&quot;&quot;&quot;</span>
+    <span class="c1"># Add new data point</span>
+    <span class="c1"># Retrain or update model incrementally</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="troubleshooting">
+<h2><span class="section-number">6.10. </span>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<section id="common-issues">
+<h3><span class="section-number">6.10.1. </span>Common Issues<a class="headerlink" href="#common-issues" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Poor CV Scores</strong></p>
+<ul class="simple">
+<li><p>Try different models</p></li>
+<li><p>Check data quality</p></li>
+<li><p>Increase training data</p></li>
+<li><p>Adjust normalization</p></li>
+</ul>
+</li>
+<li><p><strong>Slow Training</strong></p>
+<ul class="simple">
+<li><p>Use Random Forest for large data</p></li>
+<li><p>Reduce virtual space size</p></li>
+<li><p>Consider SVR for high dimensions</p></li>
+</ul>
+</li>
+<li><p><strong>Overfitting</strong></p>
+<ul class="simple">
+<li><p>Use cross-validation</p></li>
+<li><p>Reduce model complexity</p></li>
+<li><p>Add more training data</p></li>
+</ul>
+</li>
+<li><p><strong>Poor Uncertainty</strong></p>
+<ul class="simple">
+<li><p>Use Gaussian Process</p></li>
+<li><p>Increase bootstrap iterations</p></li>
+<li><p>Check model assumptions</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="performance-optimization">
+<h3><span class="section-number">6.10.2. </span>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Tips for better performance</span>
+<span class="n">optimization_tips</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Data preprocessing&quot;</span><span class="p">:</span> <span class="s2">&quot;Normalize features, remove outliers&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Model selection&quot;</span><span class="p">:</span> <span class="s2">&quot;Start with GP, try RF for discrete features&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Hyperparameters&quot;</span><span class="p">:</span> <span class="s2">&quot;Use cross-validation for tuning&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Computational&quot;</span><span class="p">:</span> <span class="s2">&quot;Reduce virtual space size for speed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Validation&quot;</span><span class="p">:</span> <span class="s2">&quot;Use CV_test=10 or &#39;LOOCV&#39; for validation&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="next-steps">
+<h2><span class="section-number">6.11. </span>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Learn acquisition functions</strong>: <a class="reference internal" href="acquisition_functions.html"><span class="doc">Acquisition Functions Guide</span></a></p></li>
+<li><p><strong>Try optimization strategies</strong>: <a class="reference internal" href="optimization_strategies.html"><span class="doc">Optimization Strategies</span></a></p></li>
+<li><p><strong>Practice with examples</strong>: <a class="reference internal" href="examples/single_objective.html"><span class="doc">Single-Objective Optimization Examples</span></a></p></li>
+<li><p><strong>Explore multi-objective</strong>: <a class="reference internal" href="multibgolearn.html"><span class="doc">MultiBgolearn: Multi-Objective Bayesian Global Optimization</span></a></p></li>
+</ul>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more on surrogate modeling:</p>
+<ul class="simple">
+<li><p>Rasmussen, C.E. “Gaussian Processes for Machine Learning”</p></li>
+<li><p>Forrester, A. “Engineering Design via Surrogate Modelling”</p></li>
+<li><p>Queipo, N.V. “Surrogate-based Analysis and Optimization”</p></li>
+</ul>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="acquisition_functions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Acquisition Functions Guide</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="optimization_strategies.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Optimization Strategies</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">6.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-process-gaussianprocess">6.2. Gaussian Process (GaussianProcess)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">6.2.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">6.2.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations">6.2.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-use-cases">6.2.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-alloy-optimization-with-gp">6.2.5. Example: Alloy Optimization with GP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#random-forest-randomforest">6.3. Random Forest (RandomForest)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">6.3.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">6.3.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">6.3.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">6.3.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-processing-parameter-optimization">6.3.5. Example: Processing Parameter Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#support-vector-regression-svr">6.4. Support Vector Regression (SVR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">6.4.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">6.4.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">6.4.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">6.4.4. Best Use Cases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-high-dimensional-optimization">6.4.5. Example: High-Dimensional Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-layer-perceptron-mlp">6.5. Multi-Layer Perceptron (MLP)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">6.5.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">6.5.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">6.5.3. Limitations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">6.5.4. Best Use Cases</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adaboost">6.6. AdaBoost</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">6.6.1. Theory</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">6.6.2. Advantages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">6.6.3. Limitations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection-guidelines">6.7. Model Selection Guidelines</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decision-tree">6.7.1. Decision Tree</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-selection-criteria">6.7.2. Detailed Selection Criteria</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-examples">6.8. Practical Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-comparison">6.8.1. Model Comparison</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning">6.8.2. Hyperparameter Tuning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-topics">6.9. Advanced Topics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ensemble-methods">6.9.1. Ensemble Methods</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#transfer-learning">6.9.2. Transfer Learning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#online-learning">6.9.3. Online Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">6.10. Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-issues">6.10.1. Common Issues</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#performance-optimization">6.10.2. Performance Optimization</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">6.11. Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

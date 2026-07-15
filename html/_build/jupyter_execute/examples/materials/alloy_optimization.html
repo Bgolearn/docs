@@ -1,0 +1,1523 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Alloy Composition Optimization &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/language-switcher.css?v=757bca44" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_build/jupyter_execute/examples/materials/alloy_optimization';</script>
+    <script src="../../../../_static/language-switcher.js?v=095d934b"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 09, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+<aside class="bd-header-announcement" aria-label="Announcement">
+  <div class="bd-header-announcement__content">Bgolearn v3.1.0 is now available</div>
+</aside>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../../../../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://bin-cao.github.io/v2/gh/Bin-Cao/Bgolearn/main?urlpath=lab/tree/bgolearnbook/_build/jupyter_execute/examples/materials/alloy_optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://bin-cao.github.io/github/Bin-Cao/Bgolearn/blob/main/bgolearnbook/_build/jupyter_execute/examples/materials/alloy_optimization.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/_build/jupyter_execute/examples/materials/alloy_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2F_build/jupyter_execute/examples/materials/alloy_optimization.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/_build/jupyter_execute/examples/materials/alloy_optimization.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Alloy Composition Optimization</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-high-strength-aluminum-alloy">Problem: High-Strength Aluminum Alloy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-materials-system">Define the Materials System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-initial-experimental-data">Generate Initial Experimental Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-initial-data">Visualize Initial Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-candidate-alloys">Generate Candidate Alloys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-objective-optimization-maximize-tensile-strength">Single-Objective Optimization: Maximize Tensile Strength</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization-for-parallel-synthesis">Batch Optimization for Parallel Synthesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-multi-objective-results">Visualize Multi-Objective Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-recommendations">Experimental Recommendations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-science-applications">🔬 Materials Science Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization-benefits">🎯 Bayesian Optimization Benefits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-insights">📊 Practical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="alloy-composition-optimization">
+<h1>Alloy Composition Optimization<a class="headerlink" href="#alloy-composition-optimization" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates how to use Bgolearn for optimizing alloy compositions to achieve desired material properties.</p>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Apply Bayesian optimization to materials discovery</p></li>
+<li><p>Handle composition constraints (sum to 1)</p></li>
+<li><p>Optimize multiple properties simultaneously</p></li>
+<li><p>Visualize materials property relationships</p></li>
+<li><p>Design parallel experiments for synthesis</p></li>
+</ul>
+</section>
+<section id="problem-high-strength-aluminum-alloy">
+<h2>Problem: High-Strength Aluminum Alloy<a class="headerlink" href="#problem-high-strength-aluminum-alloy" title="Link to this heading">#</a></h2>
+<p>We want to design a new aluminum alloy with maximum tensile strength while maintaining reasonable ductility and corrosion resistance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="c1"># import bgolearn as bgo  # Commented out for documentation build</span>
+<span class="c1"># from bgolearn.visualization import BgolearnVisualizer</span>
+
+<span class="c1"># Set style for better plots</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8&#39;</span><span class="p">)</span>
+<span class="k">except</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn&#39;</span><span class="p">)</span>  <span class="c1"># Fallback for older versions</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries imported successfully!&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Note: This is a demonstration notebook for documentation.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Libraries imported successfully!
+Note: This is a demonstration notebook for documentation.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-the-materials-system">
+<h2>Define the Materials System<a class="headerlink" href="#define-the-materials-system" title="Link to this heading">#</a></h2>
+<p>We’ll work with an Al-Cu-Mg-Si alloy system with processing parameters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AluminumAlloySystem</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulates an aluminum alloy system for optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Features:</span>
+<span class="sd">    - Al content (balance)</span>
+<span class="sd">    - Cu content (0.5-6.0 wt%)</span>
+<span class="sd">    - Mg content (0.2-3.0 wt%)</span>
+<span class="sd">    - Si content (0.1-2.0 wt%)</span>
+<span class="sd">    - Solution temperature (450-550°C)</span>
+<span class="sd">    - Aging temperature (150-200°C)</span>
+<span class="sd">    - Aging time (1-24 hours)</span>
+<span class="sd">    </span>
+<span class="sd">    Properties:</span>
+<span class="sd">    - Tensile strength (MPa)</span>
+<span class="sd">    - Ductility (%)</span>
+<span class="sd">    - Corrosion resistance (arbitrary units)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;Cu_content&#39;</span><span class="p">,</span>      <span class="c1"># Copper content (wt%)</span>
+            <span class="s1">&#39;Mg_content&#39;</span><span class="p">,</span>      <span class="c1"># Magnesium content (wt%)</span>
+            <span class="s1">&#39;Si_content&#39;</span><span class="p">,</span>      <span class="c1"># Silicon content (wt%)</span>
+            <span class="s1">&#39;Solution_temp&#39;</span><span class="p">,</span>   <span class="c1"># Solution treatment temperature (°C)</span>
+            <span class="s1">&#39;Aging_temp&#39;</span><span class="p">,</span>      <span class="c1"># Aging temperature (°C)</span>
+            <span class="s1">&#39;Aging_time&#39;</span>       <span class="c1"># Aging time (hours)</span>
+        <span class="p">]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">property_names</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">,</span>     <span class="c1"># MPa</span>
+            <span class="s1">&#39;Ductility&#39;</span><span class="p">,</span>           <span class="c1"># %</span>
+            <span class="s1">&#39;Corrosion_Resistance&#39;</span> <span class="c1"># Arbitrary units (higher is better)</span>
+        <span class="p">]</span>
+        
+        <span class="c1"># Define realistic ranges</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;Cu_content&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">6.0</span><span class="p">),</span>
+            <span class="s1">&#39;Mg_content&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
+            <span class="s1">&#39;Si_content&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),</span>
+            <span class="s1">&#39;Solution_temp&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">550</span><span class="p">),</span>
+            <span class="s1">&#39;Aging_temp&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+            <span class="s1">&#39;Aging_time&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">24</span><span class="p">)</span>
+        <span class="p">}</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">calculate_properties</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compositions_and_processing</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Calculate material properties based on composition and processing.</span>
+<span class="sd">        </span>
+<span class="sd">        This is a simplified model based on known metallurgical relationships.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cu</span><span class="p">,</span> <span class="n">mg</span><span class="p">,</span> <span class="n">si</span><span class="p">,</span> <span class="n">sol_temp</span><span class="p">,</span> <span class="n">age_temp</span><span class="p">,</span> <span class="n">age_time</span> <span class="o">=</span> <span class="n">compositions_and_processing</span><span class="o">.</span><span class="n">T</span>
+        
+        <span class="c1"># Tensile strength model</span>
+        <span class="c1"># Base strength from aluminum</span>
+        <span class="n">base_strength</span> <span class="o">=</span> <span class="mi">70</span>  <span class="c1"># Pure Al strength</span>
+        
+        <span class="c1"># Solid solution strengthening</span>
+        <span class="n">ss_strengthening</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">+</span> <span class="mi">30</span> <span class="o">*</span> <span class="n">mg</span> <span class="o">+</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">si</span>
+        
+        <span class="c1"># Precipitation strengthening (depends on heat treatment)</span>
+        <span class="n">sol_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.002</span> <span class="o">*</span> <span class="p">(</span><span class="n">sol_temp</span> <span class="o">-</span> <span class="mi">500</span><span class="p">)</span>  <span class="c1"># Optimal around 500°C</span>
+        <span class="n">age_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="p">(</span><span class="n">age_temp</span> <span class="o">-</span> <span class="mi">175</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.0001</span> <span class="o">*</span> <span class="p">(</span><span class="n">age_temp</span> <span class="o">-</span> <span class="mi">175</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">time_effect</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">age_time</span><span class="p">)</span>
+        
+        <span class="n">precip_strengthening</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">*</span> <span class="n">mg</span> <span class="o">*</span> <span class="n">sol_effect</span> <span class="o">*</span> <span class="n">age_effect</span> <span class="o">*</span> <span class="n">time_effect</span>
+        
+        <span class="c1"># Interaction effects</span>
+        <span class="n">cu_mg_interaction</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">*</span> <span class="n">mg</span>  <span class="c1"># Beneficial interaction</span>
+        <span class="n">si_effect</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">si</span> <span class="o">*</span> <span class="p">(</span><span class="n">cu</span> <span class="o">+</span> <span class="n">mg</span><span class="p">)</span>  <span class="c1"># Si enhances other elements</span>
+        
+        <span class="n">tensile_strength</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_strength</span> <span class="o">+</span> <span class="n">ss_strengthening</span> <span class="o">+</span> <span class="n">precip_strengthening</span> <span class="o">+</span> 
+                          <span class="n">cu_mg_interaction</span> <span class="o">+</span> <span class="n">si_effect</span> <span class="o">+</span> 
+                          <span class="mi">15</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cu</span><span class="p">)))</span>
+        
+        <span class="c1"># Ductility model (generally trades off with strength)</span>
+        <span class="n">base_ductility</span> <span class="o">=</span> <span class="mi">25</span>  <span class="c1"># Pure Al ductility</span>
+        <span class="n">composition_effect</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cu</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">mg</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">si</span>  <span class="c1"># Alloying reduces ductility</span>
+        <span class="n">processing_effect</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="p">(</span><span class="n">sol_temp</span> <span class="o">-</span> <span class="mi">500</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="p">(</span><span class="n">age_temp</span> <span class="o">-</span> <span class="mi">175</span><span class="p">)</span>
+        
+        <span class="n">ductility</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_ductility</span> <span class="o">+</span> <span class="n">composition_effect</span> <span class="o">+</span> <span class="n">processing_effect</span> <span class="o">+</span> 
+                    <span class="mi">3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cu</span><span class="p">)))</span>
+        <span class="n">ductility</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">ductility</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># Minimum ductility</span>
+        
+        <span class="c1"># Corrosion resistance (Mg improves, Cu decreases)</span>
+        <span class="n">base_corrosion</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># Al base resistance</span>
+        <span class="n">mg_benefit</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">mg</span>  <span class="c1"># Mg improves corrosion resistance</span>
+        <span class="n">cu_penalty</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">cu</span>  <span class="c1"># Cu decreases corrosion resistance</span>
+        <span class="n">si_neutral</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">si</span>  <span class="c1"># Si has small positive effect</span>
+        
+        <span class="n">corrosion_resistance</span> <span class="o">=</span> <span class="p">(</span><span class="n">base_corrosion</span> <span class="o">+</span> <span class="n">mg_benefit</span> <span class="o">+</span> <span class="n">cu_penalty</span> <span class="o">+</span> <span class="n">si_neutral</span> <span class="o">+</span> 
+                              <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cu</span><span class="p">)))</span>
+        <span class="n">corrosion_resistance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">corrosion_resistance</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">tensile_strength</span><span class="p">,</span> <span class="n">ductility</span><span class="p">,</span> <span class="n">corrosion_resistance</span><span class="p">])</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">generate_initial_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_samples</span><span class="o">=</span><span class="mi">25</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate initial experimental data using Latin Hypercube sampling.&quot;&quot;&quot;</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">qmc</span>
+        
+        <span class="c1"># Use Latin Hypercube for better space coverage</span>
+        <span class="n">sampler</span> <span class="o">=</span> <span class="n">qmc</span><span class="o">.</span><span class="n">LatinHypercube</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+        <span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_samples</span><span class="p">)</span>
+        
+        <span class="c1"># Scale to actual ranges</span>
+        <span class="n">scaled_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">):</span>
+            <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span>
+            <span class="n">scaled_samples</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="n">samples</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate properties</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_properties</span><span class="p">(</span><span class="n">scaled_samples</span><span class="p">)</span>
+        
+        <span class="c1"># Create DataFrames</span>
+        <span class="n">features_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scaled_samples</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+        <span class="n">properties_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">property_names</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">features_df</span><span class="p">,</span> <span class="n">properties_df</span>
+
+<span class="c1"># Create the alloy system</span>
+<span class="n">alloy_system</span> <span class="o">=</span> <span class="n">AluminumAlloySystem</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Aluminum alloy system created&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">alloy_system</span><span class="o">.</span><span class="n">feature_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Properties: </span><span class="si">{</span><span class="n">alloy_system</span><span class="o">.</span><span class="n">property_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Aluminum alloy system created
+Features: [&#39;Cu_content&#39;, &#39;Mg_content&#39;, &#39;Si_content&#39;, &#39;Solution_temp&#39;, &#39;Aging_temp&#39;, &#39;Aging_time&#39;]
+Properties: [&#39;Tensile_Strength&#39;, &#39;Ductility&#39;, &#39;Corrosion_Resistance&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generate-initial-experimental-data">
+<h2>Generate Initial Experimental Data<a class="headerlink" href="#generate-initial-experimental-data" title="Link to this heading">#</a></h2>
+<p>We start with a set of initial experiments using Latin Hypercube sampling for good space coverage:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate initial experimental data</span>
+<span class="n">X_initial</span><span class="p">,</span> <span class="n">y_initial</span> <span class="o">=</span> <span class="n">alloy_system</span><span class="o">.</span><span class="n">generate_initial_data</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial dataset: </span><span class="si">{</span><span class="n">X_initial</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> experiments&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Features: </span><span class="si">{</span><span class="n">X_initial</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> dimensions&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Properties: </span><span class="si">{</span><span class="n">y_initial</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> objectives&quot;</span><span class="p">)</span>
+
+<span class="c1"># Display summary statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Feature ranges in initial data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_initial</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Property ranges in initial data:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y_initial</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># Find current best</span>
+<span class="n">best_strength_idx</span> <span class="o">=</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+<span class="n">best_alloy</span> <span class="o">=</span> <span class="n">X_initial</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">best_strength_idx</span><span class="p">]</span>
+<span class="n">best_properties</span> <span class="o">=</span> <span class="n">y_initial</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">best_strength_idx</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Current best alloy (highest strength):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Composition: Cu=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Si_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing: Sol=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Age=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Time=</span><span class="si">{</span><span class="n">best_alloy</span><span class="p">[</span><span class="s1">&#39;Aging_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Properties: Strength=</span><span class="si">{</span><span class="n">best_properties</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa, Ductility=</span><span class="si">{</span><span class="n">best_properties</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, Corrosion=</span><span class="si">{</span><span class="n">best_properties</span><span class="p">[</span><span class="s1">&#39;Corrosion_Resistance&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Initial dataset: 20 experiments
+Features: 6 dimensions
+Properties: 3 objectives
+
+Feature ranges in initial data:
+       Cu_content  Mg_content  Si_content  Solution_temp  Aging_temp  \
+count   20.000000   20.000000   20.000000      20.000000   20.000000   
+mean     3.243654    1.593382    1.053339     500.118134  175.139856   
+std      1.628153    0.830570    0.568280      29.563253   14.894428   
+min      0.540314    0.274047    0.121019     453.147701  152.264557   
+25%      1.911776    0.930487    0.603930     474.634900  163.480826   
+50%      3.342251    1.632975    1.053692     500.910225  174.474926   
+75%      4.533516    2.250954    1.514636     523.833172  187.213049   
+max      5.787162    2.873636    1.936890     549.780981  198.907120   
+
+       Aging_time  
+count   20.000000  
+mean    12.457850  
+std      6.843244  
+min      1.513384  
+25%      7.211166  
+50%     12.426197  
+75%     17.681925  
+max     22.878034  
+
+Property ranges in initial data:
+       Tensile_Strength  Ductility  Corrosion_Resistance
+count         20.000000  20.000000             20.000000
+mean        1112.341998  14.274463              7.456435
+std          658.426855   5.351928              2.245912
+min          213.799684   5.462972              2.799597
+25%          667.524941  11.490805              5.902308
+50%          812.827403  13.527413              7.600020
+75%         1554.539272  18.824631              8.988256
+max         2536.296920  23.250255             11.304139
+
+Current best alloy (highest strength):
+Composition: Cu=4.87%, Mg=2.87%, Si=0.34%
+Processing: Sol=484°C, Age=192°C, Time=6.1h
+Properties: Strength=2536.3 MPa, Ductility=5.5%, Corrosion=8.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-initial-data">
+<h2>Visualize Initial Data<a class="headerlink" href="#visualize-initial-data" title="Link to this heading">#</a></h2>
+<p>Let’s explore the relationships in our initial dataset:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create comprehensive visualization of initial data</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Composition triangle (Cu vs Mg, colored by Si)</span>
+<span class="n">scatter1</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> 
+                            <span class="n">c</span><span class="o">=</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Si_content&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cu Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mg Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Composition Space (colored by Si content)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Si Content (wt%)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Processing conditions</span>
+<span class="n">scatter2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">],</span> <span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">],</span> 
+                            <span class="n">c</span><span class="o">=</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Aging_time&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;plasma&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Solution Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Aging Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Processing Conditions (colored by aging time)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Aging Time (h)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Property trade-offs</span>
+<span class="n">scatter3</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">],</span> 
+                            <span class="n">c</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Corrosion_Resistance&#39;</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Property Trade-offs (colored by corrosion resistance)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter3</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Corrosion Resistance&#39;</span><span class="p">)</span>
+
+<span class="c1"># Composition effects on strength</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> 
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Cu effect&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cu Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cu Effect on Strength&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Processing effects on strength</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">],</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> 
+                 <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Aging Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Aging Temperature Effect&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Property distributions</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> 
+              <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Tensile Strength&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">best_properties</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> 
+                 <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Best: </span><span class="si">{</span><span class="n">best_properties</span><span class="p">[</span><span class="s2">&quot;Tensile_Strength&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> MPa&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Strength Distribution&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/60ec287771762b2c857f6b9aed9dab6fc7daf37e7fe24a4a2e4665694983045e.png" src="../../../../_images/60ec287771762b2c857f6b9aed9dab6fc7daf37e7fe24a4a2e4665694983045e.png" />
+</div>
+</div>
+</section>
+<section id="generate-candidate-alloys">
+<h2>Generate Candidate Alloys<a class="headerlink" href="#generate-candidate-alloys" title="Link to this heading">#</a></h2>
+<p>Create a diverse set of candidate alloy compositions and processing conditions:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_candidate_alloys</span><span class="p">(</span><span class="n">n_candidates</span><span class="o">=</span><span class="mi">300</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate candidate alloy compositions and processing conditions.</span>
+<span class="sd">    </span>
+<span class="sd">    Uses stratified sampling to ensure good coverage of the design space.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">qmc</span>
+    
+    <span class="c1"># Use Sobol sequence for better space-filling</span>
+    <span class="n">sampler</span> <span class="o">=</span> <span class="n">qmc</span><span class="o">.</span><span class="n">Sobol</span><span class="p">(</span><span class="n">d</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">scramble</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+    <span class="n">samples</span> <span class="o">=</span> <span class="n">sampler</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n_candidates</span><span class="p">)</span>
+    
+    <span class="c1"># Scale to actual ranges</span>
+    <span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alloy_system</span><span class="o">.</span><span class="n">feature_names</span><span class="p">):</span>
+        <span class="n">low</span><span class="p">,</span> <span class="n">high</span> <span class="o">=</span> <span class="n">alloy_system</span><span class="o">.</span><span class="n">ranges</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span>
+        <span class="n">candidates</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="n">samples</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">candidates</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">alloy_system</span><span class="o">.</span><span class="n">feature_names</span><span class="p">)</span>
+
+<span class="c1"># Generate candidate space</span>
+<span class="n">X_candidates</span> <span class="o">=</span> <span class="n">generate_candidate_alloys</span><span class="p">(</span><span class="n">n_candidates</span><span class="o">=</span><span class="mi">250</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Generated </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">)</span><span class="si">}</span><span class="s2"> candidate alloys&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Candidate ranges:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X_candidates</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
+
+<span class="c1"># Visualize candidate space coverage</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Composition space</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> 
+               <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Candidates&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> 
+               <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Initial experiments&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cu Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mg Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Candidate Coverage: Composition Space&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Processing space</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">],</span> 
+               <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Candidates&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">],</span> <span class="n">X_initial</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">],</span> 
+               <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Initial experiments&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Solution Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Aging Temperature (°C)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Candidate Coverage: Processing Space&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Generated 250 candidate alloys
+
+Candidate ranges:
+       Cu_content  Mg_content  Si_content  Solution_temp  Aging_temp  \
+count  250.000000  250.000000  250.000000     250.000000  250.000000   
+mean     3.246030    1.602162    1.049307     500.039309  175.038246   
+std      1.591100    0.808503    0.548647      28.839974   14.416957   
+min      0.520036    0.210403    0.103889     450.126888  150.148998   
+25%      1.869588    0.910474    0.578202     475.271520  162.721488   
+50%      3.251695    1.600190    1.047819     500.037010  174.993653   
+75%      4.610949    2.304041    1.517173     524.872307  187.283800   
+max      5.988811    2.991302    1.996732     549.950130  199.839640   
+
+       Aging_time  
+count  250.000000  
+mean    12.536954  
+std      6.652041  
+min      1.070908  
+25%      6.813802  
+50%     12.510311  
+75%     18.304339  
+max     23.997423  
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/jacob/miniconda3/lib/python3.9/site-packages/scipy/stats/_qmc.py:958: UserWarning: The balance properties of Sobol&#39; points require n to be a power of 2.
+  sample = self._random(n, workers=workers)
+</pre></div>
+</div>
+<img alt="../../../../_images/a30795874d3b9e7dd61235a7f6e104e9b66683c3b98621b3a867c04a5a80e51b.png" src="../../../../_images/a30795874d3b9e7dd61235a7f6e104e9b66683c3b98621b3a867c04a5a80e51b.png" />
+</div>
+</div>
+</section>
+<section id="single-objective-optimization-maximize-tensile-strength">
+<h2>Single-Objective Optimization: Maximize Tensile Strength<a class="headerlink" href="#single-objective-optimization-maximize-tensile-strength" title="Link to this heading">#</a></h2>
+<p>First, let’s optimize for maximum tensile strength:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize for maximum tensile strength</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Single-Objective Optimization: Tensile Strength ===&quot;</span><span class="p">)</span>
+
+<span class="n">optimizer_strength</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model_strength</span> <span class="o">=</span> <span class="n">optimizer_strength</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_initial</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Maximize strength</span>
+    <span class="n">CV_test</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Model fitted for tensile strength optimization&quot;</span><span class="p">)</span>
+
+<span class="c1"># Try different acquisition functions</span>
+<span class="n">acquisition_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Expected Improvement</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">ei_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+<span class="n">ei_pred_strength</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)]</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;EI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">ei_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">ei_pred_strength</span>
+<span class="p">}</span>
+
+<span class="c1"># Upper Confidence Bound</span>
+<span class="n">ucb_values</span><span class="p">,</span> <span class="n">ucb_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>
+<span class="n">ucb_pred_strength</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ucb_values</span><span class="p">)]</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;UCB&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">ucb_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">ucb_pred_strength</span>
+<span class="p">}</span>
+
+<span class="c1"># Probability of Improvement</span>
+<span class="n">poi_values</span><span class="p">,</span> <span class="n">poi_point</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">PoI</span><span class="p">(</span><span class="n">tao</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<span class="n">poi_pred_strength</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">poi_values</span><span class="p">)]</span>
+<span class="n">acquisition_results</span><span class="p">[</span><span class="s1">&#39;PoI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">poi_point</span><span class="p">,</span>
+    <span class="s1">&#39;predicted_strength&#39;</span><span class="p">:</span> <span class="n">poi_pred_strength</span>
+<span class="p">}</span>
+
+<span class="c1"># Display results</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Acquisition Function Recommendations:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">method</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">acquisition_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+    <span class="n">pred_strength</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;predicted_strength&#39;</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Composition: Cu=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Processing: Sol=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Age=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Time=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Predicted Strength: </span><span class="si">{</span><span class="n">pred_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Calculate true strength for comparison</span>
+    <span class="n">true_properties</span> <span class="o">=</span> <span class="n">alloy_system</span><span class="o">.</span><span class="n">calculate_properties</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">point</span><span class="p">]))</span>
+    <span class="n">true_strength</span> <span class="o">=</span> <span class="n">true_properties</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  True Strength: </span><span class="si">{</span><span class="n">true_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current best observed: </span><span class="si">{</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>=== Single-Objective Optimization: Tensile Strength ===
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">6</span><span class="p">],</span> <span class="n">line</span> <span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Optimize for maximum tensile strength</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Single-Objective Optimization: Tensile Strength ===&quot;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">optimizer_strength</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">model_strength</span> <span class="o">=</span> <span class="n">optimizer_strength</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span>     <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_initial</span><span class="p">,</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span>     <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">],</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span>     <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Model fitted for tensile strength optimization&quot;</span><span class="p">)</span>
+
+<span class="ne">NameError</span>: name &#39;bgo&#39; is not defined
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="batch-optimization-for-parallel-synthesis">
+<h2>Batch Optimization for Parallel Synthesis<a class="headerlink" href="#batch-optimization-for-parallel-synthesis" title="Link to this heading">#</a></h2>
+<p>In materials synthesis, we often want to prepare multiple samples in parallel:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Batch optimization for parallel experiments</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Batch Optimization for Parallel Synthesis ===&quot;</span><span class="p">)</span>
+
+<span class="n">batch_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="n">batch_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">q</span> <span class="ow">in</span> <span class="n">batch_sizes</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Batch size q = </span><span class="si">{</span><span class="n">q</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Batch Expected Improvement</span>
+    <span class="n">batch_ei</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">batch_EI</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="p">,</span> <span class="n">mc_samples</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">batch_indices</span><span class="p">,</span> <span class="n">batch_points</span> <span class="o">=</span> <span class="n">batch_ei</span>
+    
+    <span class="n">batch_results</span><span class="p">[</span><span class="n">q</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;indices&#39;</span><span class="p">:</span> <span class="n">batch_indices</span><span class="p">,</span>
+        <span class="s1">&#39;points&#39;</span><span class="p">:</span> <span class="n">batch_points</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Selected </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">batch_points</span><span class="p">)</span><span class="si">}</span><span class="s2"> alloys for parallel synthesis:&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batch_points</span><span class="p">):</span>
+        <span class="c1"># Get predicted strength</span>
+        <span class="n">pred_idx</span> <span class="o">=</span> <span class="n">batch_indices</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">pred_strength</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span><span class="p">[</span><span class="n">pred_idx</span><span class="p">]</span>
+        
+        <span class="c1"># Calculate true properties</span>
+        <span class="n">true_properties</span> <span class="o">=</span> <span class="n">alloy_system</span><span class="o">.</span><span class="n">calculate_properties</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">point</span><span class="p">]))</span>
+        <span class="n">true_strength</span> <span class="o">=</span> <span class="n">true_properties</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Alloy </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Composition: Cu=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Processing: Sol=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Age=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Time=</span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;      Predicted/True Strength: </span><span class="si">{</span><span class="n">pred_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">true_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+
+<span class="c1"># Recommend optimal batch size</span>
+<span class="n">recommended_batch</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Good balance of diversity and efficiency</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">🎯 Recommended batch size: </span><span class="si">{</span><span class="n">recommended_batch</span><span class="si">}</span><span class="s2"> alloys&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;   This provides good diversity while being manageable for synthesis.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="multi-objective-optimization">
+<h2>Multi-Objective Optimization<a class="headerlink" href="#multi-objective-optimization" title="Link to this heading">#</a></h2>
+<p>In practice, we want to optimize multiple properties simultaneously:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Multi-objective optimization: Strength vs Ductility</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Multi-Objective Optimization: Strength vs Ductility ===&quot;</span><span class="p">)</span>
+
+<span class="c1"># Fit separate models for each property</span>
+<span class="n">model_ductility</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model_ductility</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_initial</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Ductility&#39;</span><span class="p">],</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Maximize ductility</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="n">model_corrosion</span> <span class="o">=</span> <span class="n">bgo</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model_corrosion</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_initial</span><span class="p">,</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Corrosion_Resistance&#39;</span><span class="p">],</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>  <span class="c1"># Maximize corrosion resistance</span>
+    <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Models fitted for all properties&quot;</span><span class="p">)</span>
+
+<span class="c1"># Get predictions for all candidates</span>
+<span class="n">strength_pred</span> <span class="o">=</span> <span class="n">model_strength</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+<span class="n">ductility_pred</span> <span class="o">=</span> <span class="n">model_ductility</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+<span class="n">corrosion_pred</span> <span class="o">=</span> <span class="n">model_corrosion</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+
+<span class="c1"># Define different optimization strategies</span>
+<span class="n">strategies</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Strength-focused&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;corrosion&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+    <span class="s1">&#39;Balanced&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;corrosion&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+    <span class="s1">&#39;Ductility-focused&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;corrosion&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">},</span>
+    <span class="s1">&#39;Corrosion-focused&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span> <span class="s1">&#39;ductility&#39;</span><span class="p">:</span> <span class="mf">0.2</span><span class="p">,</span> <span class="s1">&#39;corrosion&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">multi_obj_results</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">strategy_name</span><span class="p">,</span> <span class="n">weights</span> <span class="ow">in</span> <span class="n">strategies</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Normalize objectives to [0, 1] scale</span>
+    <span class="n">strength_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">strength_pred</span> <span class="o">-</span> <span class="n">strength_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">strength_pred</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">strength_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+    <span class="n">ductility_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">ductility_pred</span> <span class="o">-</span> <span class="n">ductility_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">ductility_pred</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">ductility_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+    <span class="n">corrosion_norm</span> <span class="o">=</span> <span class="p">(</span><span class="n">corrosion_pred</span> <span class="o">-</span> <span class="n">corrosion_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">corrosion_pred</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">corrosion_pred</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+    
+    <span class="c1"># Calculate weighted objective</span>
+    <span class="n">combined_objective</span> <span class="o">=</span> <span class="p">(</span><span class="n">weights</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">strength_norm</span> <span class="o">+</span> 
+                         <span class="n">weights</span><span class="p">[</span><span class="s1">&#39;ductility&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">ductility_norm</span> <span class="o">+</span> 
+                         <span class="n">weights</span><span class="p">[</span><span class="s1">&#39;corrosion&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">corrosion_norm</span><span class="p">)</span>
+    
+    <span class="c1"># Find best solution</span>
+    <span class="n">best_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">combined_objective</span><span class="p">)</span>
+    <span class="n">best_point</span> <span class="o">=</span> <span class="n">X_candidates</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+    
+    <span class="n">multi_obj_results</span><span class="p">[</span><span class="n">strategy_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;point&#39;</span><span class="p">:</span> <span class="n">best_point</span><span class="p">,</span>
+        <span class="s1">&#39;strength&#39;</span><span class="p">:</span> <span class="n">strength_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">],</span>
+        <span class="s1">&#39;ductility&#39;</span><span class="p">:</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">],</span>
+        <span class="s1">&#39;corrosion&#39;</span><span class="p">:</span> <span class="n">corrosion_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">],</span>
+        <span class="s1">&#39;combined_score&#39;</span><span class="p">:</span> <span class="n">combined_objective</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span>
+    <span class="p">}</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">strategy_name</span><span class="si">}</span><span class="s2"> Strategy:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Weights: Strength=</span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Ductility=</span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="s1">&#39;ductility&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Corrosion=</span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="s1">&#39;corrosion&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Composition: Cu=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Si_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Processing: Sol=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Age=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C, Time=</span><span class="si">{</span><span class="n">best_point</span><span class="p">[</span><span class="s1">&#39;Aging_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Predicted Properties:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Strength: </span><span class="si">{</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Ductility: </span><span class="si">{</span><span class="n">ductility_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Corrosion: </span><span class="si">{</span><span class="n">corrosion_pred</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Combined Score: </span><span class="si">{</span><span class="n">combined_objective</span><span class="p">[</span><span class="n">best_idx</span><span class="p">]</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualize-multi-objective-results">
+<h2>Visualize Multi-Objective Results<a class="headerlink" href="#visualize-multi-objective-results" title="Link to this heading">#</a></h2>
+<p>Let’s visualize the trade-offs and Pareto front:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualize multi-objective optimization results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+<span class="c1"># Pareto front approximation</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_pareto_front</span><span class="p">(</span><span class="n">objectives</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find approximate Pareto front.&quot;&quot;&quot;</span>
+    <span class="n">pareto_indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">)):</span>
+        <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">objectives</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
+                <span class="c1"># Check if point j dominates point i</span>
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">objectives</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">objectives</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">objectives</span><span class="p">[</span><span class="n">i</span><span class="p">]):</span>
+                    <span class="n">is_pareto</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+        <span class="k">if</span> <span class="n">is_pareto</span><span class="p">:</span>
+            <span class="n">pareto_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pareto_indices</span>
+
+<span class="c1"># Create objectives matrix</span>
+<span class="n">objectives</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">strength_pred</span><span class="p">,</span> <span class="n">ductility_pred</span><span class="p">,</span> <span class="n">corrosion_pred</span><span class="p">])</span>
+<span class="n">pareto_indices</span> <span class="o">=</span> <span class="n">find_pareto_front</span><span class="p">(</span><span class="n">objectives</span><span class="p">)</span>
+
+<span class="c1"># Plot 1: Strength vs Ductility</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">,</span> <span class="n">ductility_pred</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;All candidates&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pareto_indices</span><span class="p">:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">],</span> <span class="n">ductility_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">],</span> 
+                     <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Pareto front&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Plot multi-objective solutions</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="s1">&#39;purple&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multi_obj_results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;ductility&#39;</span><span class="p">],</span> 
+                     <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> 
+                     <span class="n">label</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Ductility (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Strength vs Ductility Trade-off&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Plot 2: Strength vs Corrosion</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">,</span> <span class="n">corrosion_pred</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">pareto_indices</span><span class="p">:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">strength_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">],</span> <span class="n">corrosion_pred</span><span class="p">[</span><span class="n">pareto_indices</span><span class="p">],</span> 
+                     <span class="n">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multi_obj_results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">],</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;corrosion&#39;</span><span class="p">],</span> 
+                     <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> 
+                     <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Tensile Strength (MPa)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Predicted Corrosion Resistance&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Strength vs Corrosion Trade-off&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Plot 3: Composition space with multi-objective solutions</span>
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">X_candidates</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> 
+                           <span class="n">c</span><span class="o">=</span><span class="n">strength_pred</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Predicted Strength (MPa)&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">multi_obj_results</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+    <span class="n">point</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">],</span> <span class="n">point</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">],</span> 
+                     <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> 
+                     <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">strategy</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Cu Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mg Content (wt%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Multi-Objective Solutions in Composition Space&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Plot 4: Strategy comparison</span>
+<span class="n">strategy_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">multi_obj_results</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">strengths</span> <span class="o">=</span> <span class="p">[</span><span class="n">multi_obj_results</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strategy_names</span><span class="p">]</span>
+<span class="n">ductilities</span> <span class="o">=</span> <span class="p">[</span><span class="n">multi_obj_results</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;ductility&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strategy_names</span><span class="p">]</span>
+<span class="n">corrosions</span> <span class="o">=</span> <span class="p">[</span><span class="n">multi_obj_results</span><span class="p">[</span><span class="n">s</span><span class="p">][</span><span class="s1">&#39;corrosion&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strategy_names</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strategy_names</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.25</span>
+
+<span class="c1"># Normalize for comparison</span>
+<span class="n">strengths_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">strengths</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">strengths</span><span class="p">)</span>
+<span class="n">ductilities_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ductilities</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">ductilities</span><span class="p">)</span>
+<span class="n">corrosions_norm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">corrosions</span><span class="p">)</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">corrosions</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="p">,</span> <span class="n">strengths_norm</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Strength (norm)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ductilities_norm</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Ductility (norm)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="p">,</span> <span class="n">corrosions_norm</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Corrosion (norm)&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Optimization Strategy&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Normalized Property Value&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Strategy Comparison (Normalized)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">strategy_names</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pareto_indices</span><span class="p">)</span><span class="si">}</span><span class="s2"> points on the approximate Pareto front&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These represent the best trade-offs between competing objectives.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="experimental-recommendations">
+<h2>Experimental Recommendations<a class="headerlink" href="#experimental-recommendations" title="Link to this heading">#</a></h2>
+<p>Based on our optimization, let’s provide concrete experimental recommendations:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generate final experimental recommendations</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== EXPERIMENTAL RECOMMENDATIONS ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Recommend the balanced strategy for general use</span>
+<span class="n">recommended_strategy</span> <span class="o">=</span> <span class="s1">&#39;Balanced&#39;</span>
+<span class="n">recommended_alloy</span> <span class="o">=</span> <span class="n">multi_obj_results</span><span class="p">[</span><span class="n">recommended_strategy</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🎯 RECOMMENDED ALLOY (</span><span class="si">{</span><span class="n">recommended_strategy</span><span class="si">}</span><span class="s2"> Strategy):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">point</span> <span class="o">=</span> <span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;point&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Composition:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Copper (Cu): </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> wt%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Magnesium (Mg): </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> wt%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Silicon (Si): </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Si_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> wt%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Aluminum (Al): </span><span class="si">{</span><span class="mi">100</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Cu_content&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Mg_content&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Si_content&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> wt% (balance)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Processing Conditions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Solution Treatment: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Solution_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Aging Temperature: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Aging_temp&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Aging Time: </span><span class="si">{</span><span class="n">point</span><span class="p">[</span><span class="s1">&#39;Aging_time&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Properties:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Tensile Strength: </span><span class="si">{</span><span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Ductility: </span><span class="si">{</span><span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;ductility&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> %&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  • Corrosion Resistance: </span><span class="si">{</span><span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;corrosion&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Batch recommendations for parallel synthesis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔬 BATCH SYNTHESIS RECOMMENDATIONS:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+<span class="n">recommended_batch_size</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">batch_alloys</span> <span class="o">=</span> <span class="n">batch_results</span><span class="p">[</span><span class="n">recommended_batch_size</span><span class="p">][</span><span class="s1">&#39;points&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Synthesize </span><span class="si">{</span><span class="n">recommended_batch_size</span><span class="si">}</span><span class="s2"> alloys in parallel:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">alloy</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">batch_alloys</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Alloy </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Composition: Cu=</span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Mg=</span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%, Si=</span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Processing: </span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C → </span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">°C for </span><span class="si">{</span><span class="n">alloy</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">h&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;📋 EXPERIMENTAL PROTOCOL:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;1. Prepare alloy compositions by melting and casting&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;2. Homogenize at 500°C for 24 hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3. Solution treat at specified temperature for 2 hours&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;4. Quench in water&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;5. Age at specified temperature for specified time&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;6. Test tensile properties, ductility, and corrosion resistance&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;7. Update model with new experimental data&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Improvement potential</span>
+<span class="n">current_best_strength</span> <span class="o">=</span> <span class="n">y_initial</span><span class="p">[</span><span class="s1">&#39;Tensile_Strength&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">predicted_improvement</span> <span class="o">=</span> <span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">current_best_strength</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📈 EXPECTED IMPROVEMENT:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Current best strength: </span><span class="si">{</span><span class="n">current_best_strength</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Predicted strength: </span><span class="si">{</span><span class="n">recommended_alloy</span><span class="p">[</span><span class="s1">&#39;strength&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected improvement: </span><span class="si">{</span><span class="n">predicted_improvement</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> MPa (</span><span class="si">{</span><span class="n">predicted_improvement</span><span class="o">/</span><span class="n">current_best_strength</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">predicted_improvement</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;✅ Significant improvement expected!&quot;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️  Consider exploring different regions or adjusting objectives&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="key-takeaways">
+<h2>Key Takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading">#</a></h2>
+<p>This alloy optimization example demonstrates:</p>
+<section id="materials-science-applications">
+<h3>🔬 Materials Science Applications<a class="headerlink" href="#materials-science-applications" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Composition optimization</strong> with realistic constraints</p></li>
+<li><p><strong>Processing parameter</strong> optimization alongside composition</p></li>
+<li><p><strong>Multi-objective</strong> materials design balancing competing properties</p></li>
+<li><p><strong>Batch synthesis</strong> planning for efficient experimentation</p></li>
+</ul>
+</section>
+<section id="bayesian-optimization-benefits">
+<h3>🎯 Bayesian Optimization Benefits<a class="headerlink" href="#bayesian-optimization-benefits" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Efficient exploration</strong> of high-dimensional composition-processing space</p></li>
+<li><p><strong>Uncertainty quantification</strong> to guide experimental decisions</p></li>
+<li><p><strong>Multi-objective</strong> handling without requiring prior knowledge of trade-offs</p></li>
+<li><p><strong>Parallel experiment</strong> design for faster discovery</p></li>
+</ul>
+</section>
+<section id="practical-insights">
+<h3>📊 Practical Insights<a class="headerlink" href="#practical-insights" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Cu and Mg</strong> are key strengthening elements with synergistic effects</p></li>
+<li><p><strong>Processing conditions</strong> significantly impact final properties</p></li>
+<li><p><strong>Trade-offs exist</strong> between strength, ductility, and corrosion resistance</p></li>
+<li><p><strong>Batch optimization</strong> enables efficient parallel synthesis campaigns</p></li>
+</ul>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">#</a></h2>
+<p>To continue your materials discovery journey:</p>
+<ul class="simple">
+<li><p>Explore <a class="reference internal" href="#processing_parameters.ipynb"><span class="xref myst">processing parameter optimization</span></a></p></li>
+<li><p>Learn about <a class="reference internal" href="#../materials_discovery/constraints.md"><span class="xref myst">constraint handling</span></a> for composition limits</p></li>
+<li><p>Try <a class="reference internal" href="#experimental_design.ipynb"><span class="xref myst">experimental design strategies</span></a> for systematic exploration</p></li>
+<li><p>Implement <a class="reference internal" href="#../basic/iterative_loop.ipynb"><span class="xref myst">iterative optimization loops</span></a> for continuous improvement</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./_build/jupyter_execute/examples/materials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-high-strength-aluminum-alloy">Problem: High-Strength Aluminum Alloy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-materials-system">Define the Materials System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-initial-experimental-data">Generate Initial Experimental Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-initial-data">Visualize Initial Data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-candidate-alloys">Generate Candidate Alloys</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-objective-optimization-maximize-tensile-strength">Single-Objective Optimization: Maximize Tensile Strength</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-optimization-for-parallel-synthesis">Batch Optimization for Parallel Synthesis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-objective-optimization">Multi-Objective Optimization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualize-multi-objective-results">Visualize Multi-Objective Results</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#experimental-recommendations">Experimental Recommendations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#materials-science-applications">🔬 Materials Science Applications</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-optimization-benefits">🎯 Bayesian Optimization Benefits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-insights">📊 Practical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-steps">Next Steps</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, Advanced Materials Thrust, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 09, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

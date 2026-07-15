@@ -1,0 +1,1210 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>API参考 &#8212; Bgolearn</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/language-switcher.css?v=792307d5" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zh/api_reference';</script>
+    <script src="../_static/language-switcher.js?v=18623ce7"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+    <meta name="docbuild:last-update" content="Jul 10, 2026"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/bgolearn_logo.png" class="logo__image only-light" alt="Bgolearn - Home"/>
+    <script>document.write(`<img src="../_static/bgolearn_logo.png" class="logo__image only-dark" alt="Bgolearn - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../getting_started.html">1. Installation &amp; Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic_concepts.html">2. Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../first_optimization.html">3. Your First Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Single-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api_reference.html">4. API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../acquisition_functions.html">5. Acquisition Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../surrogate_models.html">6. Surrogate Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../optimization_strategies.html">7. Optimization Strategies</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Multi-Objective Optimization</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../multibgolearn.html">8. MultiBgolearn Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../multi_objective_concepts.html">9. Multi-Objective Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../mobo_algorithms.html">10. MOBO Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pareto_optimization.html">11. Pareto Optimization</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">User Interfaces</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../bgoface.html">12. BgoFace GUI</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Applications</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../materials_discovery.html">13. Materials Discovery</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Examples &amp; Tutorials</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../examples/single_objective.html">14. Single-Objective Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/multi_objective.html">15. Multi-Objective Examples</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/edit/main/bgolearnbook/zh/api_reference.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/Bin-Cao/Bgolearn/issues/new?title=Issue%20on%20page%20%2Fzh/api_reference.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/zh/api_reference.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>API参考</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">核心课程</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bgosampling-bgolearn">BGOsampling.Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">构造函数</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">核心方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">合身（）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可用的采集功能（单个目标）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">核心采集功能</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ei">预期改善 (EI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">基于探索的功能</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">基于信息的功能</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit">fit() 方法中的用法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bgo-efficient">BGO_Efficient 的高级用法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poi">改进概率 (PoI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aei">增强预期改进 (AEI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eqi">预期分位数改进 (EQI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pes">预测熵搜索 (PES)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kg">知识梯度（KG）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">基本可视化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">可视化注意事项</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">快速参考</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">常见工作流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">参数指南</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="api">
+<h1>API参考<a class="headerlink" href="#api" title="Link to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本页是 Bgolearn 手册的中文版本。</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>常见错误</strong>：<code class="docutils literal notranslate"><span class="pre">AttributeError:</span> <span class="pre">'numpy.ndarray'</span> <span class="pre">object</span> <span class="pre">has</span> <span class="pre">no</span> <span class="pre">attribute</span> <span class="pre">'columns'</span></code></p>
+<p>当您将 numpy 数组而不是 pandas DataFrame 传递给 Bgolearn 方法时，会发生此错误。</p>
+<p><strong>解决方案</strong>：始终使用 pandas DataFrames 和 Series：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data_matrix</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Measured_response</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.Series</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">virtual_samples</span></code> → <code class="docutils literal notranslate"><span class="pre">pd.DataFrame</span></code></p></li>
+</ul>
+<p><strong>永远不要使用 <code class="docutils literal notranslate"><span class="pre">.values</span></code></strong> - 它将 DataFrame 转换为 numpy 数组！</p>
+</div>
+<section id="id1">
+<h2>核心课程<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="bgosampling-bgolearn">
+<h3>BGOsampling.Bgolearn<a class="headerlink" href="#bgosampling-bgolearn" title="Link to this heading">#</a></h3>
+<p>提供贝叶斯全局优化功能的主要优化类。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Bgolearn</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Bayesian Global Optimization for materials discovery and scientific research.</span>
+
+<span class="sd">    This class implements various acquisition functions and provides tools for</span>
+<span class="sd">    efficient experimental design and optimization.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<section id="id2">
+<h4>构造函数<a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialize Bgolearn optimizer.</span>
+
+<span class="sd">    Creates necessary directories and displays welcome information.</span>
+<span class="sd">    The optimizer is configured with default settings and can be customized</span>
+<span class="sd">    through the fit() method parameters.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<h4>核心方法<a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<section id="id4">
+<h5>合身（）<a class="headerlink" href="#id4" title="Link to this heading">#</a></h5>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_matrix</span><span class="p">,</span> <span class="n">Measured_response</span><span class="p">,</span> <span class="n">virtual_samples</span><span class="p">,</span>
+        <span class="n">Mission</span><span class="o">=</span><span class="s1">&#39;Regression&#39;</span><span class="p">,</span> <span class="n">Classifier</span><span class="o">=</span><span class="s1">&#39;GaussianProcess&#39;</span><span class="p">,</span> <span class="n">noise_std</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">Kriging_model</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">min_search</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">CV_test</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">Dynamic_W</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">Normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Fit the Bayesian optimization model and recommend next experiments.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data_matrix : pandas.DataFrame</span>
+<span class="sd">        Training input features (n_samples, n_features)</span>
+<span class="sd">        **Must be DataFrame** - numpy arrays will cause AttributeError</span>
+<span class="sd">    Measured_response : pandas.Series</span>
+<span class="sd">        Training target values (n_samples,)</span>
+<span class="sd">        **Must be Series** - numpy arrays may cause issues</span>
+<span class="sd">    virtual_samples : pandas.DataFrame</span>
+<span class="sd">        Candidate points for optimization (n_candidates, n_features)</span>
+<span class="sd">        **Must be DataFrame** - numpy arrays will cause AttributeError</span>
+<span class="sd">    Mission : str, default=&#39;Regression&#39;</span>
+<span class="sd">        Mission type: &#39;Regression&#39; or &#39;Classification&#39;</span>
+<span class="sd">    Classifier : str, default=&#39;GaussianProcess&#39;</span>
+<span class="sd">        For classification: &#39;GaussianProcess&#39;, &#39;LogisticRegression&#39;,</span>
+<span class="sd">        &#39;NaiveBayes&#39;, &#39;SVM&#39;, &#39;RandomForest&#39;</span>
+<span class="sd">    noise_std : float or ndarray, default=None</span>
+<span class="sd">        Noise level for Gaussian Process. If None, automatically estimated</span>
+<span class="sd">    Kriging_model : str or callable, default=None</span>
+<span class="sd">        Surrogate model: &#39;SVM&#39;, &#39;RF&#39;, &#39;AdaB&#39;, &#39;MLP&#39; or custom model</span>
+<span class="sd">    opt_num : int, default=1</span>
+<span class="sd">        Number of recommended candidates for next iteration</span>
+<span class="sd">    min_search : bool, default=True</span>
+<span class="sd">        True for minimization, False for maximization</span>
+<span class="sd">    CV_test : False, int, or &#39;LOOCV&#39;, default=False</span>
+<span class="sd">        Cross-validation settings:</span>
+<span class="sd">        - False: No cross-validation (default)</span>
+<span class="sd">        - int: k-fold cross-validation (e.g., 10 for 10-fold)</span>
+<span class="sd">        - &#39;LOOCV&#39;: Leave-one-out cross-validation</span>
+<span class="sd">    Dynamic_W : bool, default=False</span>
+<span class="sd">        Whether to apply dynamic resampling</span>
+<span class="sd">    seed : int, default=42</span>
+<span class="sd">        Random seed for reproducibility</span>
+<span class="sd">    Normalize : bool, default=True</span>
+<span class="sd">        Whether to normalize input data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    Global_min or Global_max : optimization model</span>
+<span class="sd">        Optimization model object with methods and attributes:</span>
+<span class="sd">        - EI(): Expected Improvement acquisition function</span>
+<span class="sd">        - UCB(): Upper Confidence Bound acquisition function</span>
+<span class="sd">        - PoI(): Probability of Improvement acquisition function</span>
+<span class="sd">        - virtual_samples_mean: predicted values for all candidates</span>
+<span class="sd">        - virtual_samples_std: prediction uncertainties</span>
+<span class="sd">        - data_matrix: training features</span>
+<span class="sd">        - Measured_response: training targets</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from Bgolearn import BGOsampling</span>
+<span class="sd">    &gt;&gt;&gt; import pandas as pd</span>
+<span class="sd">    &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Create sample data</span>
+<span class="sd">    &gt;&gt;&gt; X = pd.DataFrame(np.random.randn(20, 3), columns=[&#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; y = pd.Series(np.random.randn(20))</span>
+<span class="sd">    &gt;&gt;&gt; candidates = pd.DataFrame(np.random.randn(100, 3), columns=[&#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;])</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Fit model</span>
+<span class="sd">    &gt;&gt;&gt; optimizer = BGOsampling.Bgolearn()</span>
+<span class="sd">    &gt;&gt;&gt; model = optimizer.fit(</span>
+<span class="sd">    ...     data_matrix=X,  # Pass DataFrame directly</span>
+<span class="sd">    ...     Measured_response=y,  # Pass Series directly</span>
+<span class="sd">    ...     virtual_samples=candidates,  # Pass DataFrame directly</span>
+<span class="sd">    ...     opt_num=1,</span>
+<span class="sd">    ...     min_search=True</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &gt;&gt;&gt;</span>
+<span class="sd">    &gt;&gt;&gt; # Get recommendation using Expected Improvement</span>
+<span class="sd">    &gt;&gt;&gt; ei_values, recommended_points = model.EI()</span>
+<span class="sd">    &gt;&gt;&gt; next_experiment = recommended_points[0]  # First recommendation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+<section id="id5">
+<h2>可用的采集功能（单个目标）<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<p>Bgolearn支持多种采集功能，针对不同的优化场景：</p>
+<section id="id6">
+<h3>核心采集功能<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="ei">
+<h4>预期改善 (EI)<a class="headerlink" href="#ei" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>标准EI</strong>：基本预期改善</p></li>
+<li><p><strong>对数 EI</strong>：对 EI 应用对数变换</p></li>
+<li><p><strong>EI_plugin</strong>：基于插件的预期改进</p></li>
+<li><p><strong>Augmented_EI</strong>：带有附加参数的增强型 EI</p></li>
+<li><p><strong>EQI</strong>：预期分位数改进</p></li>
+<li><p><strong>Reinterpolation_EI</strong>：基于重新插值的 EI</p></li>
+</ul>
+</section>
+<section id="id7">
+<h4>基于探索的功能<a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>UCB</strong>：置信上限</p></li>
+<li><p><strong>PoI</strong>：改进的概率</p></li>
+</ul>
+</section>
+<section id="id8">
+<h4>基于信息的功能<a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<ul class="simple">
+<li><p><strong>PES</strong>：预测熵搜索</p></li>
+<li><p><strong>Knowledge_G</strong>：知识梯度</p></li>
+</ul>
+</section>
+</section>
+<section id="fit">
+<h3>fit() 方法中的用法<a class="headerlink" href="#fit" title="Link to this heading">#</a></h3>
+<p>在 <code class="docutils literal notranslate"><span class="pre">fit()</span></code> 方法期间自动选择并应用采集函数。优化过程在内部使用这些函数来推荐下一个实验点。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Basic optimization with automatic acquisition function selection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">data_matrix</span><span class="o">=</span><span class="n">X_train</span><span class="p">,</span>  <span class="c1"># Pass DataFrame directly</span>
+    <span class="n">Measured_response</span><span class="o">=</span><span class="n">y_train</span><span class="p">,</span>  <span class="c1"># Pass Series directly</span>
+    <span class="n">virtual_samples</span><span class="o">=</span><span class="n">X_candidates</span><span class="p">,</span>  <span class="c1"># Pass DataFrame directly</span>
+    <span class="n">opt_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>  <span class="c1"># Number of recommendations</span>
+    <span class="n">min_search</span><span class="o">=</span><span class="kc">True</span>  <span class="c1"># Minimize objective, min_search=False for maximization</span>
+<span class="p">)</span>
+
+<span class="c1"># Get the recommended point using EI</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+<span class="n">next_experiment</span> <span class="o">=</span> <span class="n">recommended_points</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="bgo-efficient">
+<h3>BGO_Efficient 的高级用法<a class="headerlink" href="#bgo-efficient" title="Link to this heading">#</a></h3>
+<p>对于想要显式控制采集功能的高级用户：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn.BgolearnFuns.BGO_eval</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGO_Efficient</span>
+
+<span class="c1"># Create BGO_Efficient instance (advanced usage)</span>
+<span class="c1"># This requires more setup and is typically used for research purposes</span>
+    <span class="n">next_point</span> <span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span>
+        <span class="n">Coordinates</span> <span class="n">of</span> <span class="n">the</span> <span class="n">point</span> <span class="k">with</span> <span class="n">maximum</span> <span class="n">UCB</span>
+    
+    <span class="n">Examples</span>
+    <span class="o">--------</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="c1"># Conservative exploration</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="n">ucb_values</span><span class="p">,</span> <span class="n">next_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+    <span class="o">&gt;&gt;&gt;</span> 
+    <span class="o">&gt;&gt;&gt;</span> <span class="c1"># Aggressive exploration</span>
+    <span class="o">&gt;&gt;&gt;</span> <span class="n">ucb_values</span><span class="p">,</span> <span class="n">next_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">UCB</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">3.0</span><span class="p">)</span>
+    <span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<section id="poi">
+<h4>改进概率 (PoI)<a class="headerlink" href="#poi" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PoI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tao</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Probability of Improvement acquisition function.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tao : float, default=0.01</span>
+<span class="sd">        Tolerance parameter for improvement</span>
+<span class="sd">    T : float, optional</span>
+<span class="sd">        Threshold value. If None, uses best observed value.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    poi_values : numpy.ndarray</span>
+<span class="sd">        PoI values for all candidate points</span>
+<span class="sd">    next_point : numpy.ndarray</span>
+<span class="sd">        Coordinates of the point with maximum PoI</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # Strict improvement required</span>
+<span class="sd">    &gt;&gt;&gt; poi_values, next_point = model.PoI(tao=0.0)</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # Allow small degradation</span>
+<span class="sd">    &gt;&gt;&gt; poi_values, next_point = model.PoI(tao=0.1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="aei">
+<h4>增强预期改进 (AEI)<a class="headerlink" href="#aei" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Augmented_EI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tao</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Augmented Expected Improvement for noisy functions.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    alpha : float, default=1.0</span>
+<span class="sd">        Trade-off coefficient for baseline selection</span>
+<span class="sd">    tao : float, default=0.0</span>
+<span class="sd">        Noise standard deviation estimate</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    aei_values : numpy.ndarray</span>
+<span class="sd">        AEI values for all candidate points</span>
+<span class="sd">    next_point : numpy.ndarray</span>
+<span class="sd">        Coordinates of the point with maximum AEI</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # For noisy experiments</span>
+<span class="sd">    &gt;&gt;&gt; aei_values, next_point = model.Augmented_EI(alpha=1.5, tao=0.1)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="eqi">
+<h4>预期分位数改进 (EQI)<a class="headerlink" href="#eqi" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">EQI</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Expected Quantile Improvement for robust optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    beta : float, default=0.5</span>
+<span class="sd">        Quantile level (0 &lt; beta &lt; 1)</span>
+<span class="sd">        0.5 = median, 0.25 = conservative, 0.75 = optimistic</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    eqi_values : numpy.ndarray</span>
+<span class="sd">        EQI values for all candidate points</span>
+<span class="sd">    next_point : numpy.ndarray</span>
+<span class="sd">        Coordinates of the point with maximum EQI</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # Optimize median performance</span>
+<span class="sd">    &gt;&gt;&gt; eqi_values, next_point = model.EQI(beta=0.5)</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # Conservative optimization (25th percentile)</span>
+<span class="sd">    &gt;&gt;&gt; eqi_values, next_point = model.EQI(beta=0.25)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="pes">
+<h4>预测熵搜索 (PES)<a class="headerlink" href="#pes" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">PES</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sam_num</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predictive Entropy Search for information-theoretic optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sam_num : int, default=100</span>
+<span class="sd">        Number of Monte Carlo samples for entropy estimation</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    pes_values : numpy.ndarray</span>
+<span class="sd">        PES values for all candidate points</span>
+<span class="sd">    next_point : numpy.ndarray</span>
+<span class="sd">        Coordinates of the point with maximum PES</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # Standard precision</span>
+<span class="sd">    &gt;&gt;&gt; pes_values, next_point = model.PES(sam_num=100)</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # High precision (slower)</span>
+<span class="sd">    &gt;&gt;&gt; pes_values, next_point = model.PES(sam_num=500)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="kg">
+<h4>知识梯度（KG）<a class="headerlink" href="#kg" title="Link to this heading">#</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">Knowledge_G</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">MC_num</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Proc_num</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Knowledge Gradient for value of information optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    MC_num : int, default=1</span>
+<span class="sd">        Number of Monte Carlo samples</span>
+<span class="sd">    Proc_num : int, default=1</span>
+<span class="sd">        Number of parallel processes (if supported)</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    kg_values : numpy.ndarray</span>
+<span class="sd">        KG values for all candidate points</span>
+<span class="sd">    next_point : numpy.ndarray</span>
+<span class="sd">        Coordinates of the point with maximum KG</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # Fast approximation</span>
+<span class="sd">    &gt;&gt;&gt; kg_values, next_point = model.Knowledge_G(MC_num=1)</span>
+<span class="sd">    &gt;&gt;&gt; </span>
+<span class="sd">    &gt;&gt;&gt; # More accurate estimation</span>
+<span class="sd">    &gt;&gt;&gt; kg_values, next_point = model.Knowledge_G(MC_num=5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="id9">
+<h2>基本可视化<a class="headerlink" href="#id9" title="Link to this heading">#</a></h2>
+<p>Bgolearn 不包含内置可视化方法。但是，您可以使用 matplotlib 轻松创建可视化：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="c1"># Example: Plot Expected Improvement values</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">recommended_points</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Expected Improvement Values&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Candidate Index&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;EI Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ei_values</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Best EI (idx=</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">ei_values</span><span class="p">)</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: Plot predictions vs uncertainties</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_mean</span>
+<span class="n">uncertainties</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">virtual_samples_std</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">uncertainties</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Prediction Uncertainty&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Prediction vs Uncertainty&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted Value&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Distribution of Predictions&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h2>可视化注意事项<a class="headerlink" href="#id10" title="Link to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Bgolearn 专注于优化算法而不是可视化。对于高级绘图：</p>
+<ol class="arabic simple">
+<li><p><strong>使用 matplotlib</strong> 进行基本绘图（如上所示）</p></li>
+<li><p><strong>使用seaborn</strong>进行统计可视化</p></li>
+<li><p><strong>使用plotly</strong>进行交互式绘图</p></li>
+<li><p><strong>使用 BgoFace GUI</strong> 进行视觉优化工作流程</p></li>
+</ol>
+<p>上面的示例展示了如何从 Bgolearn 模型中提取数据并创建自定义可视化。</p>
+</div>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ----------
+    Figsize : 元组，默认=(10, 6)
+        图形尺寸（宽度、高度）以英寸为单位
+    dpi：整数，默认=100
+        图形分辨率
+    样式：str，默认=&#39;seaborn&#39;
+        使用的 Matplotlib 样式
+    
+    示例
+    --------
+    &gt;&gt;&gt; 从 bgolearn.visualization 导入 BgolearnVisualizer
+    &gt;&gt;&gt; 可视化工具 = BgolearnVisualizer(figsize=(12, 8), dpi=150)
+    &quot;&quot;&quot;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+#### Visualization Methods
+
+```python
+def plot_optimization_history(self, y_history, y_true_optimum=None, 
+                            title=&quot;Optimization History&quot;, save_path=None):
+    &quot;&quot;&quot;
+    Plot optimization convergence history.
+    
+    Parameters
+    ----------
+    y_history : list or numpy.ndarray
+        Best objective values over iterations
+    y_true_optimum : float, optional
+        True optimum value for comparison
+    title : str, default=&quot;Optimization History&quot;
+        Plot title
+    save_path : str, optional
+        Path to save the figure
+    
+    Returns
+    -------
+    fig : matplotlib.figure.Figure
+        The generated figure
+    
+    Examples
+    --------
+    &gt;&gt;&gt; history = [1.0, 0.8, 0.5, 0.3, 0.1]
+    &gt;&gt;&gt; fig = visualizer.plot_optimization_history(
+    ...     y_history=history,
+    ...     y_true_optimum=0.0,
+    ...     title=&quot;My Optimization&quot;
+    ... )
+    &quot;&quot;&quot;
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_acquisition_function_2d</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">,</span> <span class="n">acquisition_values</span><span class="p">,</span> 
+                               <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">next_point</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">title</span><span class="o">=</span><span class="s2">&quot;2D Acquisition Function&quot;</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot 2D acquisition function heatmap.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    X_candidates : numpy.ndarray</span>
+<span class="sd">        Candidate points (n_candidates, 2)</span>
+<span class="sd">    acquisition_values : numpy.ndarray</span>
+<span class="sd">        Acquisition function values</span>
+<span class="sd">    X_train : numpy.ndarray</span>
+<span class="sd">        Training input points</span>
+<span class="sd">    y_train : numpy.ndarray</span>
+<span class="sd">        Training target values</span>
+<span class="sd">    next_point : numpy.ndarray, optional</span>
+<span class="sd">        Next recommended point to highlight</span>
+<span class="sd">    title : str, default=&quot;2D Acquisition Function&quot;</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    save_path : str, optional</span>
+<span class="sd">        Path to save the figure</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fig : matplotlib.figure.Figure</span>
+<span class="sd">        The generated figure</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; ei_values, next_point = model.EI()</span>
+<span class="sd">    &gt;&gt;&gt; fig = visualizer.plot_acquisition_function_2d(</span>
+<span class="sd">    ...     X_candidates, ei_values,</span>
+<span class="sd">    ...     X_train, y_train,</span>
+<span class="sd">    ...     next_point=next_point</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_pareto_front</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">objectives</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                     <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pareto Front&quot;</span><span class="p">,</span> <span class="n">save_path</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot Pareto front for multi-objective optimization.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    objectives : numpy.ndarray</span>
+<span class="sd">        Objective values (n_points, n_objectives)</span>
+<span class="sd">    labels : list, optional</span>
+<span class="sd">        Objective labels</span>
+<span class="sd">    title : str, default=&quot;Pareto Front&quot;</span>
+<span class="sd">        Plot title</span>
+<span class="sd">    save_path : str, optional</span>
+<span class="sd">        Path to save the figure</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    fig : matplotlib.figure.Figure</span>
+<span class="sd">        The generated figure</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; # For 2-objective optimization</span>
+<span class="sd">    &gt;&gt;&gt; objectives = np.column_stack([strength, ductility])</span>
+<span class="sd">    &gt;&gt;&gt; fig = visualizer.plot_pareto_front(</span>
+<span class="sd">    ...     objectives, </span>
+<span class="sd">    ...     labels=[&#39;Strength&#39;, &#39;Ductility&#39;]</span>
+<span class="sd">    ... )</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="id11">
+<h2>快速参考<a class="headerlink" href="#id11" title="Link to this heading">#</a></h2>
+<section id="id12">
+<h3>常见工作流程<a class="headerlink" href="#id12" title="Link to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Basic optimization workflow</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">Bgolearn</span><span class="w"> </span><span class="kn">import</span> <span class="n">BGOsampling</span>
+
+<span class="c1"># 1. Prepare data</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">BGOsampling</span><span class="o">.</span><span class="n">Bgolearn</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_candidates</span><span class="p">)</span>
+
+<span class="c1"># 2. Single-point optimization</span>
+<span class="n">ei_values</span><span class="p">,</span> <span class="n">next_point</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">EI</span><span class="p">()</span>
+
+</pre></div>
+</div>
+</section>
+<section id="id13">
+<h3>参数指南<a class="headerlink" href="#id13" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>函数</p></th>
+<th class="head"><p>关键参数</p></th>
+<th class="head"><p>推荐值</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>EI</p></td>
+<td><p>T</p></td>
+<td><p>None（自动）或自定义阈值</p></td>
+</tr>
+<tr class="row-odd"><td><p>UCB</p></td>
+<td><p>alpha</p></td>
+<td><p>1.0-3.0（越高越偏向探索）</p></td>
+</tr>
+<tr class="row-even"><td><p>PoI</p></td>
+<td><p>tao</p></td>
+<td><p>0.0-0.1（改进容差）</p></td>
+</tr>
+<tr class="row-odd"><td><p>AEI</p></td>
+<td><p>alpha, tao</p></td>
+<td><p>1.0-2.0, 0.0-0.2</p></td>
+</tr>
+<tr class="row-even"><td><p>EQI</p></td>
+<td><p>beta</p></td>
+<td><p>0.25（保守）、0.5（中位）、0.75（乐观）</p></td>
+</tr>
+<tr class="row-odd"><td><p>PES</p></td>
+<td><p>sam_num</p></td>
+<td><p>100-500（越高越准确）</p></td>
+</tr>
+<tr class="row-even"><td><p>KG</p></td>
+<td><p>MC_num</p></td>
+<td><p>1-5（越高越准确）</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "Bin-Cao/Bgolearn",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./zh"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">核心课程</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bgosampling-bgolearn">BGOsampling.Bgolearn</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">构造函数</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">核心方法</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">合身（）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">可用的采集功能（单个目标）</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">核心采集功能</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#ei">预期改善 (EI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">基于探索的功能</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">基于信息的功能</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fit">fit() 方法中的用法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bgo-efficient">BGO_Efficient 的高级用法</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#poi">改进概率 (PoI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#aei">增强预期改进 (AEI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#eqi">预期分位数改进 (EQI)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pes">预测熵搜索 (PES)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#kg">知识梯度（KG）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">基本可视化</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">可视化注意事项</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">快速参考</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">常见工作流程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">参数指南</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By <strong><a href='https://bin-cao.github.io/'>Bin Cao</a></strong>, HKUST(GZ)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+  Last updated on Jul 10, 2026.
+  <br/>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://licensebuttons.net/l/by-nc-sa/3.0/88x31.png"></a>
+    All content on this site (unless otherwise specified) is licensed under the <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA 4.0 license</a>
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
